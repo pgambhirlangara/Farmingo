@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Farmingo's Backend Service",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pgambhirlangara/Farmingo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pgambhirlangara/Farmingo/issues"
+  },
+  "homepage": "https://github.com/pgambhirlangara/Farmingo#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
