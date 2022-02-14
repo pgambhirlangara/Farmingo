@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/pgambhirlangara/Farmingo#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.1",
+    "morgan": "^1.10.0"
   }
 }
