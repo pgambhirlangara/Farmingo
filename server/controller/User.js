@@ -63,25 +63,9 @@ const getUserById = (req, res) => {
 
 }
 
-const createUser = (req, res) => {
-    let newUser = req.body;
-    const user = new User(newUser);
-    user.save()
-    .then((result) => {
-        return res.status(200).json({
-            message: 'Succesfully added user',
-            data: result
-        })
-    })
-    .catch((error) => {
-        console.error(error, "error");
-    })
-}
-
 const registerUser = async (req, res) => {
     try {
         let newPassword = await bcrypt.hash(req.body.password, 10);
-        console.log(newPassword);
         const output = await User.create({
             name: req.body.name,
             password: newPassword,
@@ -125,7 +109,6 @@ module.exports = {
     deleteUser,
     updateUser,
     getUserById,
-    createUser,
     registerUser,
     loginUser
 }

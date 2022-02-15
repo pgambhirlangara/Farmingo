@@ -10,8 +10,6 @@ router.post('/login', loginUser);
 
 router.get('/', getUsers);
 
-router.post('/', createUser);
-
 router.put('/:id', updateUser);
 
 router.delete('/:id', deleteUser);

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const userRoutes = require('./routes/user');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const URL = 'mongodb+srv://farmingo_admin:Farmingo%40123@farmingo.rsu0x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -17,6 +18,7 @@ mongoose.connection.on('connected', () => {
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (request, response) => {
     console.log('Requested home page');
@@ -27,5 +29,4 @@ app.get('/', (request, response) => {
 app.use('/users', userRoutes)
 
 app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
-
 
