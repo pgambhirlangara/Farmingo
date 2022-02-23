@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
-const userRoutes = require('./routes/user');
+const customerRoutes = require('./routes/Customer');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
@@ -26,7 +26,7 @@ app.get('/', (request, response) => {
 })
 
 // middleware
-app.use('/users', userRoutes)
+app.use('/customer', customerRoutes)
 
 app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 

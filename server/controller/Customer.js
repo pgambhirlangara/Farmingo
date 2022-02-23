@@ -2,7 +2,7 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const getUsers = (req, res) => {
+const getCustomers = (req, res) => {
     User.find()
     .then((result) => {
         return res.status(200).json({
@@ -17,7 +17,7 @@ const getUsers = (req, res) => {
     })
 }
 
-const deleteUser = (req, res) => {
+const deleteCustomer = (req, res) => {
     const id = req.params.id;
     User.findByIdAndDelete(id)
     .then((result) => {
@@ -33,7 +33,7 @@ const deleteUser = (req, res) => {
     })
 }
 
-const updateUser = (req, res) => {
+const updateCustomer = (req, res) => {
     const id = req.params.id;
 
     User.findOneAndUpdate({ _id : id }, req.body)
@@ -45,7 +45,7 @@ const updateUser = (req, res) => {
     })
 }
 
-const getUserById = (req, res) => {
+const getCustomerById = (req, res) => {
     const id = req.params.id;
 
     User.findById(id)
@@ -63,7 +63,7 @@ const getUserById = (req, res) => {
 
 }
 
-const registerUser = async (req, res) => {
+const registerCustomer = async (req, res) => {
     try {
         let newPassword = await bcrypt.hash(req.body.password, 10);
         const output = await User.create({
@@ -84,7 +84,7 @@ const registerUser = async (req, res) => {
     }
 }
 
-const loginUser = async (req, res) => {
+const loginCustomer = async (req, res) => {
     const email = req.body.email;
     let user = await User.findOne({ email: email});
     console.log(user, "user");
@@ -105,10 +105,10 @@ const loginUser = async (req, res) => {
 }
 
 module.exports = {
-    getUsers,
-    deleteUser,
-    updateUser,
-    getUserById,
-    registerUser,
-    loginUser
+    getCustomers,
+    deleteCustomer,
+    updateCustomer,
+    getCustomerById,
+    registerCustomer,
+    loginCustomer
 }
