@@ -4,12 +4,16 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
     button: {
         color: "white !important",
+        borderRadius: "13px",
     },
 });
 
-const ButtonComponent = ({ theme, text, type }) => {
+const ButtonComponent = (props) => {
+
+
+
     const classes = useStyles();
-    return <Button variant={type} color={theme} className={classes.button}>{text}</Button>
+    return <Button onClick={props.onClick} variant={props.type} color={props.theme} className={classes.button}>{props.text}</Button>
 }
 
 export default ButtonComponent;
