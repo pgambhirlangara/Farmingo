@@ -5,11 +5,12 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
+import { BrowserRouter } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "5BAF61",
+      main: "#5BAF61",
     },
     secondary: {
       main: "#F15A22",
@@ -26,7 +27,9 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

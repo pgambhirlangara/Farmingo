@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const Signup = () => {
+const CustomerSignup = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -36,4 +36,4 @@ const Signup = () => {
     )
 }
 
-export default Signup;
+export default CustomerSignup;

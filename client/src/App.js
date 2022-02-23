@@ -1,10 +1,17 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Signup from "./components/authentication/signup/signup";
+import CustomerSignup from "./components/Customers/Signup/customerSignup";
+import FarmerSignup from "./components/Farmers/Signup/farmerSignup";
+import Welcome from "./components/Welcome/welcome";
 
 function App() {
   return (
     <div className="App">
-      <Signup />
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="customer/signup" element={<CustomerSignup />} />
+        <Route path="farmer/signup" element={<FarmerSignup />} />
+      </Routes>
     </div>
   );
 }
