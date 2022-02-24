@@ -5,10 +5,10 @@ import { Box } from "@mui/system";
 import ButtonComponent from "../../utils/button";
 import InputComponent from "../../utils/input";
 
-const FarmerSignup = () => {
+const FarmerLogin = () => {
 
     const useStyles = makeStyles((theme) => ({
-        farmerSignup: {
+        farmerLogin: {
             backgroundColor: theme.palette.primary.a100,
             display: "flex",
             flexDirection: "column",
@@ -16,15 +16,11 @@ const FarmerSignup = () => {
             justifyContent: "center",
             gap: "20px"
         },
-        farmerSignupHeading: {
+        farmerLoginHeading: {
             color: "#182918",
             margin: 0,
         },
-        farmerSignupSubHeading: {
-            margin: 0,
-            padding: "0px 80px"
-        },
-        farmerSignupContent: {
+        farmerLoginContent: {
             backgroundColor: "white",
             width: "50%",
             padding: "50px",
@@ -46,45 +42,31 @@ const FarmerSignup = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [contact, setContact] = useState(0);
-    const [address, setAddress] = useState("");
 
     const classes = useStyles();
 
-    const signup = async (e) => {
+    const login = async (e) => {
         e.preventDefault();
     }
 
     return (
-        <form className={classes.farmerSignup}>
-            <h2 className={classes.farmerSignupHeading}>Create a profile</h2>
-            <h3 className={classes.farmerSignupSubHeading}></h3>
-            <div className={classes.farmerSignupContent}>
-                <div className={classes.formControl}>
-                    <label htmlFor="name">Name</label>
-                    <InputComponent onChange={(e) => setName(e.target.value)} />
-                </div>
+        <form className={classes.farmerLogin}>
+            <h2 className={classes.farmerLoginHeading}>Welcome!</h2>
+            <h3 className={classes.farmerLoginSubHeading}></h3>
+            <div className={classes.farmerLoginContent}>
+
                 <div className={classes.formControl}>
                     <label htmlFor="email">Email</label>
                     <InputComponent type="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                    <label htmlFor="contact">Contact</label>
-                    <InputComponent type="number" onChange={(e) => setContact(e.target.value)} />
-                </div>
-                <div className={classes.formControl}>
-                    <label htmlFor="address">Address</label>
-                    <InputComponent  onChange={(e) => setAddress(e.target.value)} />
-                </div>
-                <div className={classes.formControl}>
                     <label htmlFor="password">Password</label>
                     <InputComponent type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <div>
+            <div>
 
                 <div className={classes.buttonContainer}>
-                    <ButtonComponent onClick={signup} type="contained" theme="primary" text="Signup" />
+                    <ButtonComponent onClick={login} type="contained" theme="primary" text="Login" />
                 </div>
 
                 </div>
@@ -94,4 +76,4 @@ const FarmerSignup = () => {
     )
 }
 
-export default FarmerSignup;
+export default FarmerLogin;
