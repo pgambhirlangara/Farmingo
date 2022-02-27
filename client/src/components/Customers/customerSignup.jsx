@@ -4,7 +4,7 @@ import { Alert, Button, InputLabel, MenuItem, Select, Snackbar, TextField } from
 import axios from "axios";
 import { Box } from "@mui/system";
 import { Province as provinceList } from "../../constants/constant";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CustomerSignup = () => {
 
@@ -40,11 +40,18 @@ const CustomerSignup = () => {
             flexDirection: "column",
         },
         buttonContainer: {
-            textAlign: "center"
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px"
         },
         signupButton: {
             color: "white !important",
             width: "50%"
+        },
+        alreadyAccount: {
+            color: theme.palette.secondary.main
         }
     }));
 
@@ -74,7 +81,7 @@ const CustomerSignup = () => {
             province,
             zipCode
         }
-        
+
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/customer/register`, signupData);
             if (response) {
@@ -86,22 +93,22 @@ const CustomerSignup = () => {
                     navigate('../customer/login');
                 }, 1000);
             }
-         } catch(error) {
+        } catch (error) {
             setSeverity('error');
             setOpen(true);
             setButtonDisabled(false);
             setMessage(error.response.data.message);
-         }
+        }
 
     }
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
-          return;
+            return;
         }
-    
+
         setOpen(false);
-      };
+    };
 
     return (
         <form className={classes.customerSignup}>
@@ -117,15 +124,15 @@ const CustomerSignup = () => {
             <div className={classes.customerSignupContent}>
                 <div className={classes.formControl}>
                     <InputLabel>Name</InputLabel>
-                    <TextField type="text" onChange={(e) => setName(e.target.value)} />
+                    <TextField required type="text" onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
                     <InputLabel>Email</InputLabel>
-                    <TextField type="email" onChange={(e) => setEmail(e.target.value)} />
+                    <TextField required type="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
                     <InputLabel>Contact</InputLabel>
-                    <TextField type="number" onChange={(e) => setContact(e.target.value)} />
+                    <TextField required type="number" onChange={(e) => setContact(e.target.value)} />
                 </div>
                 <Box display="grid" gridTemplateColumns="auto auto" gap="20px">
                     <div className={classes.formControl}>
@@ -164,12 +171,13 @@ const CustomerSignup = () => {
                 </div>
                 <div className={classes.formControl}>
                     <InputLabel>Password</InputLabel>
-                    <TextField type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <TextField required type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div>
 
                     <div className={classes.buttonContainer}>
                         <Button disabled={buttonDisabled} className={classes.signupButton} onClick={signup} variant="contained" color="primary" >Signup</Button>
+                        <Link className={classes.alreadyAccount} to="../customer/login">Already have an account ?</Link>
                     </div>
 
                 </div>

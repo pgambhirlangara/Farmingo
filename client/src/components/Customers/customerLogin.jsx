@@ -1,6 +1,8 @@
-import { Button, TextField } from "@mui/material";
+import { Alert, Button, Snackbar, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 function CustomerLogin() {
     const useStyles = makeStyles((theme) => ({
@@ -33,39 +35,90 @@ function CustomerLogin() {
         },
         buttonContainer: {
             textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px"
         },
         loginButton: {
             color: "white !important",
             width: "50%"
+        },
+        noAccount: {
+            color: theme.palette.secondary.main
         }
     }));
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState('success');
+    const [message, setMessage] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(false);
 
     const classes = useStyles();
+    const navigate = useNavigate();
 
     const customerLogin = async (e) => {
-        e.preventDefault();
+        setButtonDisabled(true);
+        const signupData = {
+            email,
+            password,
+        }
+
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/customer/login`, signupData);
+            if (response) {
+                console.log(response);
+                setMessage(response.data.message);
+                setOpen(true);
+                setButtonDisabled(false);
+                setTimeout(() => {
+                    navigate('../home');
+                }, 1000);
+            }
+        } catch (error) {
+            setSeverity('error');
+            setOpen(true);
+            setButtonDisabled(false);
+            setMessage(error.response.data.message);
+        }
+
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
 
     return (
         <form className={classes.customerLogin}>
+
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
+
             <h2 className={classes.customerLoginHeading}>Welcome</h2>
             <div className={classes.customerLoginContent}>
                 <div className={classes.formControl}>
                     <label htmlFor="email">Email</label>
-                    <TextField value={email} type="email" onChange={(e) => setEmail(e.target.value)} />
+                    <TextField required value={email} type="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
                     <label htmlFor="password">Password</label>
-                    <TextField value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <TextField required value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div>
                     <div className={classes.buttonContainer}>
-                        <Button className={classes.loginButton} onClick={customerLogin} variant="contained" color="primary">Login</Button>
+                        <Button disabled={buttonDisabled} className={classes.loginButton} onClick={customerLogin} variant="contained" color="primary">Login</Button>
+                        <Link className={classes.noAccount} to="../customer/signup">Don't have an account ?</Link>
                     </div>
-
                 </div>
             </div>
 

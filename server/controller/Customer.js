@@ -102,7 +102,15 @@ const loginCustomer = async (req, res) => {
                 token,
                 message:"Succesfully Logged In"
             })
+        } else {
+            return res.status(401).json({
+                message: "Incorrect Password"
+            })
         }
+    } else {
+        return res.status(400).json({
+            message: "User not found!"
+        })
     }
 
 }
