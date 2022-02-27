@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import CustomerSignup from "./components/Customers/Signup/customerSignup";
-import CustomerLogin from "./components/Customers/Signup/login/customerLogin";
+import CustomerLogin from "./components/Customers/customerLogin";
+import CustomerSignup from "./components/Customers/customerSignup";
 import FarmerSignup from "./components/Farmers/Signup/farmerSignup";
 import Welcome from "./components/Welcome/welcome";
 
