@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import ButtonComponent from "../../utils/button";
-import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import axios from "axios";
 import { Box } from "@mui/system";
 import { Province as provinceList } from "../../../constants/constant";
@@ -41,6 +40,10 @@ const CustomerSignup = () => {
         },
         buttonContainer: {
             textAlign: "center"
+        },
+        signupButton: {
+            color: "white !important",
+            width: "50%"
         }
     }));
 
@@ -129,7 +132,7 @@ const CustomerSignup = () => {
                 <div>
 
                     <div className={classes.buttonContainer}>
-                        <ButtonComponent onClick={signup} type="contained" theme="primary" text="Signup" />
+                        <Button className={classes.signupButton} onClick={signup} variant="contained" color="primary" >Signup</Button>
                     </div>
 
                 </div>
