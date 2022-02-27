@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Alert, Button, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
 import axios from "axios";
 import { Box } from "@mui/system";
-import { Province as provinceList } from "../../../constants/constant";
+import { Province as provinceList } from "../../constants/constant";
+import { useNavigate } from "react-router-dom";
 
 const CustomerSignup = () => {
 
@@ -54,11 +55,16 @@ const CustomerSignup = () => {
     const [city, setCity] = useState("");
     const [province, setProvince] = useState("");
     const [zipCode, setZipCode] = useState("");
-
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState('success');
+    const [message, setMessage] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const navigate = useNavigate();
 
     const classes = useStyles();
 
     const signup = async (e) => {
+        setButtonDisabled(true);
         const signupData = {
             email,
             password,
@@ -68,12 +74,43 @@ const CustomerSignup = () => {
             province,
             zipCode
         }
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/customer/register`, signupData);
+        
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/customer/register`, signupData);
+            if (response) {
+                console.log(response);
+                setMessage(response.data.message);
+                setOpen(true);
+                setButtonDisabled(false);
+                setTimeout(() => {
+                    navigate('../customer/login');
+                }, 1000);
+            }
+         } catch(error) {
+            setSeverity('error');
+            setOpen(true);
+            setButtonDisabled(false);
+            setMessage(error.response.data.message);
+         }
 
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+
     return (
         <form className={classes.customerSignup}>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+
+                <Alert onClose={handleClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
             <h2 className={classes.customerSignupHeading}>Create a profile</h2>
             <h3 className={classes.customerSignupSubHeading}>You can establish a unique identity of your farm by creating a new
                 profile of your farm in wich to upload a list of your products.</h3>
@@ -113,10 +150,10 @@ const CustomerSignup = () => {
                             onChange={(e) => setCity(e.target.value)}
                             label="City"
                         >
-                             { province ? 
+                            {province ?
                                 provinceList.find((pr) => pr.name === province)
-                                .cities.map((city , index) => <MenuItem key={index} value={city}>{city}</MenuItem>)
-                               : []
+                                    .cities.map((city, index) => <MenuItem key={index} value={city}>{city}</MenuItem>)
+                                : []
                             }
                         </Select>
                     </div>
@@ -132,7 +169,7 @@ const CustomerSignup = () => {
                 <div>
 
                     <div className={classes.buttonContainer}>
-                        <Button className={classes.signupButton} onClick={signup} variant="contained" color="primary" >Signup</Button>
+                        <Button disabled={buttonDisabled} className={classes.signupButton} onClick={signup} variant="contained" color="primary" >Signup</Button>
                     </div>
 
                 </div>
