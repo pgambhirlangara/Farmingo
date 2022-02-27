@@ -1,9 +1,10 @@
-import { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
 import ButtonComponent from "../../utils/button";
-import InputComponent from "../../utils/input";
+import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import axios from "axios";
+import { Box } from "@mui/system";
+import { Province as provinceList } from "../../../constants/constant";
 
 const CustomerSignup = () => {
 
@@ -47,12 +48,25 @@ const CustomerSignup = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [contact, setContact] = useState(0);
-    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [province, setProvince] = useState("");
+    const [zipCode, setZipCode] = useState("");
+
 
     const classes = useStyles();
 
     const signup = async (e) => {
-        e.preventDefault();
+        const signupData = {
+            email,
+            password,
+            name,
+            contact,
+            city,
+            province,
+            zipCode
+        }
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/customer/register`, signupData);
+
     }
 
     return (
@@ -62,34 +76,64 @@ const CustomerSignup = () => {
                 profile of your farm in wich to upload a list of your products.</h3>
             <div className={classes.customerSignupContent}>
                 <div className={classes.formControl}>
-                    <label htmlFor="name">Name</label>
-                    <InputComponent onChange={(e) => setName(e.target.value)} />
+                    <InputLabel>Name</InputLabel>
+                    <TextField type="text" onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                    <label htmlFor="email">Email</label>
-                    <InputComponent type="email" onChange={(e) => setEmail(e.target.value)} />
+                    <InputLabel>Email</InputLabel>
+                    <TextField type="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                    <label htmlFor="contact">Contact</label>
-                    <InputComponent type="number" onChange={(e) => setContact(e.target.value)} />
+                    <InputLabel>Contact</InputLabel>
+                    <TextField type="number" onChange={(e) => setContact(e.target.value)} />
+                </div>
+                <Box display="grid" gridTemplateColumns="auto auto" gap="20px">
+                    <div className={classes.formControl}>
+                        <InputLabel>Province</InputLabel>
+                        <Select
+                            value={province}
+                            onChange={(e) => setProvince(e.target.value)}
+                            label="Province"
+                        >
+                            {
+                                provinceList.map(({ name }, index) => {
+                                    return <MenuItem key={index} value={name}>{name}</MenuItem>
+                                })
+                            }
+                        </Select>
+                    </div>
+                    <div className={classes.formControl}>
+                        <InputLabel>City</InputLabel>
+                        <Select
+                            disabled={!province}
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            label="City"
+                        >
+                             { province ? 
+                                provinceList.find((pr) => pr.name === province)
+                                .cities.map((city , index) => <MenuItem key={index} value={city}>{city}</MenuItem>)
+                               : []
+                            }
+                        </Select>
+                    </div>
+                </Box>
+                <div className={classes.formControl}>
+                    <InputLabel>Zip Code</InputLabel>
+                    <TextField type="text" onChange={(e) => setZipCode(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                    <label htmlFor="address">Address</label>
-                    <InputComponent  onChange={(e) => setAddress(e.target.value)} />
-                </div>
-                <div className={classes.formControl}>
-                    <label htmlFor="password">Password</label>
-                    <InputComponent type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <InputLabel>Password</InputLabel>
+                    <TextField type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div>
 
-                <div className={classes.buttonContainer}>
-                    <ButtonComponent onClick={signup} type="contained" theme="primary" text="Signup" />
-                </div>
+                    <div className={classes.buttonContainer}>
+                        <ButtonComponent onClick={signup} type="contained" theme="primary" text="Signup" />
+                    </div>
 
                 </div>
             </div>
-
         </form>
     )
 }

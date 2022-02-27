@@ -5,10 +5,12 @@ const Customer = new mongoose.Schema(
 		name: { type: String, required: true },
 		email: { type: String, required: true, unique: true },
 		contact: {type : Number, required: true },
-		address: {type: String},
+		city: {type: String},
+		zipCode: {type: String},
+		province: {type: String},
 		password: { type: String, required: true },
 	},
-	{ collection: 'customer-data' }
+	{ collection: 'customer-data', timestamps: true }
 )
 
 const model = mongoose.model('customerData', Customer);
