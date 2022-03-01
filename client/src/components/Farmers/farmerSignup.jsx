@@ -1,15 +1,14 @@
 import { useState } from "react";
+import axios from "axios";
 import { makeStyles } from "@mui/styles";
 import { Alert, Button, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
-import axios from "axios";
 import { Box } from "@mui/system";
-import { Province as provinceList } from "../../constants/constant";
 import { Link, useNavigate } from "react-router-dom";
 
-const CustomerSignup = () => {
+const FarmerSignup = () => {
 
     const useStyles = makeStyles((theme) => ({
-        customerSignup: {
+        farmerSignup: {
             backgroundColor: theme.palette.primary.a100,
             display: "flex",
             flexDirection: "column",
@@ -17,15 +16,15 @@ const CustomerSignup = () => {
             justifyContent: "center",
             gap: "20px"
         },
-        customerSignupHeading: {
+        farmerSignupHeading: {
             color: "#182918",
             margin: 0,
         },
-        customerSignupSubHeading: {
+        farmerSignupSubHeading: {
             margin: 0,
             padding: "0px 80px"
         },
-        customerSignupContent: {
+        farmerSignupContent: {
             backgroundColor: "white",
             width: "50%",
             padding: "50px",
@@ -38,20 +37,10 @@ const CustomerSignup = () => {
         formControl: {
             display: "flex",
             flexDirection: "column",
+            color: "black"
         },
         buttonContainer: {
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "10px"
-        },
-        signupButton: {
-            color: "white !important",
-            width: "50%"
-        },
-        alreadyAccount: {
-            color: theme.palette.secondary.main
+            textAlign: "center"
         }
     }));
 
@@ -59,38 +48,35 @@ const CustomerSignup = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [contact, setContact] = useState(0);
-    const [city, setCity] = useState("");
-    const [province, setProvince] = useState("");
-    const [zipCode, setZipCode] = useState("");
+    const [address, setAddress] = useState("");
     const [open, setOpen] = useState(false);
     const [severity, setSeverity] = useState('success');
     const [message, setMessage] = useState("");
-    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(false)
     const navigate = useNavigate();
+
 
     const classes = useStyles();
 
     const signup = async (e) => {
         setButtonDisabled(true);
         const signupData = {
+            name,
             email,
             password,
-            name,
-            contact,
-            city,
-            province,
-            zipCode
+            contact, 
+            address
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/customer/register`, signupData);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/register`, signupData);
             if (response) {
                 console.log(response);
                 setMessage(response.data.message);
                 setOpen(true);
                 setButtonDisabled(false);
                 setTimeout(() => {
-                    navigate('../customer/login');
+                    navigate('../farmer/login');
                 }, 1000);
             }
         } catch (error) {
@@ -111,17 +97,18 @@ const CustomerSignup = () => {
     };
 
     return (
-        <form className={classes.customerSignup}>
+        <form className={classes.farmerSignup}>
             <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
 
                 <Alert onClose={handleClose} severity={severity}>
                     {message}
                 </Alert>
             </Snackbar>
-            <h2 className={classes.customerSignupHeading}>Create a profile</h2>
-            <h3 className={classes.customerSignupSubHeading}>After creating a profile, you can interact with farmers to buy products for your business
+            <h2 className={classes.farmerSignupHeading}>Create a profile</h2>
+            <h3 className={classes.farmerSignupSubHeading}>After creating a profile, you can 
+            add your farms and products. After that interact with your customers to expand the business.
             </h3>
-            <div className={classes.customerSignupContent}>
+            <div className={classes.farmerSignupContent}>
                 <div className={classes.formControl}>
                     <InputLabel>Name</InputLabel>
                     <TextField required type="text" onChange={(e) => setName(e.target.value)} />
@@ -134,40 +121,9 @@ const CustomerSignup = () => {
                     <InputLabel>Contact</InputLabel>
                     <TextField required type="number" onChange={(e) => setContact(e.target.value)} />
                 </div>
-                <Box display="grid" gridTemplateColumns="auto auto" gap="20px">
-                    <div className={classes.formControl}>
-                        <InputLabel>Province</InputLabel>
-                        <Select
-                            value={province}
-                            onChange={(e) => setProvince(e.target.value)}
-                            label="Province"
-                        >
-                            {
-                                provinceList.map(({ name }, index) => {
-                                    return <MenuItem key={index} value={name}>{name}</MenuItem>
-                                })
-                            }
-                        </Select>
-                    </div>
-                    <div className={classes.formControl}>
-                        <InputLabel>City</InputLabel>
-                        <Select
-                            disabled={!province}
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            label="City"
-                        >
-                            {province ?
-                                provinceList.find((pr) => pr.name === province)
-                                    .cities.map((city, index) => <MenuItem key={index} value={city}>{city}</MenuItem>)
-                                : []
-                            }
-                        </Select>
-                    </div>
-                </Box>
                 <div className={classes.formControl}>
-                    <InputLabel>Zip Code</InputLabel>
-                    <TextField type="text" onChange={(e) => setZipCode(e.target.value)} />
+                    <InputLabel>Address</InputLabel>
+                    <TextField type="text" onChange={(e) => setAddress(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
                     <InputLabel>Password</InputLabel>
@@ -177,7 +133,7 @@ const CustomerSignup = () => {
 
                     <div className={classes.buttonContainer}>
                         <Button disabled={buttonDisabled} className={classes.signupButton} onClick={signup} variant="contained" color="primary" >Signup</Button>
-                        <Link className={classes.alreadyAccount} to="../customer/login">Already have an account ?</Link>
+                        <Link className={classes.alreadyAccount} to="../farmer/login">Already have an account ?</Link>
                     </div>
 
                 </div>
@@ -186,4 +142,4 @@ const CustomerSignup = () => {
     )
 }
 
-export default CustomerSignup;
+export default FarmerSignup;
