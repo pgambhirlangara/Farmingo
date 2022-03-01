@@ -5,11 +5,14 @@ import CustomerSignup from "./components/Customers/customerSignup";
 import FarmerProductPage from "./components/Farmers/farmerProduct";
 import FarmerProductInformation from "./components/Farmers/farmerProductInformation";
 import FarmerSignup from "./components/Farmers/Signup/farmerSignup";
+import Footer from "./components/utils/Footer";
+import Header from "./components/utils/Header";
 import Welcome from "./components/Welcome/welcome";
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="customer/signup" element={<CustomerSignup />} />
@@ -21,6 +24,7 @@ function App() {
           element={<FarmerProductInformation />}
         />
       </Routes>
+      <Footer />
     </div>
   );
 }
