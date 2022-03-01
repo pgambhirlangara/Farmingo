@@ -1,12 +1,12 @@
-const User = require('../models/user');
+const Customer = require('../models/customer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const getCustomers = (req, res) => {
-    User.find()
+    Customer.find()
     .then((result) => {
         return res.status(200).json({
-            message: 'Succesfully fetched users',
+            message: 'Succesfully fetched customers',
             data: result
         })
     })
@@ -19,10 +19,10 @@ const getCustomers = (req, res) => {
 
 const deleteCustomer = (req, res) => {
     const id = req.params.id;
-    User.findByIdAndDelete(id)
+    Customer.findByIdAndDelete(id)
     .then((result) => {
         return res.status(200).json({
-            message: "User succesfully delete",
+            message: "Customer succesfully delete",
             data: result
         })
     })
@@ -36,10 +36,10 @@ const deleteCustomer = (req, res) => {
 const updateCustomer = (req, res) => {
     const id = req.params.id;
 
-    User.findOneAndUpdate({ _id : id }, req.body)
+    Customer.findOneAndUpdate({ _id : id }, req.body)
     .then((result) => {
         res.status(200).json({
-            message: 'Succesfully updated user',
+            message: 'Succesfully updated Customer',
             data: result
         });
     })
@@ -48,10 +48,10 @@ const updateCustomer = (req, res) => {
 const getCustomerById = (req, res) => {
     const id = req.params.id;
 
-    User.findById(id)
+    Customer.findById(id)
     .then((result) => {
         return res.status(200).json({
-            message: `User found succesfully with id ${id}`,
+            message: `Customer found succesfully with id ${id}`,
             data: result
         })
     })
@@ -66,10 +66,14 @@ const getCustomerById = (req, res) => {
 const registerCustomer = async (req, res) => {
     try {
         let newPassword = await bcrypt.hash(req.body.password, 10);
-        const output = await User.create({
+        const output = await Customer.create({
             name: req.body.name,
             password: newPassword,
-            email: req.body.email
+            email: req.body.email,
+            city: req.body.city,
+            zipCode: req.body.zipCode,
+            province: req.body.province,
+            contact: req.body.contact
         })
 
         return res.status(200).json({
@@ -86,20 +90,27 @@ const registerCustomer = async (req, res) => {
 
 const loginCustomer = async (req, res) => {
     const email = req.body.email;
-    let user = await User.findOne({ email: email});
-    console.log(user, "user");
-    if (user) {
-        const isValidPassword = await bcrypt.compare(req.body.password, user.password);
+    let customer = await Customer.findOne({ email: email});
+    if (customer) {
+        const isValidPassword = await bcrypt.compare(req.body.password, customer.password);
         if (isValidPassword) {
             const token = jwt.sign({
                 name: req.body.name,
                 email: req.body.email
-            }, 'hello123')
+            }, process.env.JWT_SECRET)
             return res.status(200).json({
                 token,
                 message:"Succesfully Logged In"
             })
+        } else {
+            return res.status(401).json({
+                message: "Incorrect Password"
+            })
         }
+    } else {
+        return res.status(400).json({
+            message: "User not found!"
+        })
     }
 
 }

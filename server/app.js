@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const customerRoutes = require('./routes/Customer');
 const farmerRoutes = require('./routes/Farmer');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const morgan = require('morgan')
+require('dotenv').config();
 
-const URL = 'mongodb+srv://farmingo_admin:Farmingo%40123@farmingo.rsu0x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-mongoose.connect(URL, {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -20,6 +21,8 @@ mongoose.connection.on('connected', () => {
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use(morgan('combined'))
+
 
 app.get('/', (request, response) => {
     console.log('Requested home page');
