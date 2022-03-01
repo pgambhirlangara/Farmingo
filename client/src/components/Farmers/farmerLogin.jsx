@@ -1,9 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
-import ButtonComponent from "../../utils/button";
-import InputComponent from "../../utils/input";
+import { Button, InputLabel, TextField } from "@mui/material";
 
 const FarmerLogin = () => {
 
@@ -56,17 +53,17 @@ const FarmerLogin = () => {
             <div className={classes.farmerLoginContent}>
 
                 <div className={classes.formControl}>
-                    <label htmlFor="email">Email</label>
-                    <InputComponent type="email" onChange={(e) => setEmail(e.target.value)} />
+                <InputLabel>Email</InputLabel>
+                <TextField required type="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                    <label htmlFor="password">Password</label>
-                    <InputComponent type="password" onChange={(e) => setPassword(e.target.value)} />
+                <InputLabel>Password</InputLabel>
+                <TextField required type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
             <div>
 
                 <div className={classes.buttonContainer}>
-                    <ButtonComponent onClick={login} type="contained" theme="primary" text="Login" />
+                <Button  onClick={login} variant="contained" color="primary" >Login</Button>
                 </div>
 
                 </div>
