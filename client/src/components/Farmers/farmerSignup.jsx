@@ -3,6 +3,8 @@ import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { Province as provinceList } from "../../constants/constant";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const FarmerSignup = () => {
 
@@ -51,11 +53,32 @@ const FarmerSignup = () => {
     const [province, setProvince] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [city, setCity] = useState("");
+    const navigate = useNavigate();
 
     const classes = useStyles();
 
     const signup = async (e) => {
-        e.preventDefault();
+        const signupData = {
+            email,
+            password,
+            name,
+            contact,
+            city,
+            province,
+            zipCode
+        }
+
+    try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/register`, signupData);
+            setTimeout(() => {
+                navigate('../farmer/login');
+            }, 1000);
+        }
+
+        catch(error) {
+
+        }
+         
     }
 
     return (

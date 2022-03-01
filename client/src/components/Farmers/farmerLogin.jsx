@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import { Button, InputLabel, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const FarmerLogin = () => {
 
@@ -39,11 +41,24 @@ const FarmerLogin = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const classes = useStyles();
 
     const login = async (e) => {
-        e.preventDefault();
+        const loginData = {
+            email,
+            password,
+        }
+
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/login`, loginData);
+            setTimeout(() => {
+                navigate('../farmer/home');
+            }, 1000);
+        } catch(error) {
+
+        }
     }
 
     return (
