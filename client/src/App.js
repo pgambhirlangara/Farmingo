@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import CustomerLogin from "./components/Customers/customerLogin";
+import CustomerSignup from "./components/Customers/customerSignup";
+import FarmerProductPage from "./components/Farmers/farmerProduct";
+import FarmerProductInformation from "./components/Farmers/farmerProductInformation";
+import FarmerSignup from "./components/Farmers/Signup/farmerSignup";
+import FarmerLogin from "./components/Farmers/Signup/farmerLogin";
+import Footer from "./components/utils/Footer";
+import Header from "./components/utils/Header";
+import Welcome from "./components/Welcome/welcome";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="customer/signup" element={<CustomerSignup />} />
+        <Route path="customer/login" element={<CustomerLogin />} />
+        <Route path="farmer/signup" element={<FarmerSignup />} />
+        <Route path="farmer/login" element={<FarmerLogin />} />
+        <Route path="farmer/home" element={<FarmerProductPage />} />
+        <Route
+          path="farmer/product/:id"
+          element={<FarmerProductInformation />}
+        />
+      </Routes>
+      <Footer />
     </div>
   );
 }
