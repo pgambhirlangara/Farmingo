@@ -9,6 +9,8 @@ import FarmerLogin from "./components/Farmers/farmerLogin";
 import Footer from "./components/utils/Footer";
 import Header from "./components/utils/Header";
 import Welcome from "./components/Welcome/welcome";
+import Adduser from "./components/Users/adduser";
+import ContactUs from "./components/Contact Us/contactUs";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="farmer/signup" element={<FarmerSignup />} />
         <Route path="farmer/login" element={<FarmerLogin />} />
         <Route path="farmer/home" element={<FarmerProductPage />} />
+        <Route path="farmer/adduser" element={<Adduser />} />
+        <Route path="farmer/contactUs" element={<ContactUs />} />
         <Route
           path="farmer/product/:id"
           element={<FarmerProductInformation />}
