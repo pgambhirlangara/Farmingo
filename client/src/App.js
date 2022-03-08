@@ -30,7 +30,7 @@ function App() {
         <Route path="customer/faq" element={<Customerfaq />} />
 
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
