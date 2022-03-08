@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import { Button, InputLabel, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 
 const FarmerLogin = () => {
 
@@ -35,17 +36,32 @@ const FarmerLogin = () => {
             color: "black"
         },
         buttonContainer: {
-            textAlign: "center"
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px"
+        },
+        loginButton: {
+            color: "white !important",
+            width: "50%"
+        },
+        noAccount: {
+            color: theme.palette.secondary.main
         }
     }));
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+
 
     const classes = useStyles();
 
-    const login = async (e) => {
+    const farmerLogin = async (e) => {
+        setButtonDisabled(true);
         const loginData = {
             email,
             password,
@@ -75,12 +91,12 @@ const FarmerLogin = () => {
                 <InputLabel>Password</InputLabel>
                 <TextField required type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
-            <div>
-
-                <div className={classes.buttonContainer}>
-                <Button  onClick={login} variant="contained" color="primary" >Login</Button>
-                </div>
-
+                <div>
+                    <div className={classes.buttonContainer}>
+                        <Button disabled={buttonDisabled} className={classes.loginButton} onClick={farmerLogin} variant="contained" color="primary">Login</Button>
+                        <br></br>
+                        <Link className={classes.noAccount} to="../farmer/signup">Don't have an account ?</Link>
+                    </div>
                 </div>
             </div>
 
