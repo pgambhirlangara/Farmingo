@@ -9,6 +9,8 @@ import FarmerLogin from "./components/Farmers/farmerLogin";
 import Footer from "./components/utils/Footer";
 import Header from "./components/utils/Header";
 import Welcome from "./components/Welcome/welcome";
+import Customerfaq from "./components/Customers/customerfaq";
+
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           path="farmer/product/:id"
           element={<FarmerProductInformation />}
         />
+        <Route path="customer/faq" element={<Customerfaq />} />
+
       </Routes>
       <Footer />
     </div>
