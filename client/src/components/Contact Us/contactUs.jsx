@@ -23,7 +23,7 @@ export default function ContactUs() {
                 flex:"0",
             },
         flex:"1.3",
-        height:"100%",
+        width:"907px",
         backgroundColor:"black",
         },
         divtwo:{
@@ -33,7 +33,8 @@ export default function ContactUs() {
             alignItems:"center",
             height:"100%",
             flexDirection:"column",
-            backgroundColor:theme.palette.primary.a100
+            backgroundColor:theme.palette.primary.a100,
+            width:"405px"
         },
         headingone:{
             textAlign:"center",
@@ -47,8 +48,8 @@ export default function ContactUs() {
             width:"70%",
             height:"100vh",
             border:"1px green solid",
-            borderTopLeftRadius:"10px",
-            borderTopRightRadius:"10px",
+            borderTopLeftRadius:"26px",
+            borderTopRightRadius:"26px",
             display:"flex",
             flexDirection:"column",
             backgroundColor:"white",
@@ -67,11 +68,13 @@ export default function ContactUs() {
             fontWeight:"bold"
         },
         farmeremail:{
-            fontWeight:"bold",
-            fontSize:"20px",
+            fontWeight:"600",
+            fontSize:"25px",
             marginLeft:"50px",
             marginTop:"10px",
-            
+            [theme.breakpoints.down("sm")]:{
+                fontSize:"14px"
+            }
         },
         line1:{
             width:"80%",
@@ -86,24 +89,63 @@ export default function ContactUs() {
                 
                 textAlign:"center",
                 marginBottom:"10px",
-               
-                textAlign:"center"
+                fontSize:"20px",
+                position:"absolute",
+                top:"50px",
+                [theme.breakpoints.down("sm")]:{
+                    top:"428px",
+                    right:"39px",
+                    position:"absolute",
+                    fontSize:"14px"
+    
+    
+                }
+                
+                
                 
         },
         farmerphone:{
-            fontSize:"20px",
-            fontWeight:"bold",
-            marginLeft:"50px"
+            fontSize:"24px",
+            fontWeight:"600",
+            marginLeft:"50px",
+            [theme.breakpoints.down("sm")]:{
+                fontSize:"14px",
+                position:"absolute",
+                right:"300px",
+                top:"476px"
+            }
         },
         phone:{
-            marginBottom:"10px",
-           textAlign:"center"
+            fontSize:"20px",
+            marginBottom:"30px",
+            position:"absolute",
+            top:"490px",
+            right:"344px",
+            [theme.breakpoints.down("sm")]:{
+                top:"476px",
+                right:"39px",
+                position:"absolute",
+                fontSize:"14px"
+
+
+            }
+           
         },
         faq:{
-            fontSize:"20px",
-            fontWeight:"bold",
-            marginLeft:"50px"
+            fontSize:"24px",
+            fontWeight:"600",
+            marginLeft:"50px",
+            [theme.breakpoints.down("sm")]:{
+                fontSize:"14px"
+            }
         },
+        mainline1:{
+            marginTop:"35px",
+
+            display:"flex",
+            justifyContent:"center"
+            
+        }
 
         
     }));
@@ -135,7 +177,7 @@ export default function ContactUs() {
             
                 <div className={classes.farmerphone}>Phone</div>
                 <div className={classes.phone}>778-123-1234</div>
-                <div className={classes.mainline}><div className={classes.line1}></div></div>
+                <div className={classes.mainline1}><div className={classes.line1}></div></div>
                 <div className={classes.faq}>FAQ</div>
                 </div>
             </div>

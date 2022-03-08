@@ -13,11 +13,11 @@ import Adduser from "./components/Users/adduser";
 import ContactUs from "./components/Contact Us/contactUs";
 import orderDetails from "./components/Order details/orderDetails"
 import OrderDetails from "./components/Order details/orderDetails";
-
+import Settings from "./components/Settings/settings";
 function App() {
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="customer/signup" element={<CustomerSignup />} />
@@ -28,12 +28,13 @@ function App() {
         <Route path="farmer/adduser" element={<Adduser />} />
         <Route path="farmer/contactUs" element={<ContactUs />} />
         <Route path="farmer/orderDetails" element={<OrderDetails />} />
+        <Route path="farmer/settings" element={<Settings />} />
         <Route
           path="farmer/product/:id"
           element={<FarmerProductInformation />}
         />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
