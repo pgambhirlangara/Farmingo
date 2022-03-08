@@ -31,7 +31,7 @@ app.get('/', (request, response) => {
 
 // middleware
 app.use('/customer', customerRoutes);
-app.use('/farmers', farmerRoutes);
+app.use('/farmer', farmerRoutes);
 
 app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 

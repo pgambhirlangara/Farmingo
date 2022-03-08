@@ -1,11 +1,12 @@
-import { Alert, Button, Checkbox, FormControlLabel, Snackbar, TextField } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useState } from "react";
-import axios from "axios";
+import { makeStyles } from "@mui/styles";
+import { Button, InputLabel, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import FormGroup from '@mui/material/FormGroup';
+import axios from "axios";
 
-function FarmerLogin() {
+
+const FarmerLogin = () => {
+
     const useStyles = makeStyles((theme) => ({
         farmerLogin: {
             backgroundColor: theme.palette.primary.a100,
@@ -13,16 +14,11 @@ function FarmerLogin() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "20px",
-            height: "100%"
+            gap: "20px"
         },
         farmerLoginHeading: {
             color: "#182918",
             margin: 0,
-            [theme.breakpoints.down("md")]:
-            {
-                display:"none!important"
-            }
         },
         farmerLoginContent: {
             backgroundColor: "white",
@@ -32,16 +28,12 @@ function FarmerLogin() {
             display: "flex",
             flexDirection: "column",
             gap: "20px",
-            border: `1px solid ${theme.palette.primary.main}`,
-            [theme.breakpoints.down("md")]:
-            {
-                border:"none!important",
-                backgroundColor:"#ECF4EC"
-            }
+            border: `1px solid ${theme.palette.primary.main}`
         },
         formControl: {
             display: "flex",
             flexDirection: "column",
+            color: "black"
         },
         buttonContainer: {
             textAlign: "center",
@@ -53,106 +45,57 @@ function FarmerLogin() {
         },
         loginButton: {
             color: "white !important",
-            width: "50%",
-            backgroundColor:"#F15922!important"
-            
+            width: "50%"
         },
         noAccount: {
             color: theme.palette.secondary.main
-        },
-        logoimg:{
-            width:"50%",
-            height:"150px",
-            [theme.breakpoints.up("md")]:{
-                    display:"none"
-
-            }
-            
-        },
-        textboxes:{
-            [theme.breakpoints.down("md")]:
-            {
-                
-                backgroundColor:"white"
-            }
-
         }
     }));
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [open, setOpen] = useState(false);
-    const [severity, setSeverity] = useState('success');
-    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
+
     const classes = useStyles();
-    const navigate = useNavigate();
 
     const farmerLogin = async (e) => {
         setButtonDisabled(true);
-        const signupData = {
+        const loginData = {
             email,
             password,
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/login`, signupData);
-            if (response) {
-                console.log(response);
-                setMessage(response.data.message);
-                setOpen(true);
-                setButtonDisabled(false);
-                setTimeout(() => {
-                    navigate('../home');
-                }, 1000);
-            }
-        } catch (error) {
-            setSeverity('error');
-            setOpen(true);
-            setButtonDisabled(false);
-            setMessage(error.response.data.message);
-        }
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/login`, loginData);
+            setTimeout(() => {
+                navigate('../farmer/home');
+            }, 1000);
+        } catch(error) {
 
+        }
     }
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
-        setOpen(false);
-      };
 
     return (
         <form className={classes.farmerLogin}>
-
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity={severity}>
-                    {message}
-                </Alert>
-            </Snackbar>
-            <div className={classes.logoimg}>LOGO</div>
-            <h2 className={classes.farmerLoginHeading}>Welcome</h2>
+            <h2 className={classes.farmerLoginHeading}>Welcome!</h2>
+            <h3 className={classes.farmerLoginSubHeading}></h3>
             <div className={classes.farmerLoginContent}>
+
                 <div className={classes.formControl}>
-                    <label htmlFor="email">Email</label>
-                    <TextField className={classes.textboxes} required value={email} placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)} />
+                <InputLabel>Email</InputLabel>
+                <TextField required type="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                    <label htmlFor="password">Password</label>
-                    <TextField className={classes.textboxes} required value={password} placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+                <InputLabel>Password</InputLabel>
+                <TextField required type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <div className={classes.check}>
-                    <FormGroup>
-                        <FormControlLabel control={<Checkbox/>} label = "Remember me "/>
-                    </FormGroup>
-                    </div>
                 <div>
                     <div className={classes.buttonContainer}>
                         <Button disabled={buttonDisabled} className={classes.loginButton} onClick={farmerLogin} variant="contained" color="primary">Login</Button>
+                        <br></br>
                         <Link className={classes.noAccount} to="../farmer/signup">Don't have an account ?</Link>
-                        <Link className={classes.noAccount} to="#">Forgot Password</Link>
                     </div>
                 </div>
             </div>
