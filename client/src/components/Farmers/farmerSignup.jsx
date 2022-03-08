@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
 import { Alert, Button, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, height } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
 
 const FarmerSignup = () => {
@@ -41,7 +41,8 @@ const FarmerSignup = () => {
         },
         buttonContainer: {
             textAlign: "center"
-        }
+        },
+      
     }));
 
     const [email, setEmail] = useState('');
@@ -104,6 +105,7 @@ const FarmerSignup = () => {
                     {message}
                 </Alert>
             </Snackbar>
+            
             <h2 className={classes.farmerSignupHeading}>Create a profile</h2>
             <h3 className={classes.farmerSignupSubHeading}>After creating a profile, you can 
             add your farms and products. After that interact with your customers to expand the business.
