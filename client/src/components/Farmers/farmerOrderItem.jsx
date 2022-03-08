@@ -1,9 +1,6 @@
 import { Button, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import { useState } from "react";
-import PropTypes from "prop-types";
-import Typography from "@mui/material/Typography";
 
 const FarmerOrderItem = (props) => {
   const useStyles = makeStyles((theme) => ({
@@ -20,6 +17,8 @@ const FarmerOrderItem = (props) => {
     farmRight: {
       margin: "10px",
     },
+    header: {},
+    paragraph: {},
   }));
 
   const classes = useStyles();
@@ -27,8 +26,8 @@ const FarmerOrderItem = (props) => {
   return (
     <Paper className={classes.farmOrderItem}>
       <Box className={classes.farmLeft}>
-        <h1>Store name</h1>
-        <p>01/01/2001</p>
+        <h1 className={classes.header}>Store name</h1>
+        <p className={classes.paragraph}>01/01/2001</p>
       </Box>
       <Box className={classes.farmRight}>
         <Button type="button" variant="contained">

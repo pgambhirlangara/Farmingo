@@ -1,9 +1,7 @@
-import { Button, Paper } from "@mui/material";
+import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import { useState } from "react";
-import PropTypes from "prop-types";
-import Typography from "@mui/material/Typography";
+import FarmerOrderItem from "./farmerOrderItem";
 
 const FarmerOrderHistoryMobile = (props) => {
   const useStyles = makeStyles((theme) => ({
@@ -58,6 +56,7 @@ const FarmerOrderHistoryMobile = (props) => {
         <Button type="button" variant="contained" color="secondary">
           Problem orders
         </Button>
+        <FarmerOrderItem />
       </Box>
     </div>
   );

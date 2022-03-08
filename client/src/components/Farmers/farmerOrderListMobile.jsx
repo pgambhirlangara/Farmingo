@@ -1,8 +1,11 @@
+import { Button, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import { Tabs, Tab, Typography } from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import Typography from "@mui/material/Typography";
 
 function TabPanel(props) {
   const { children, value, index } = props;
