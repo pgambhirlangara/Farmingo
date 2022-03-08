@@ -4,6 +4,7 @@ import CustomerLogin from "./components/Customers/customerLogin";
 import CustomerSignup from "./components/Customers/customerSignup";
 import FarmerProductPage from "./components/Farmers/farmerProduct";
 import FarmerProductInformation from "./components/Farmers/farmerProductInformation";
+import FarmerAddUser from "./components/Farmers/farmerAddUser";
 import FarmerSignup from "./components/Farmers/farmerSignup";
 import FarmerLogin from "./components/Farmers/farmerLogin";
 import Footer from "./components/utils/Footer";
@@ -23,6 +24,8 @@ function App() {
         <Route path="farmer/signup" element={<FarmerSignup />} />
         <Route path="farmer/login" element={<FarmerLogin />} />
         <Route path="farmer/home" element={<FarmerProductPage />} />
+        <Route path="farmer/addUser" element={<FarmerAddUser />} />
+
         <Route
           path="farmer/product/:id"
           element={<FarmerProductInformation />}
