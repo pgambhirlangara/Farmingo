@@ -28,7 +28,7 @@ const Welcome = () => {
             display: "flex",
             gap: "20px",
             [theme.breakpoints.down("md")]: {
-               flexDirection: "column"
+                flexDirection: "column"
             }
         },
         button: {
@@ -166,51 +166,52 @@ const Welcome = () => {
                         </Link>
                     </div>
                 </div>
-                <div className={classes.featureSection}>
-                    <div className={classes.featureSectionItem}>
-                        <img className={classes.featureSectionIcon} src="./assets/home_1.svg" alt="home1" />
-                        <h3>Secure Payment</h3>
-                        <p>Integrated and secure platform payment processes</p>
-                    </div>
-                    <div className={classes.featureSectionItem}>
-                        <img className={classes.featureSectionIcon} src="./assets/home_1.svg" alt="home1" />
-                        <h3>Secure Payment</h3>
-                        <p>Integrated and secure platform payment processes</p>
-                    </div>
-                    <div className={classes.featureSectionItem}>
-                        <img className={classes.featureSectionIcon} src="./assets/home_1.svg" alt="home1" />
-                        <h3>Secure Payment</h3>
-                        <p>Integrated and secure platform payment processes</p>
-                    </div>
+            </div>
+            <div className={classes.featureSection}>
+                <div className={classes.featureSectionItem}>
+                    <img className={classes.featureSectionIcon} src="./assets/home_1.svg" alt="home1" />
+                    <h3>Secure Payment</h3>
+                    <p>Integrated and secure platform payment processes</p>
                 </div>
-                <div className={classes.joinUsSection}>
-                    <div className={classes.leftSection}>
-                        <h2 className={classes.leftSectionTitle}>
-                            DO YOU WORK AS A LOCAL FARMER? HERE’S WHY YOU SHOULD JOIN US
+                <div className={classes.featureSectionItem}>
+                    <img className={classes.featureSectionIcon} src="./assets/home_1.svg" alt="home1" />
+                    <h3>Secure Payment</h3>
+                    <p>Integrated and secure platform payment processes</p>
+                </div>
+                <div className={classes.featureSectionItem}>
+                    <img className={classes.featureSectionIcon} src="./assets/home_1.svg" alt="home1" />
+                    <h3>Secure Payment</h3>
+                    <p>Integrated and secure platform payment processes</p>
+                </div>
+            </div>
+            <div className={classes.joinUsSection}>
+                <div className={classes.leftSection}>
+                    <h2 className={classes.leftSectionTitle}>
+                        DO YOU WORK AS A LOCAL FARMER? HERE’S WHY YOU SHOULD JOIN US
+                    </h2>
+                    <Divider />
+                    <p className={classes.leftSectionDescription}>  As a farmer, you sell directly to customers rather than through distributors. We market your brand, handle orders, and more, all while you benefit from an online presence that will help you build a loyal customer base. You are paid</p>
+                    <Divider />
+
+                    <Button variant="contained" color="secondary">Join us</Button>
+                </div>
+
+                <div className={classes.rightSection}>
+                    <div className={classes.rightSectionImage}>
+                        <h2 className={classes.rightSectionTitle}>
+                            EXPERIENCE THE BEST THAT YOUR LOCAL FARMERY HAS TO OFFER
                         </h2>
-                        <Divider />
-                        <p className={classes.leftSectionDescription}>  As a farmer, you sell directly to customers rather than through distributors. We market your brand, handle orders, and more, all while you benefit from an online presence that will help you build a loyal customer base. You are paid</p>
-                        <Divider />
-
-                        <Button variant="contained" color="secondary">Join us</Button>
-                    </div>
-
-                    <div className={classes.rightSection}>
-                        <div className={classes.rightSectionImage}>
-                            <h2 className={classes.rightSectionTitle}>
-                                EXPERIENCE THE BEST THAT YOUR LOCAL FARMERY HAS TO OFFER
-                            </h2>
-                            <p className={classes.rightSectionDescription}>
-                                EXPERIENCE THE BEST THAT YOUR LOCAL FARMERY HAS TO OFFER FarminGo is excited to announce the opening of our first location inside of Canada in South Vancouver, as well as the trade of local and fresh produce from your local farmers.
-                            </p>
-                        </div>
+                        <p className={classes.rightSectionDescription}>
+                            EXPERIENCE THE BEST THAT YOUR LOCAL FARMERY HAS TO OFFER FarminGo is excited to announce the opening of our first location inside of Canada in South Vancouver, as well as the trade of local and fresh produce from your local farmers.
+                        </p>
                     </div>
                 </div>
+            </div>
 
-                <div>
-                    <h1 className={classes.testimonialHeading}>CUSTOMER LOVE US!</h1>
-                   <div className={classes.testimonialSection}>
-                   {
+            <div>
+                <h1 className={classes.testimonialHeading}>CUSTOMER LOVE US!</h1>
+                <div className={classes.testimonialSection}>
+                    {
                         testimonials.map((data) => {
                             return (
                                 <div className={classes.testimonialSectionContent}>
@@ -221,7 +222,6 @@ const Welcome = () => {
                             )
                         })
                     }
-                   </div>
                 </div>
             </div>
         </section>
