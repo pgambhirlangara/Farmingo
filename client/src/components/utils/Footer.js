@@ -72,7 +72,7 @@ const Footer = () => {
       <div className={classes.footerLeftSection}>
         <img
           className={classes.footerLogo}
-          src="./assets/team3_farmingo_positive_final.png"
+          src="../assets/team3_farmingo_positive_final.png"
           alt="logo"
         />
       </div>
@@ -87,7 +87,7 @@ const Footer = () => {
             <img
               className={classes.arrowIcon}
               alt="arrow"
-              src="./assets/arrow.png"
+              src="../assets/arrow.png"
             />
           </Button>
         </div>

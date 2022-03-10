@@ -152,21 +152,21 @@ export const headersData = [
   {
     label: "Products",
     href: "/customer/products",
-    icon: "./assets/tomato_logo.svg"
+    icon: "../assets/tomato_logo.svg"
   },
   {
     label: "Order Details",
     href: "/customer/order/details",
-    icon: "./assets/tomato_logo.svg"
+    icon: "../assets/tomato_logo.svg"
   },
   {
     label: "Contact Us",
     href: "/contact",
-    icon: "./assets/tomato_logo.svg"
+    icon: "../assets/tomato_logo.svg"
   },
   {
     label: "Settings",
     href: "/customer/settings",
-    icon: "./assets/tomato_logo.svg"
+    icon: "../assets/tomato_logo.svg"
   },
 ];
