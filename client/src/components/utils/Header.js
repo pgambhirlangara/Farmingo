@@ -13,14 +13,14 @@ import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import { headersData } from "../../constants/constant";
-import { Box } from "@mui/system";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   header: {
     paddingRight: "79px",
     backgroundColor: "white !important",
     paddingLeft: "118px",
+    boxShadow: "none !important",
     "@media (max-width: 900px)": {
       paddingLeft: 0,
     },
@@ -46,11 +46,18 @@ const useStyles = makeStyles(() => ({
   },
   mobileToolbar: {
       width: "400px !important"
+  },
+  menuList:{ 
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      alignItems: "center",
+      borderBottom: "1px solid #cdcdcd"
+  },
   }
 }));
 
 export default function Header() {
-  const { header, menuButton, toolbar, drawerContainer, farmingoLogoImage, headerMenuIcon, mobileToolbar  } = useStyles();
+  const { header, menuButton, toolbar, drawerContainer, farmingoLogoImage, headerMenuIcon, menuList  } = useStyles();
 
   const [state, setState] = useState({
     mobileView: false,
@@ -123,6 +130,7 @@ export default function Header() {
     return headersData.map(({ label, href , icon}) => {
       return (
         <Link
+        className={menuList}
           {...{
             component: RouterLink,
             to: href,

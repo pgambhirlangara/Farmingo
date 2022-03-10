@@ -7,12 +7,13 @@ const Welcome = () => {
 
     const useStyles = makeStyles((theme) => ({
         banner: {
-            backgroundImage: `url('./assets/landing-page.jpg')`,
             height: "100%",
             backgroundPosition: "center",
             backgroundSize: "cover",
-            height: "800px",
-            width: "100% !important"
+            height: "907px",
+            width: "100% !important",
+            backgroundImage: "url(./assets/landing-page.jpg), linear-gradient(90deg, rgba(91, 175, 97, 0.5) 1.28%, rgba(248, 177, 51, 0.5) 105.7%)",
+            backgroundBlendMode: "multiply",
         },
         link: {
             textDecoration: "none",
