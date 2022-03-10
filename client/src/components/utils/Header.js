@@ -151,7 +151,7 @@ export default function Header() {
   };
 
   const farmingoLogo = (
-     <img className={farmingoLogoImage} src="./assets/HORIZONTAL.png" alt="logo" />
+     <img className={farmingoLogoImage} src="../assets/HORIZONTAL.png" alt="logo" />
   );
 
   const getMenuButtons = () => {
