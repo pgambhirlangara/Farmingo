@@ -1,8 +1,11 @@
+import { Button, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import { Tabs, Tab, Typography } from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import Typography from "@mui/material/Typography";
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -35,21 +38,23 @@ const FarmerOrderHistory = (props) => {
     <Box>
       <Box>
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Item One" />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-          <Tab label="Item Three" />
-          <Tab label="Item Three" />
+          <Tab label="New Orders" />
+          <Tab label="In Progress" />
+          <Tab label="Completed" />
+          <Tab label="Problems" />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Item One
+        New Orders
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        In Progress
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        Completed
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Problems
       </TabPanel>
     </Box>
   );
