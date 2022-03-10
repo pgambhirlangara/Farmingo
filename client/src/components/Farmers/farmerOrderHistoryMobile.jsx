@@ -56,7 +56,7 @@ const FarmerOrderHistoryMobile = (props) => {
         <Button type="button" variant="contained" color="secondary">
           Problem orders
         </Button>
-        <FarmerOrderItem />
+        {/* <FarmerOrderItem /> */}
       </Box>
     </div>
   );

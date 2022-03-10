@@ -6,7 +6,7 @@ import FarmerProductPage from "./components/Farmers/farmerProduct";
 import FarmerProductInformation from "./components/Farmers/farmerProductInformation";
 import FarmerSignup from "./components/Farmers/farmerSignup";
 import FarmerLogin from "./components/Farmers/farmerLogin";
-import FarmerOrder from "./components/Farmers/farmerOrderHistoryMobile.jsx";
+import FarmerOrder from "./components/Farmers/farmerOrderHistoryMobile";
 import Footer from "./components/utils/Footer";
 import Header from "./components/utils/Header";
 import Welcome from "./components/Welcome/welcome";
