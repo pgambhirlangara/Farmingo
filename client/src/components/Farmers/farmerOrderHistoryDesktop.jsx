@@ -6,7 +6,7 @@ import Tab from "@mui/material/Tab";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
-
+import FarmerOrderItem from "./farmerOrderItem";
 function TabPanel(props) {
   const { children, value, index } = props;
 
@@ -14,7 +14,10 @@ function TabPanel(props) {
     <div hidden={value !== index} id={`simple-tabpanel-${index}`}>
       {value === index && (
         <Box>
-          <Typography>{children}</Typography>
+          <FarmerOrderItem />
+          <FarmerOrderItem />
+          <FarmerOrderItem />
+          <FarmerOrderItem />
         </Box>
       )}
     </div>
@@ -53,7 +56,7 @@ const FarmerOrderHistory = (props) => {
       <TabPanel value={value} index={2}>
         Completed
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={3}>
         Problems
       </TabPanel>
     </Box>
