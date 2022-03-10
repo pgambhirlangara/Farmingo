@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 900px)": {
       paddingLeft: 0,
     },
+    [theme.breakpoints.down("md")]: {
+      backgroundColor: "transparent !important",
+  },
   },
   menuButton: {
     fontFamily: "Open Sans, sans-serif",
@@ -38,7 +41,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px 30px",
   },
   farmingoLogoImage: {
-      width: "200px"
+      width: "200px",
+      [theme.breakpoints.down("md")]: {
+        display: "none"
+    },
   },
   headerMenuIcon: {
       width: "50px",
