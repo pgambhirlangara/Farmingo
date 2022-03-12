@@ -6,7 +6,6 @@ import {
   TabsUnstyled,
   TabsListUnstyled,
   TabPanelUnstyled,
-  buttonUnstyledClasses,
   tabUnstyledClasses,
 } from "@mui/base";
 
@@ -74,12 +73,6 @@ const TabsList = styled(TabsListUnstyled)`
 
 const FarmerOrderHistory = (props) => {
   const useStyles = makeStyles((theme) => ({
-    mobileView: {
-      [theme.breakpoints.up("md")]: {
-        display: "none",
-      },
-    },
-
     desktopView: {
       [theme.breakpoints.down("md")]: {
         display: "none",
@@ -89,26 +82,6 @@ const FarmerOrderHistory = (props) => {
       alignItems: "center",
       position: "relative",
       backgroundColor: "#EEF6EE",
-    },
-    farmOrderHistory: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      backgroundColor: "#EEF6EE",
-    },
-    farmTotalSection: {
-      width: "100%",
-      textAlign: "center",
-      backgroundColor: "#5BAF61",
-      marginBottom: "10px",
-      color: "#FFFFFF",
-    },
-    farmButtonsSection: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      width: "90%",
-      gap: "10px",
     },
     desktopContainer: {
       display: "flex",
@@ -131,13 +104,44 @@ const FarmerOrderHistory = (props) => {
       textAlign: "center",
     },
     totalDesktopHeader: {
-      margin: "30px",
+      margin: "25px",
     },
     orderDesktop: {
       marginTop: "40px",
       fontSize: "0.8vw",
       fontWeight: "800",
       lineHeight: "30px",
+    },
+    mobileView: {
+      [theme.breakpoints.up("md")]: {
+        display: "none",
+      },
+      backgroundColor: "#EEF6EE",
+    },
+    farmOrderHistory: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      backgroundColor: "#EEF6EE",
+      height: "100%",
+    },
+    farmTotalSection: {
+      width: "100%",
+      textAlign: "center",
+      backgroundColor: "#5BAF61",
+      marginBottom: "10px",
+      color: "#FFFFFF",
+    },
+    farmButtonsSection: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      width: "93vw",
+      gap: "20px",
+    },
+
+    farmButton: {
+      height: "50px",
     },
   }));
 
@@ -146,7 +150,7 @@ const FarmerOrderHistory = (props) => {
   return (
     <Box>
       <Box className={classes.mobileView}>
-        <div className={classes.farmOrderHistory}>
+        <Box className={classes.farmOrderHistory}>
           <section className={classes.farmHeaderSection}>
             <h1 className={classes.farmHeader}>Order History</h1>
           </section>
@@ -157,24 +161,44 @@ const FarmerOrderHistory = (props) => {
           </section>
 
           <Box className={classes.farmButtonsSection}>
-            <Button type="button" variant="contained" color="secondary">
+            <Button
+              className={classes.farmButton}
+              type="button"
+              variant="contained"
+              color="secondary"
+            >
               New orders
             </Button>
 
-            <Button type="button" variant="contained" color="secondary">
+            <Button
+              className={classes.farmButton}
+              type="button"
+              variant="contained"
+              color="secondary"
+            >
               In progress orders
             </Button>
 
-            <Button type="button" variant="contained" color="secondary">
+            <Button
+              className={classes.farmButton}
+              type="button"
+              variant="contained"
+              color="secondary"
+            >
               Completed orders
             </Button>
 
-            <Button type="button" variant="contained" color="secondary">
+            <Button
+              className={classes.farmButton}
+              type="button"
+              variant="contained"
+              color="secondary"
+            >
               Problem orders
             </Button>
             {/* <FarmerOrderItem /> */}
           </Box>
-        </div>
+        </Box>
       </Box>
       <Box className={classes.desktopView}>
         <Box className={classes.totalDesktop}>
