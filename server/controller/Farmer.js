@@ -43,7 +43,15 @@ const loginFarmer = async (req, res) => {
                 token,
                 message:"Succesfully Logged In"
             })
+        } else {
+            return res.status(401).json({
+                message:"Incorrect Password!"
+            })
         }
+    } else {
+        return res.status(500).json({
+            message:"User doesn't exist, please register"
+        })
     }
 
 }

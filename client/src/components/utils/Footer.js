@@ -15,10 +15,7 @@ const Footer = () => {
       padding: 10,
       color: "white",
       [theme.breakpoints.down("md")]: {
-        gridTemplateColumns: "100%",
-        padding: 0,
-        textAlign: "center",
-        paddingBottom: "20px"
+        display: "none"
       },
     },
     arrowButton: {
