@@ -96,7 +96,6 @@ const Welcome = () => {
             backgroundImage: `url('./assets/new.jpg'), linear-gradient(90deg, rgba(91, 175, 97, 0.6) 1.28%, rgba(248, 177, 51, 0.6) 105.7%);`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            height: "680px",
             padding: "60px",
             color: "white",
             display: "flex",
