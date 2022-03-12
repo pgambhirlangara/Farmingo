@@ -9,9 +9,11 @@ import FarmerSignup from "./components/Farmers/farmerSignup";
 import FarmerLogin from "./components/Farmers/farmerLogin";
 import Welcome from "./components/Welcome/welcome";
 import ContactUs from "./components/Contact Us/contactUs";
-import OrderDetails from "./components/Order details/orderDetails";
-import Settings from "./components/Settings/settings";
+import OrderDetails from "./components/Farmers/orderDetails";
+import Settings from "./components/Farmers/settings";
+import ProfileInformation from "./components/Farmers/profileInformation";
 import Customerfaq from "./components/Customers/customerfaq";
+import FarmProfile from "./components/Farmers/FarmProfile";
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
         <Route path="farmer/contactUs" element={<ContactUs />} />
         <Route path="farmer/orderDetails" element={<OrderDetails />} />
         <Route path="farmer/settings" element={<Settings />} />
+        <Route path="farmer/profileinformation" element={<ProfileInformation />} />
+        <Route path="farmer/FarmProfile" element={<FarmProfile />} />
         <Route path="farmer/addUser" element={<FarmerAddUser />} />
 
         <Route
