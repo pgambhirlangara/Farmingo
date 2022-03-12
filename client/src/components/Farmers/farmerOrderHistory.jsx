@@ -1,54 +1,53 @@
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
 import FarmerOrderItem from "./farmerOrderItem";
-import TabsUnstyled from "@mui/base/TabsUnstyled";
-import TabsListUnstyled from "@mui/base/TabsListUnstyled";
-import TabPanelUnstyled from "@mui/base/TabPanelUnstyled";
-import { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
-import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
-import { styled } from "@mui/system";
+import {
+  TabUnstyled,
+  TabsUnstyled,
+  TabsListUnstyled,
+  TabPanelUnstyled,
+  buttonUnstyledClasses,
+  tabUnstyledClasses,
+} from "@mui/base";
+
+import { styled, Box } from "@mui/system";
 
 const Tab = styled(TabUnstyled)`
   color: white;
   cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: bold;
   background-color: #c04718;
-  width: 200px;
+  width: 13vw;
+  height: 100px;
   padding: 12px 16px;
   margin: 6px 6px;
-
+  margin-left: 0;
+  text-align: center;
   border: none;
-  border-radius: 5px;
+  border-radius: 24px;
   display: flex;
   justify-content: center;
-
-  &:hover {
-  }
-
-  &:focus {
-    color: #fff;
-    border-radius: 3px;
-
-    outline-offset: 2px;
-  }
+  font-size: 1.3vw;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
 
   &.${tabUnstyledClasses.selected} {
     background-color: #f15a22;
-  }
-
-  &.${buttonUnstyledClasses.disabled} {
-    opacity: 0.5;
-
-    cursor: not-allowed;
   }
 `;
 
 const TabPanel = styled(TabPanelUnstyled)`
   width: 100%;
-  font-family: IBM Plex Sans, sans-serif;
-  font-size: 0.875rem;
+  height: 450px;
+  top: 230px;
+  background-color: white;
+  z-index: 100;
+  position: absolute;
+  width: 60vw;
+  padding: 50px 35px;
+  border: 1px solid #74c26c;
+  border-radius: 0 24px 24px 24px;
 `;
 
 const TabsList = styled(TabsListUnstyled)`
@@ -58,6 +57,7 @@ const TabsList = styled(TabsListUnstyled)`
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
+  min-height: 650px;
 `;
 
 const FarmerOrderHistory = (props) => {
@@ -72,6 +72,10 @@ const FarmerOrderHistory = (props) => {
       [theme.breakpoints.down("md")]: {
         display: "none",
       },
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      position: "relative",
     },
     farmOrderHistory: {
       display: "flex",
@@ -97,6 +101,19 @@ const FarmerOrderHistory = (props) => {
     desktopContainer: {
       display: "flex",
       justifyContent: "center",
+    },
+
+    panelContainer: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr 1fr",
+      gap: "20px",
+    },
+
+    totalDesktop: {
+      fontSize: "1vw",
+      fontWeight: "800",
+      lineHeight: "30px",
+      backgroundColor: "#57A85D",
     },
   }));
 
@@ -136,6 +153,12 @@ const FarmerOrderHistory = (props) => {
         </div>
       </Box>
       <Box className={classes.desktopView}>
+        <Box className={classes.totalDesktop}>
+          <h2>Total: $1200.85</h2>
+        </Box>
+        <Box className={classes.orderDesktop}>
+          <h1>Order History</h1>
+        </Box>
         <Box className={classes.desktopContainer}>
           <TabsUnstyled defaultValue={0}>
             <TabsList>
@@ -144,7 +167,18 @@ const FarmerOrderHistory = (props) => {
               <Tab>Completed</Tab>
               <Tab>Problems</Tab>
             </TabsList>
-            <TabPanel value={0}>First content</TabPanel>
+            <TabPanel value={0}>
+              <div className={classes.panelContainer}>
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+              </div>
+            </TabPanel>
             <TabPanel value={1}>Second content</TabPanel>
             <TabPanel value={2}>Third content</TabPanel>
             <TabPanel value={3}>Third content</TabPanel>

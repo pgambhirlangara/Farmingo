@@ -10,38 +10,51 @@ const FarmerOrderItem = (props) => {
       justifyContent: "space-between",
       borderRadius: 25,
       border: "2px solid #74C26C",
-      width: "340px",
-      height: "90px",
+      width: "18vw",
+      height: "80px",
       backgroundColor: "#FFFFFF",
     },
     farmLeft: {
-      margin: "10px",
+      margin: "15px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      marginLeft: "15px",
     },
     farmRight: {
-      margin: "10px",
+      margin: "15px",
+      marginLeft: "15px",
     },
     header: {
-      fontSize: "24px",
-      margin: "0",
-    },
-    paragraph: {
-      fontSize: "16px",
-      color: "rgba(38, 38, 38, 0.6)",
+      fontSize: "1.4vw",
+      fontFamily: "Nunito",
+      fontStyle: "normal",
+      fontWeight: "700",
       lineHeight: "30px",
       margin: "0",
     },
+    paragraph: {
+      color: "rgba(38, 38, 38, 0.6)",
+      lineHeight: "30px",
+      margin: "0",
+      fontSize: "0.9vw",
+      fontFamily: "Nunito",
+      fontStyle: "normal",
+      fontWeight: "600",
+    },
     total: {
       backgroundColor: "#FDC350",
-      border: "7px solid #FDC350",
+      border: "0.3vw solid #FDC350",
       borderRadius: 25,
-      width: "140px",
+      width: "6vw",
       margin: "0",
       textAlign: "center",
       display: "inline-block",
-      fontSize: "20px",
+      fontSize: "1vw",
+      fontFamily: "Nunito",
+      fontStyle: "normal",
+      fontWeight: "700",
+      lineHeight: "30px",
     },
   }));
 
@@ -50,7 +63,7 @@ const FarmerOrderItem = (props) => {
   return (
     <Box className={classes.farmOrderItem}>
       <Box className={classes.farmLeft}>
-        <h1 className={classes.header}>Store name</h1>
+        <h1 className={classes.header}>Walmart</h1>
         <p className={classes.paragraph}>01/01/2001</p>
       </Box>
       <Box className={classes.farmRight}>
