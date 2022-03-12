@@ -1,25 +1,64 @@
-import { Button, Tab, Tabs } from "@mui/material";
+import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import PropTypes from "prop-types";
 import FarmerOrderItem from "./farmerOrderItem";
-import { useState } from "react";
+import TabsUnstyled from "@mui/base/TabsUnstyled";
+import TabsListUnstyled from "@mui/base/TabsListUnstyled";
+import TabPanelUnstyled from "@mui/base/TabPanelUnstyled";
+import { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
+import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
+import { styled } from "@mui/system";
 
-function TabPanel(props) {
-  const { children, value, index } = props;
+const Tab = styled(TabUnstyled)`
+  color: white;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: bold;
+  background-color: #c04718;
+  width: 200px;
+  padding: 12px 16px;
+  margin: 6px 6px;
 
-  return (
-    <div hidden={value !== index} id={`simple-tabpanel-${index}`}>
-      {value === index && <Box>{children}</Box>}
-    </div>
-  );
-}
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
+  &:hover {
+  }
+
+  &:focus {
+    color: #fff;
+    border-radius: 3px;
+
+    outline-offset: 2px;
+  }
+
+  &.${tabUnstyledClasses.selected} {
+    background-color: #f15a22;
+  }
+
+  &.${buttonUnstyledClasses.disabled} {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+  }
+`;
+
+const TabPanel = styled(TabPanelUnstyled)`
+  width: 100%;
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+`;
+
+const TabsList = styled(TabsListUnstyled)`
+  min-width: 320px;
+  width: 63vw;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+`;
 
 const FarmerOrderHistory = (props) => {
   const useStyles = makeStyles((theme) => ({
@@ -57,18 +96,11 @@ const FarmerOrderHistory = (props) => {
 
     desktopContainer: {
       display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
+      justifyContent: "center",
     },
   }));
 
   const classes = useStyles();
-
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <Box>
@@ -105,26 +137,18 @@ const FarmerOrderHistory = (props) => {
       </Box>
       <Box className={classes.desktopView}>
         <Box className={classes.desktopContainer}>
-          <Box>
-            <Tabs value={value} onChange={handleChange}>
-              <Tab label="New Orders" />
-              <Tab label="In Progress" />
-              <Tab label="Completed" />
-              <Tab label="Problems" />
-            </Tabs>
-          </Box>
-          <TabPanel value={value} index={0}>
-            New Orders
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            In Progress
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            Completed
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            Problems
-          </TabPanel>
+          <TabsUnstyled defaultValue={0}>
+            <TabsList>
+              <Tab>New Orders</Tab>
+              <Tab>In Progress </Tab>
+              <Tab>Completed</Tab>
+              <Tab>Problems</Tab>
+            </TabsList>
+            <TabPanel value={0}>First content</TabPanel>
+            <TabPanel value={1}>Second content</TabPanel>
+            <TabPanel value={2}>Third content</TabPanel>
+            <TabPanel value={3}>Third content</TabPanel>
+          </TabsUnstyled>
         </Box>
       </Box>
     </Box>
