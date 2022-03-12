@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
-import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import { Province as provinceList } from "../../constants/constant";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
+import { Alert, Button, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import { Link, useNavigate } from "react-router-dom";
+import { Province as provinceList } from "../../constants/constant";
 
 const FarmerSignup = () => {
 
@@ -50,102 +50,96 @@ const FarmerSignup = () => {
     const [name, setName] = useState('');
     const [contact, setContact] = useState(0);
     const [address, setAddress] = useState("");
-    const [province, setProvince] = useState("");
-    const [zipCode, setZipCode] = useState("");
-    const [city, setCity] = useState("");
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState('success');
+    const [message, setMessage] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(false)
     const navigate = useNavigate();
+
 
     const classes = useStyles();
 
     const signup = async (e) => {
+        setButtonDisabled(true);
         const signupData = {
+            name,
             email,
             password,
-            name,
-            contact,
-            city,
-            province,
-            zipCode
+            contact, 
+            address
         }
 
-    try {
+        try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/register`, signupData);
-            setTimeout(() => {
-                navigate('../farmer/login');
-            }, 1000);
+            if (response) {
+                console.log(response);
+                setMessage(response.data.message);
+                setOpen(true);
+                setButtonDisabled(false);
+                setTimeout(() => {
+                    navigate('../farmer/login');
+                }, 1000);
+            }
+        } catch (error) {
+            setSeverity('error');
+            setOpen(true);
+            setButtonDisabled(false);
+            setMessage(error.response.data.message);
         }
 
-        catch(error) {
-
-        }
-         
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     return (
         <form className={classes.farmerSignup}>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+
+                <Alert onClose={handleClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
+            
             <h2 className={classes.farmerSignupHeading}>Create a profile</h2>
-            <h3 className={classes.farmerSignupSubHeading}></h3>
+            <h3 className={classes.farmerSignupSubHeading}>After creating a profile, you can 
+            add your farms and products. After that interact with your customers to expand the business.
+            </h3>
             <div className={classes.farmerSignupContent}>
                 <div className={classes.formControl}>
                     <InputLabel>Name</InputLabel>
                     <TextField required type="text" onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                <InputLabel>Email</InputLabel>
+                    <InputLabel>Email</InputLabel>
                     <TextField required type="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                <InputLabel>Contact</InputLabel>
+                    <InputLabel>Contact</InputLabel>
                     <TextField required type="number" onChange={(e) => setContact(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                   
-                <Box display="grid" gridTemplateColumns="auto auto" gap="20px">
-                    <div className={classes.formControl}>
-                        <InputLabel>Province</InputLabel>
-                        <Select
-                            value={province}
-                            onChange={(e) => setProvince(e.target.value)}
-                            label="Province"
-                        >
-                            {
-                                provinceList.map(({ name }, index) => {
-                                    return <MenuItem key={index} value={name}>{name}</MenuItem>
-                                })
-                            }
-                        </Select>
-                    </div>
-                    <div className={classes.formControl}>
-                        <InputLabel>City</InputLabel>
-                        <Select
-                            disabled={!province}
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            label="City"
-                        >
-                            {province ?
-                                provinceList.find((pr) => pr.name === province)
-                                    .cities.map((city, index) => <MenuItem key={index} value={city}>{city}</MenuItem>)
-                                : []
-                            }
-                        </Select>
-                    </div>
-                </Box>
-
+                    <InputLabel>Address</InputLabel>
+                    <TextField type="text" onChange={(e) => setAddress(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
-                <InputLabel>Password</InputLabel>
+                    <InputLabel>Password</InputLabel>
                     <TextField required type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div>
 
-                <div className={classes.buttonContainer}>
-                    <Button variant="contained" onClick={signup} color="primary" >Signup</Button>
-                </div>
+                    <div className={classes.buttonContainer}>
+                        <Button disabled={buttonDisabled} className={classes.signupButton} onClick={signup} variant="contained" color="primary" >Signup</Button>
+                        <Link className={classes.alreadyAccount} to="../farmer/login">Already have an account ?</Link>
+                    </div>
 
                 </div>
             </div>
-
         </form>
     )
 }

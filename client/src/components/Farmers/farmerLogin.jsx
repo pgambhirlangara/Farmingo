@@ -28,7 +28,11 @@ const FarmerLogin = () => {
             display: "flex",
             flexDirection: "column",
             gap: "20px",
-            border: `1px solid ${theme.palette.primary.main}`
+            border: `1px solid ${theme.palette.primary.main}`,
+            [theme.breakpoints.down("md")]: {
+                backgroundColor: "transparent",
+                border: "none"
+            },
         },
         formControl: {
             display: "flex",
@@ -49,6 +53,10 @@ const FarmerLogin = () => {
         },
         noAccount: {
             color: theme.palette.secondary.main
+        },
+        logo: {
+            width: "234px",
+            height: "234px"
         }
     }));
 
@@ -79,8 +87,7 @@ const FarmerLogin = () => {
 
     return (
         <form className={classes.farmerLogin}>
-            <h2 className={classes.farmerLoginHeading}>Welcome!</h2>
-            <h3 className={classes.farmerLoginSubHeading}></h3>
+            <img className={classes.logo} src="../assets/team3_farmingo_final.png" alt="Logo" />
             <div className={classes.farmerLoginContent}>
 
                 <div className={classes.formControl}>

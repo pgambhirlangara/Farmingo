@@ -14,8 +14,8 @@ import Settings from "./components/Farmers/settings";
 import ProfileInformation from "./components/Farmers/profileInformation";
 import Customerfaq from "./components/Customers/customerfaq";
 import FarmProfile from "./components/Farmers/FarmProfile";
-import Footer from "./components/utils/Footer";
 import Header from "./components/utils/Header";
+import Footer from "./components/utils/Footer";
 
 
 function App() {
