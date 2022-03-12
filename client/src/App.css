@@ -7,5 +7,9 @@ button {
   border-radius: 24px !important;
   font-weight: bold !important;
   text-transform: none !important;
+  box-shadow: none !important;
 }
 
+#subscribeInput {
+  padding: 8px;
+}

@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between"  },
   drawerContainer: {
     padding: "20px 30px",
+    backgroundColor: "#EEF6EE",
+    height: "100%"
   },
   farmingoLogoImage: {
       width: "200px",
