@@ -14,12 +14,14 @@ import Settings from "./components/Farmers/settings";
 import ProfileInformation from "./components/Farmers/profileInformation";
 import Customerfaq from "./components/Customers/customerfaq";
 import FarmProfile from "./components/Farmers/FarmProfile";
+import Footer from "./components/utils/Footer";
+import Header from "./components/utils/Header";
 
 
 function App() {
   return (
     <div className="App">
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="customer/signup" element={<CustomerSignup />} />
@@ -41,7 +43,7 @@ function App() {
         <Route path="customer/faq" element={<Customerfaq />} />
 
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

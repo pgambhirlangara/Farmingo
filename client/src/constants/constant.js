@@ -152,21 +152,21 @@ export const headersData = [
   {
     label: "Products",
     href: "/customer/products",
-    icon: "./assets/products.svg"
+    icon: "../assets/products.svg"
   },
   {
     label: "Order Details",
     href: "/customer/order/details",
-    icon: "./assets/order_details.svg"
+    icon: "../assets/order_details.svg"
   },
   {
     label: "Contact Us",
     href: "/contact",
-    icon: "./assets/contact_us.svg"
+    icon: "../assets/contact_us.svg"
   },
   {
     label: "Settings",
     href: "/customer/settings",
-    icon: "./assets/settings.svg"
+    icon: "../assets/settings.svg"
   },
 ];
