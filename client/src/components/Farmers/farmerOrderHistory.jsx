@@ -48,6 +48,18 @@ const TabPanel = styled(TabPanelUnstyled)`
   padding: 50px 35px;
   border: 1px solid #74c26c;
   border-radius: 0 24px 24px 24px;
+  @media (min-width: 1900px) {
+    top: 280px;
+  }
+  @media (min-width: 1700px) and (max-width: 1900px) {
+    top: 270px;
+  }
+  @media (min-width: 1300px) and (max-width: 1700px) {
+    top: 250px;
+  }
+  @media (min-width: 1000px) and (max-width: 1300px) {
+    top: 240px;
+  }
 `;
 
 const TabsList = styled(TabsListUnstyled)`
@@ -76,6 +88,7 @@ const FarmerOrderHistory = (props) => {
       flexDirection: "column",
       alignItems: "center",
       position: "relative",
+      backgroundColor: "#EEF6EE",
     },
     farmOrderHistory: {
       display: "flex",
@@ -97,7 +110,6 @@ const FarmerOrderHistory = (props) => {
       width: "90%",
       gap: "10px",
     },
-
     desktopContainer: {
       display: "flex",
       justifyContent: "center",
@@ -110,10 +122,22 @@ const FarmerOrderHistory = (props) => {
     },
 
     totalDesktop: {
-      fontSize: "1vw",
+      fontSize: "1.4vw",
       fontWeight: "800",
       lineHeight: "30px",
       backgroundColor: "#57A85D",
+      color: "#FFFFFF",
+      width: "100%",
+      textAlign: "center",
+    },
+    totalDesktopHeader: {
+      margin: "30px",
+    },
+    orderDesktop: {
+      marginTop: "40px",
+      fontSize: "0.8vw",
+      fontWeight: "800",
+      lineHeight: "30px",
     },
   }));
 
@@ -154,7 +178,7 @@ const FarmerOrderHistory = (props) => {
       </Box>
       <Box className={classes.desktopView}>
         <Box className={classes.totalDesktop}>
-          <h2>Total: $1200.85</h2>
+          <h2 className={classes.totalDesktopHeader}>Total: $1200.85</h2>
         </Box>
         <Box className={classes.orderDesktop}>
           <h1>Order History</h1>
@@ -179,9 +203,35 @@ const FarmerOrderHistory = (props) => {
                 <FarmerOrderItem />
               </div>
             </TabPanel>
-            <TabPanel value={1}>Second content</TabPanel>
-            <TabPanel value={2}>Third content</TabPanel>
-            <TabPanel value={3}>Third content</TabPanel>
+            <TabPanel value={1}>
+              {" "}
+              <div className={classes.panelContainer}>
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+              </div>
+            </TabPanel>
+            <TabPanel value={2}>
+              {" "}
+              <div className={classes.panelContainer}>
+                <FarmerOrderItem />
+              </div>
+            </TabPanel>
+            <TabPanel value={3}>
+              {" "}
+              <div className={classes.panelContainer}>
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+                <FarmerOrderItem />
+              </div>
+            </TabPanel>
           </TabsUnstyled>
         </Box>
       </Box>
