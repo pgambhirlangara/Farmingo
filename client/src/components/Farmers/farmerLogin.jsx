@@ -19,6 +19,9 @@ const FarmerLogin = () => {
             justifyContent: "center",
             gap: "20px",
             height: "100%",
+            [theme.breakpoints.down("md")]: {
+                height: "unset"
+            }
         },
         farmerLoginHeading: {
             color: "#182918",
@@ -82,6 +85,9 @@ const FarmerLogin = () => {
         label: {
             color: "black !important",
             fontWeight: "bold !important"
+        },
+        snackbar: {
+            backgroundColor: "yellow"
         }
     }));
 
@@ -96,6 +102,11 @@ const FarmerLogin = () => {
 
     const navigate = useNavigate();
     const [buttonDisabled, setButtonDisabled] = useState(false);
+
+    const anchorOrigin = {
+        vertical: "top", horizontal: "center"
+    }
+
     const classes = useStyles();
 
     const farmerLogin = async (e) => {
@@ -112,7 +123,7 @@ const FarmerLogin = () => {
             setButtonDisabled(false);
             setTimeout(() => {
                 navigate('../farmer/home');
-            }, 1500);
+            }, 2000);
         } catch (error) {
             setSeverity('error');
             setOpen(true);
@@ -144,13 +155,10 @@ const FarmerLogin = () => {
         setOpen(false);
     };
 
-    const anchorOrigin = {
-        vertical: "top", horizontal: "center"
-    }
     return (
         <form className={classes.farmerLogin}>
-            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
-                <Alert onClose={handleAlertClose} severity={severity}>
+            <Snackbar  anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
+                <Alert className={classes.snackbar} onClose={handleAlertClose} severity={severity}>
                     {message}
                 </Alert>
             </Snackbar>

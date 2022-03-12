@@ -11,13 +11,12 @@ const registerFarmer = async (req, res) => {
             password: newPassword,
             email: req.body.email,
             city: req.body.city,
-            zipCode: req.body.zipCode,
             province: req.body.province,
             contact: req.body.contact
         })
 
         return res.status(200).json({
-            message: "Succesfully logged in",
+            message: "Farmer Registered Succesfully",
             data: output
         })
 
@@ -38,7 +37,7 @@ const loginFarmer = async (req, res) => {
             const token = jwt.sign({
                 name: req.body.name,
                 email: req.body.email
-            }, 'hello123')
+            }, process.env.JWT_SECRET)
             return res.status(200).json({
                 token,
                 message:"Succesfully Logged In"
