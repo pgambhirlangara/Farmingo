@@ -4,18 +4,18 @@ import CustomerLogin from "./components/Customers/customerLogin";
 import CustomerSignup from "./components/Customers/customerSignup";
 import FarmerProductPage from "./components/Farmers/farmerProduct";
 import FarmerProductInformation from "./components/Farmers/farmerProductInformation";
+import FarmerAddUser from "./components/Farmers/farmerAddUser";
 import FarmerSignup from "./components/Farmers/farmerSignup";
 import FarmerLogin from "./components/Farmers/farmerLogin";
-import Footer from "./components/utils/Footer";
-import Header from "./components/utils/Header";
 import Welcome from "./components/Welcome/welcome";
-import Adduser from "./components/Users/adduser";
 import ContactUs from "./components/Contact Us/contactUs";
-import orderDetails from "./components/Order details/orderDetails"
-import OrderDetails from "./components/Order details/orderDetails";
-import Settings from "./components/Settings/settings";
-import Farm_Profile from "./components/Create Farm_Profile/Farm_Profile";
-import ProfileInformation from "./components/Profile Information/profile_information";
+import OrderDetails from "./components/Farmers/orderDetails";
+import Settings from "./components/Farmers/settings";
+import ProfileInformation from "./components/Farmers/profileInformation";
+import Customerfaq from "./components/Customers/customerfaq";
+import FarmProfile from "./components/Farmers/FarmProfile";
+
+
 function App() {
   return (
     <div className="App">
@@ -27,16 +27,19 @@ function App() {
         <Route path="farmer/signup" element={<FarmerSignup />} />
         <Route path="farmer/login" element={<FarmerLogin />} />
         <Route path="farmer/home" element={<FarmerProductPage />} />
-        <Route path="farmer/adduser" element={<Adduser />} />
         <Route path="farmer/contactUs" element={<ContactUs />} />
         <Route path="farmer/orderDetails" element={<OrderDetails />} />
         <Route path="farmer/settings" element={<Settings />} />
         <Route path="farmer/profileinformation" element={<ProfileInformation />} />
-        <Route path="farmer/FarmProfile" element={<Farm_Profile />} />
+        <Route path="farmer/FarmProfile" element={<FarmProfile />} />
+        <Route path="farmer/addUser" element={<FarmerAddUser />} />
+
         <Route
           path="farmer/product/:id"
           element={<FarmerProductInformation />}
         />
+        <Route path="customer/faq" element={<Customerfaq />} />
+
       </Routes>
       {/* <Footer /> */}
     </div>
