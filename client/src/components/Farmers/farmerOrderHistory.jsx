@@ -1,25 +1,16 @@
-import { Button } from "@mui/material";
+import { Button, Tab, Tabs } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import PropTypes from "prop-types";
 import FarmerOrderItem from "./farmerOrderItem";
 import { useState } from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 
 function TabPanel(props) {
   const { children, value, index } = props;
 
   return (
     <div hidden={value !== index} id={`simple-tabpanel-${index}`}>
-      {value === index && (
-        <Box>
-          <FarmerOrderItem />
-          <FarmerOrderItem />
-          <FarmerOrderItem />
-          <FarmerOrderItem />
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -32,6 +23,17 @@ TabPanel.propTypes = {
 
 const FarmerOrderHistory = (props) => {
   const useStyles = makeStyles((theme) => ({
+    mobileView: {
+      [theme.breakpoints.up("md")]: {
+        display: "none",
+      },
+    },
+
+    desktopView: {
+      [theme.breakpoints.down("md")]: {
+        display: "none",
+      },
+    },
     farmOrderHistory: {
       display: "flex",
       flexDirection: "column",
@@ -49,8 +51,14 @@ const FarmerOrderHistory = (props) => {
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
-      width: "80%",
+      width: "90%",
       gap: "10px",
+    },
+
+    desktopContainer: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
     },
   }));
 
@@ -96,7 +104,7 @@ const FarmerOrderHistory = (props) => {
         </div>
       </Box>
       <Box className={classes.desktopView}>
-        <Box>
+        <Box className={classes.desktopContainer}>
           <Box>
             <Tabs value={value} onChange={handleChange}>
               <Tab label="New Orders" />
