@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("md")]: {
       backgroundColor: "transparent !important",
-  },
+    },
   },
   menuButton: {
     fontFamily: "Open Sans, sans-serif",
@@ -36,36 +36,37 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     display: "flex",
-    justifyContent: "space-between"  },
+    justifyContent: "space-between"
+  },
   drawerContainer: {
     padding: "20px 30px",
     backgroundColor: "#EEF6EE",
     height: "100%"
   },
   farmingoLogoImage: {
-      width: "200px",
-      [theme.breakpoints.down("md")]: {
-        display: "none"
+    width: "200px",
+    [theme.breakpoints.down("md")]: {
+      display: "none"
     },
   },
   headerMenuIcon: {
-      width: "50px",
-      height: "24px"
+    width: "50px",
+    height: "24px"
   },
   mobileToolbar: {
-      width: "400px !important"
+    width: "400px !important"
   },
-  menuList:{ 
+  menuList: {
     [theme.breakpoints.down("md")]: {
       display: "flex",
       alignItems: "center",
       borderBottom: "1px solid #cdcdcd"
-  },
+    },
   }
 }));
 
 export default function Header() {
-  const { header, menuButton, toolbar, drawerContainer, farmingoLogoImage, headerMenuIcon, menuList  } = useStyles();
+  const { header, menuButton, toolbar, drawerContainer, farmingoLogoImage, headerMenuIcon, menuList } = useStyles();
 
   const [state, setState] = useState({
     mobileView: false,
@@ -135,10 +136,10 @@ export default function Header() {
   };
 
   const getDrawerChoices = () => {
-    return headersData.map(({ label, href , icon}) => {
+    return headersData.map(({ label, href, icon }) => {
       return (
         <Link
-        className={menuList}
+          className={menuList}
           {...{
             component: RouterLink,
             to: href,
@@ -147,10 +148,8 @@ export default function Header() {
             key: label,
           }}
         >
-          {/* <Box display="flex" gap="5px" alignItems="center"> */}
-            <img className={headerMenuIcon} src={icon} alt="image" />
+          <img className={headerMenuIcon} src={icon} alt="image" />
           <MenuItem>{label}</MenuItem>
-          {/* </Box> */}
 
           <Divider />
         </Link>
@@ -159,7 +158,9 @@ export default function Header() {
   };
 
   const farmingoLogo = (
-     <img className={farmingoLogoImage} src="../assets/HORIZONTAL.png" alt="logo" />
+    <RouterLink to="/">
+      <img className={farmingoLogoImage} src="../assets/HORIZONTAL.png" alt="logo" />
+    </RouterLink>
   );
 
   const getMenuButtons = () => {
