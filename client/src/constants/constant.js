@@ -170,3 +170,55 @@ export const headersData = [
     icon: "../assets/settings.svg"
   },
 ];
+
+
+export const orderDetails = [
+  {
+    image: "../assets/farmer1.jpg",
+    title: "Pink Apple",
+    amount: "30lb",
+    price: "$100"
+  },
+  {
+    image: "../assets/farmer1.jpg",
+    title: "Pink Apple",
+    amount: "30lb",
+    price: "$100"
+  },
+  {
+    image: "../assets/farmer1.jpg",
+    title: "Pink Apple",
+    amount: "30lb",
+    price: "$100"
+  },
+  {
+    image: "../assets/farmer1.jpg",
+    title: "Pink Apple",
+    amount: "30lb",
+    price: "$100"
+  },
+  {
+    image: "../assets/farmer1.jpg",
+    title: "Pink Apple",
+    amount: "30lb",
+    price: "$100"
+  },
+  {
+    image: "../assets/farmer1.jpg",
+    title: "Pink Apple",
+    amount: "30lb",
+    price: "$100"
+  },
+  {
+    image: "../assets/farmer1.jpg",
+    title: "Pink Apple",
+    amount: "30lb",
+    price: "$100"
+  },
+  {
+    image: "../assets/farmer1.jpg",
+    title: "Pink Apple",
+    amount: "30lb",
+    price: "$100"
+  }
+]

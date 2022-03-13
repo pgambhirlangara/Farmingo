@@ -3,16 +3,21 @@ import { Button, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import { border, borderRadius, display, fontWeight, textAlign, width } from '@mui/system';
+import { orderDetails } from '../../constants/constant';
 export default function OrderDetails() {
 
     const useStyles = makeStyles((theme) => ({
         maindiv:{
             height:"100vh",
-            display:"flex"
-
+            display:"flex",
 
         },
         divone:{
+            backgroundImage: "url('../assets/orderDetail.jpg'), linear-gradient(90deg, rgba(91, 175, 97, 0.5) 1.28%, rgba(248, 177, 51, 0.5) 105.7%);",
+            filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));",
+            backgroundBlendMode: "multiply",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
             [theme.breakpoints.down("xs")]: {
                 flex:"0.7",
             },
@@ -23,17 +28,17 @@ export default function OrderDetails() {
                 flex:"0",
             },
         flex:"1.3",
-        height:"100%",
-        backgroundColor:"black",
         },
         divtwo:{
+            overflow: "auto",
             flex:"1",
             display:"flex",
             justifyContent:"center",
             alignItems:"center",
             height:"100%",
             flexDirection:"column",
-            backgroundColor:theme.palette.primary.a100
+            backgroundColor:theme.palette.primary.a100,
+            gap: "40px"
         },
         headingone:{
             textAlign:"center",
@@ -89,8 +94,7 @@ export default function OrderDetails() {
             width:"70%",
             display:"flex",
             flexDirection:"column"
-            
-
+        
         },
         threeone:{
             width:"90%",
@@ -101,6 +105,26 @@ export default function OrderDetails() {
             display:"flex",
             flexDirection:"column",
             justifyContent:"center"
+        },
+        orderDetailContainer: {
+            display: "grid",
+            gridTemplateColumns: "20% 80%",
+            gap: "20px",
+            alignItems: "center",
+            margin: "0px 80px",
+            padding: "20px",
+            background: "white",
+            border: "1px solid #74C26C",
+            borderRadius: "24px"
+        },
+        orderDetailImage: {
+            width: "100%",
+            border: "1px solid green",
+            borderRadius: "20px",
+            height: "100%"
+        },
+        orderp: {
+            margin: 0
         }
         
     }));
@@ -119,23 +143,25 @@ export default function OrderDetails() {
   return (
     <div className={classes.maindiv}>
         <div className={classes.divone}>
-        <img src="" alt="" />    
         </div>
         <div className={classes.divtwo}>
             <div className={classes.headingone}>
                 <h1 className={classes.head}>Order Details</h1>
                 </div>
-            <div className={classes.divthree}>
-                <div className={classes.threeone}>
-                    <div className={classes.threetwo}> </div>
-                    <div className={classes.threeeach}><h2>Pink Apple</h2><p>Total Amount: 30lb</p><p>Total price: $100</p></div>
-                    </div>
-                <div className={classes.threeone}></div>
-                <div className={classes.threeone}></div>
-                <div className={classes.threeone}></div>
-                <div className={classes.threeone}></div>
-
-            </div>
+            {
+                orderDetails.map((data) => {
+                    return (
+                        <div className={classes.orderDetailContainer}>
+                            <img className={classes.orderDetailImage} src={data.image} alt="" />
+                            <div>
+                                <h3 className={classes.orderp}>{data.title}</h3>
+                                <p className={classes.orderp}>Total Amount: {data.amount}</p>
+                                <p className={classes.orderp}>Total Amount: {data.price}</p>
+                            </div>
+                        </div>
+                    )
+                })
+            }
            
         
         
