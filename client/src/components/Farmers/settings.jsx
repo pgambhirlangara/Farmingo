@@ -1,8 +1,10 @@
 import React from 'react'
-import { Button, TextField } from "@mui/material";
+import { Button, Divider, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import { border, borderRadius, display, fontSize, fontWeight, letterSpacing, padding, textAlign, width } from '@mui/system';
+import { Link } from 'react-router-dom';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 export default function Settings() {
 
     const useStyles = makeStyles((theme) => ({
@@ -11,10 +13,17 @@ export default function Settings() {
             height:"100vh",
             width:"100%"
         },
+        head: {
+            fontSize: "28px"
+        },  
         divone:{
             //change width and height according to the mock ups
             flex:"1",
-            backgroundColor:"black",
+            backgroundImage: "url('../assets/settingsImage.jpg'), linear-gradient(90deg, rgba(91, 175, 97, 0.5) 1.28%, rgba(248, 177, 51, 0.5) 105.7%);",
+            filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));",
+            backgroundBlendMode: "multiply",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
             [theme.breakpoints.down("sm")]:{
                 display:"none"
             }
@@ -93,6 +102,22 @@ export default function Settings() {
             fontSize:"24px",
             padding:"10px",
             letterSpacing:"1px"
+        },
+        settingImage: {
+            width: "100%",
+            height: "100%"
+        },
+        settingAction: {
+            textDecoration: "none",
+            fontSize: "24px",
+            color: "black",
+            padding: "20px",
+            display: "flex",
+            alignItems: "center",
+            gap: "20px",
+            "&:hover": {
+               color: theme.palette.primary.main
+            }
         }
 
 
@@ -110,24 +135,30 @@ export default function Settings() {
     }
 }
 
+const logout = () => {
+    alert("Logged out");
+}
+
   return (
     <div className={classes.maindiv}>
         <div className={classes.divone}>
-        <img src="" alt="" />    
+            {/* <img className={classes.settingImage} src="../assets/settingsImage.jpg" alt="settingspage" />     */}
         </div>
         <div className={classes.divtwo}>
             <div className={classes.headingone}>
                 <h1 className={classes.head}>Settings</h1>
                 </div>
             <div className={classes.box}>
-                <div className={classes.farmeremail}>Profile Information</div>
-                <div className={classes.mainline}><div className={classes.line1}></div></div>
-                <div className={classes.adduser}>Add User</div>
-                <div className={classes.mainline}><div className={classes.line1}></div></div>
-            
-                <div className={classes.farmerphone}>Payment</div>
-                <div className={classes.mainline}><div className={classes.line1}></div></div>
-                <div className={classes.phone}>Log Out</div>
+                <Link  to="../farmer/profile" className={classes.settingAction}><AccountCircle />Profile Information</Link>
+                {/* <div className={classes.mainline}><div className={classes.line1}></div></div> */}
+                <Divider />
+                <Link to="../farmer/addUser" className={classes.settingAction}><AccountCircle />Add User</Link>
+                {/* <div className={classes.mainline}><div className={classes.line1}></div></div> */}
+                <Divider />
+                <Link to="farmer/payment" className={classes.settingAction}><AccountCircle />Payment</Link>
+                {/* <div className={classes.mainline}><div className={classes.line1}></div></div> */}
+                <Divider />
+                <div onClick={logout} className={classes.settingAction}><AccountCircle />Log Out</div>
                 </div>
             </div>
         

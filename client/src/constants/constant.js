@@ -151,22 +151,22 @@ export const farmProducts = [
 export const headersData = [
   {
     label: "Products",
-    href: "/customer/products",
+    href: "/farmer/home",
     icon: "../assets/products.svg"
   },
   {
     label: "Order Details",
-    href: "/customer/order/details",
+    href: "/farmer/orderDetails",
     icon: "../assets/order_details.svg"
   },
   {
     label: "Contact Us",
-    href: "/contact",
+    href: "/farmer/contactUs",
     icon: "../assets/contact_us.svg"
   },
   {
     label: "Settings",
-    href: "/customer/settings",
+    href: "/farmer/settings",
     icon: "../assets/settings.svg"
   },
 ];
