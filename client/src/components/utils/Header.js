@@ -17,6 +17,7 @@ import { headersData } from "../../constants/constant";
 const useStyles = makeStyles((theme) => ({
   header: {
     paddingRight: "79px",
+    height: "64px",
     backgroundColor: "white !important",
     paddingLeft: "118px",
     boxShadow: "none !important",
@@ -174,7 +175,7 @@ export default function Header() {
    <RouterLink to="/">
     <img
       className={farmingoLogoImage}
-      src="../assets/HORIZONTAL.png"
+      src="/assets/HORIZONTAL.png"
       alt="logo"
     />
     </RouterLink>

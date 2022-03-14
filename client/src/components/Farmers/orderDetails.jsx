@@ -7,115 +7,131 @@ import { orderDetails } from '../../constants/constant';
 export default function OrderDetails() {
 
     const useStyles = makeStyles((theme) => ({
-        maindiv:{
-            height:"100vh",
-            display:"flex",
-
+        maindiv: {
+            height: "100vh",
+            display: "grid",
+            gridTemplateColumns: "60% 40%",
+            backgroundColor: theme.palette.primary.a100,
+            [theme.breakpoints.down("md")]: {
+                gridTemplateColumns: "100%"
+            },
         },
-        divone:{
-            backgroundImage: "url('../assets/orderDetail.jpg'), linear-gradient(90deg, rgba(91, 175, 97, 0.5) 1.28%, rgba(248, 177, 51, 0.5) 105.7%);",
+        totalSection: {
+            background: "#57A85D",
+            color: "white",
+            padding: "20px",
+            display: "flex",
+            gap: "10px",
+            marginTop: "64px",
+            justifyContent: "center",
+            fontSize: "24px",
+        },
+        totalSectionTitle: {
+            fontWeight: "bold"
+        },
+        divone: {
+            backgroundImage: "url('../../assets/orderDetail.jpg'), linear-gradient(90deg, rgba(91, 175, 97, 0.5) 1.28%, rgba(248, 177, 51, 0.5) 105.7%);",
             filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));",
             backgroundBlendMode: "multiply",
             backgroundPosition: "center",
             backgroundSize: "cover",
-            [theme.breakpoints.down("xs")]: {
-                flex:"0.7",
-            },
-            [theme.breakpoints.down("sm")]: {
-                flex:"0.7",
-            },
             [theme.breakpoints.down("md")]: {
-                flex:"0",
+                display: "none"
             },
-        flex:"1.3",
+            flex: "1.3",
         },
-        divtwo:{
+        divtwo: {
             overflow: "auto",
-            flex:"1",
-            display:"flex",
-            justifyContent:"center",
-            alignItems:"center",
-            height:"100%",
-            flexDirection:"column",
-            backgroundColor:theme.palette.primary.a100,
-            gap: "40px"
+            padding: "40px 0px",
+            display: "grid",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "calc(100% - 100px)",
+            flexDirection: "column",
+            gap: "20px"
         },
-        headingone:{
-            textAlign:"center",
-            display:"flex",
-            justifyContent:"center",
-            alignItems:"end",
-            
+        headingone: {
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "end",
+
         },
-       
-        head:{
-            fontWeight:"bold"
+
+        head: {
+            fontWeight: "bold"
         },
-        farmeremail:{
-            fontWeight:"bold",
-            fontSize:"20px",
-            marginLeft:"50px",
-            marginTop:"10px",
-            
+        farmeremail: {
+            fontWeight: "bold",
+            fontSize: "20px",
+            marginLeft: "50px",
+            marginTop: "10px",
+
         },
-        line1:{
-            width:"80%",
-            border:"1px black solid",
-            marginBottom:"10px",
+        line1: {
+            width: "80%",
+            border: "1px black solid",
+            marginBottom: "10px",
         },
-        mainline:{
-            display:"flex",
-            justifyContent:"center",
+        mainline: {
+            display: "flex",
+            justifyContent: "center",
         },
-        email:{
-                
-                textAlign:"center",
-                marginBottom:"10px",
-               
-                textAlign:"center"
-                
+        email: {
+
+            textAlign: "center",
+            marginBottom: "10px",
+
+            textAlign: "center"
+
         },
-        farmerphone:{
-            fontSize:"20px",
-            fontWeight:"bold",
-            marginLeft:"50px"
+        farmerphone: {
+            fontSize: "20px",
+            fontWeight: "bold",
+            marginLeft: "50px"
         },
-        phone:{
-            marginBottom:"10px",
-           textAlign:"center"
+        phone: {
+            marginBottom: "10px",
+            textAlign: "center"
         },
-        faq:{
-            fontSize:"20px",
-            fontWeight:"bold",
-            marginLeft:"50px"
+        faq: {
+            fontSize: "20px",
+            fontWeight: "bold",
+            marginLeft: "50px"
         },
-        divthree:{
-            border:"1px black solid",
-            width:"70%",
-            display:"flex",
-            flexDirection:"column"
-        
+        divthree: {
+            border: "1px black solid",
+            width: "70%",
+            display: "flex",
+            flexDirection: "column"
+
         },
-        threeone:{
-            width:"90%",
-            display:"flex"
-            
+        threeone: {
+            width: "90%",
+            display: "flex"
+
         },
-        threeeach:{
-            display:"flex",
-            flexDirection:"column",
-            justifyContent:"center"
+        threeeach: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center"
         },
         orderDetailContainer: {
             display: "grid",
-            gridTemplateColumns: "20% 80%",
+            gridTemplateColumns: "30% 70%",
             gap: "20px",
             alignItems: "center",
             margin: "0px 80px",
-            padding: "20px",
+            padding: "0px",
             background: "white",
             border: "1px solid #74C26C",
-            borderRadius: "24px"
+            borderRadius: "24px",
+            [theme.breakpoints.down("md")]: {
+                margin: "0px 20px"
+            },
+        },
+        orderDetailDescription: {
+            padding: "8px"
         },
         orderDetailImage: {
             width: "100%",
@@ -125,47 +141,52 @@ export default function OrderDetails() {
         },
         orderp: {
             margin: 0
+        },
+        orderDescTitle: {
+            fontWeight: 800
         }
-        
+
     }));
 
 
 
 
- const classes = useStyles();
- const addusers = async (e) => {
-    
-    const users = {
-       
-    }
-}
+    const classes = useStyles();
+    const addusers = async (e) => {
 
-  return (
-    <div className={classes.maindiv}>
-        <div className={classes.divone}>
-        </div>
-        <div className={classes.divtwo}>
-            <div className={classes.headingone}>
-                <h1 className={classes.head}>Order Details</h1>
+    }
+
+    return (
+        <>
+            <div className={classes.totalSection}>
+                <span className={classes.totalSectionTitle}>Wallmart: </span> <span>Total $1200.85</span>
+            </div>
+            <div className={classes.maindiv}>
+                <div className={classes.divone}>
                 </div>
-            {
-                orderDetails.map((data) => {
-                    return (
-                        <div className={classes.orderDetailContainer}>
-                            <img className={classes.orderDetailImage} src={data.image} alt="" />
-                            <div>
-                                <h3 className={classes.orderp}>{data.title}</h3>
-                                <p className={classes.orderp}>Total Amount: {data.amount}</p>
-                                <p className={classes.orderp}>Total Amount: {data.price}</p>
-                            </div>
-                        </div>
-                    )
-                })
-            }
-           
-        
-        
-        </div>
-    </div>
-  )
+                <div className={classes.divtwo}>
+                    <div className={classes.headingone}>
+                        <h1 className={classes.head}>Order Details</h1>
+                    </div>
+                    {
+                        orderDetails.map((data) => {
+                            return (
+                                <div className={classes.orderDetailContainer}>
+                                    <img className={classes.orderDetailImage} src={data.image} alt="" />
+                                    <div className={classes.orderDetailDescription}>
+                                        <h3 className={classes.orderp}>{data.title}</h3>
+                                        <p className={classes.orderp}><span className={classes.orderDescTitle}>Total Amount:</span> {data.amount}</p>
+                                        <p className={classes.orderp}><span className={classes.orderDescTitle}>Total Price:</span> {data.price}</p>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
+
+
+                </div>
+            </div>
+        </>
+    )
 }

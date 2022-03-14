@@ -28,25 +28,25 @@ export const Faqfarmer = [
 
 export const testimonials = [
   {
-    image: "./assets/farmer1.jpg",
+    image: "/assets/farmer1.jpg",
     name: "Jorge Avelino",
     comment: "Amazing!",
     rating: 5
   },
   {
-    image: "./assets/farmer2.jpg",
+    image: "/assets/farmer2.jpg",
     name: "Oscar Hierro",
     comment: "Easy to follow!",
     rating: 5
   },
   {
-    image: "./assets/farmer3.jpg",
+    image: "/assets/farmer3.jpg",
     name: "Antonio Gallardo",
     comment: "Love it!",
     rating: 5
   },
   {
-    image: "./assets/farmer4.jpg",
+    image: "/assets/farmer4.jpg",
     name: "Marcia Rubio",
     comment: "I find new customers!",
     rating: 5
@@ -152,73 +152,112 @@ export const headersData = [
   {
     label: "Products",
     href: "/farmer/home",
-    icon: "../assets/products.svg"
+    icon: "/assets/products.svg"
   },
   {
-    label: "Order Details",
-    href: "/farmer/orderDetails",
-    icon: "../assets/order_details.svg"
+    label: "Order History",
+    href: "/farmer/order-history",
+    icon: "/assets/order_details.svg"
   },
   {
     label: "Contact Us",
     href: "/farmer/contactUs",
-    icon: "../assets/contact_us.svg"
+    icon: "/assets/contact_us.svg"
   },
   {
     label: "Settings",
     href: "/farmer/settings",
-    icon: "../assets/settings.svg"
+    icon: "/assets/settings.svg"
   },
 ];
 
 
 export const orderDetails = [
   {
-    image: "../assets/farmer1.jpg",
+    image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
     price: "$100"
   },
   {
-    image: "../assets/farmer1.jpg",
+    image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
     price: "$100"
   },
   {
-    image: "../assets/farmer1.jpg",
+    image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
     price: "$100"
   },
   {
-    image: "../assets/farmer1.jpg",
+    image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
     price: "$100"
   },
   {
-    image: "../assets/farmer1.jpg",
+    image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
     price: "$100"
   },
   {
-    image: "../assets/farmer1.jpg",
+    image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
     price: "$100"
   },
   {
-    image: "../assets/farmer1.jpg",
+    image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
     price: "$100"
   },
   {
-    image: "../assets/farmer1.jpg",
+    image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
     price: "$100"
+  }
+]
+
+
+export const orderHistory = [
+  {
+    id: "order1",
+    orderDate: "01/01/2001",
+    total: "$600"
+  },
+  {
+    id: "order1",
+    orderDate: "01/01/2001",
+    total: "$600"
+  },
+  {
+    id: "order1",
+    orderDate: "01/01/2001",
+    total: "$600"
+  },
+  {
+    id: "order1",
+    orderDate: "01/01/2001",
+    total: "$600"
+  },
+  {
+    id: "order1",
+    orderDate: "01/01/2001",
+    total: "$600"
+  },
+  {
+    id: "order1",
+    orderDate: "01/01/2001",
+    total: "$600"
+  },
+  {
+    id: "order1",
+    orderDate: "01/01/2001",
+    total: "$600"
   }
 ]

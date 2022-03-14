@@ -1,8 +1,9 @@
 import { Button, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
-const FarmerOrderItem = (props) => {
+const FarmerOrderItem = ({data}) => {
   const useStyles = makeStyles((theme) => ({
     farmOrderItem: {
       display: "flex",
@@ -56,20 +57,25 @@ const FarmerOrderItem = (props) => {
       fontWeight: "700",
       lineHeight: "30px",
     },
+    orderItemContainer: {
+      textDecoration: "none"
+    }
   }));
 
   const classes = useStyles();
 
   return (
-    <Box className={classes.farmOrderItem}>
-      <Box className={classes.farmLeft}>
-        <h1 className={classes.header}>Walmart</h1>
-        <p className={classes.paragraph}>01/01/2001</p>
+    <Link className={classes.orderItemContainer} to={`../farmer/orderdetails/${data.id}`}>
+      <Box className={classes.farmOrderItem}>
+        <Box className={classes.farmLeft}>
+          <h1 className={classes.header}>Farmer</h1>
+          <p className={classes.paragraph}>{data.orderDate}</p>
+        </Box>
+        <Box className={classes.farmRight}>
+          <p className={classes.total}>Total: {data.total}</p>
+        </Box>
       </Box>
-      <Box className={classes.farmRight}>
-        <p className={classes.total}>Total: $600</p>
-      </Box>
-    </Box>
+    </Link>
   );
 };
 
