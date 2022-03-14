@@ -1,9 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
-import { Alert, Button, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
-import { Box } from "@mui/system";
+import { Alert, Button, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Snackbar, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import { Province as provinceList } from "../../constants/constant";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Box } from "@mui/system";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
 
 const FarmerSignup = () => {
 
@@ -19,10 +23,18 @@ const FarmerSignup = () => {
         farmerSignupHeading: {
             color: "#182918",
             margin: 0,
+            marginTop: "100px",
+            [theme.breakpoints.down("md")]: {
+                display: "none"
+            }
         },
         farmerSignupSubHeading: {
             margin: 0,
-            padding: "0px 80px"
+            padding: "0px 80px",
+            [theme.breakpoints.down("md")]: {
+                display: "none"
+            }
+
         },
         farmerSignupContent: {
             backgroundColor: "white",
@@ -32,7 +44,15 @@ const FarmerSignup = () => {
             display: "flex",
             flexDirection: "column",
             gap: "20px",
-            border: `1px solid ${theme.palette.primary.main}`
+            margin: "40px",
+            border: `1px solid ${theme.palette.primary.main}`,
+            [theme.breakpoints.down("md")]: {
+                backgroundColor: "transparent",
+                border: "none",
+                padding: "0px",
+                width: "80%",
+                marginTop: 0
+            },
         },
         formControl: {
             display: "flex",
@@ -40,19 +60,53 @@ const FarmerSignup = () => {
             color: "black"
         },
         buttonContainer: {
-            textAlign: "center"
-        }
+            textAlign: "center",
+            paddingTop: "40px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px"
+        },
+        signupButton: {
+            color: "white !important",
+            width: "200px", // check with designers
+            [theme.breakpoints.down("md")]: {
+                borderRadius: "24px",
+                width: "154px",
+                height: "51px",
+                margin: "10px 0px"
+            },
+        },
+        logo: {
+            display: "none",
+            [theme.breakpoints.down("md")]: {
+                width: "234px",
+                height: "234px",
+                display: "block"
+            },
+        },
     }));
 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [contact, setContact] = useState(0);
-    const [address, setAddress] = useState("");
     const [open, setOpen] = useState(false);
     const [severity, setSeverity] = useState('success');
     const [message, setMessage] = useState("");
-    const [buttonDisabled, setButtonDisabled] = useState(false)
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [city, setCity] = useState("");
+    const [province, setProvince] = useState("");
+    // const [zipCode, setZipCode] = useState("");
+    const [values, setValues] = useState({
+        password: '',
+        showPassword: false,
+    });
+
+    const anchorOrigin = {
+        vertical: "top", horizontal: "center"
+    }
+
     const navigate = useNavigate();
 
 
@@ -63,9 +117,10 @@ const FarmerSignup = () => {
         const signupData = {
             name,
             email,
-            password,
-            contact, 
-            address
+            password: values.password,
+            contact,
+            province,
+            city
         }
 
         try {
@@ -88,6 +143,21 @@ const FarmerSignup = () => {
 
     }
 
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    const handleClickShowPassword = () => {
+        setValues({
+            ...values,
+            showPassword: !values.showPassword,
+        });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+    
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -98,36 +168,131 @@ const FarmerSignup = () => {
 
     return (
         <form className={classes.farmerSignup}>
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-
+                <img className={classes.logo} src="../assets/team3_farmingo_final.png" alt="Logo" />
+            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={severity}>
                     {message}
                 </Alert>
             </Snackbar>
+
             <h2 className={classes.farmerSignupHeading}>Create a profile</h2>
-            <h3 className={classes.farmerSignupSubHeading}>After creating a profile, you can 
-            add your farms and products. After that interact with your customers to expand the business.
+            <h3 className={classes.farmerSignupSubHeading}>After creating a profile, you can
+                add your farms and products. After that interact with your customers to expand the business.
             </h3>
             <div className={classes.farmerSignupContent}>
                 <div className={classes.formControl}>
                     <InputLabel>Name</InputLabel>
-                    <TextField required type="text" onChange={(e) => setName(e.target.value)} />
+                    <FormControl variant="outlined">
+                        <OutlinedInput
+                            placeholder="Your Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            startAdornment={<InputAdornment position="start">
+                                <AccountCircle />
+                            </InputAdornment>}
+                            aria-describedby="outlined-weight-helper-text"
+                            inputProps={{
+                                'aria-label': 'weight',
+                            }}
+                            required
+                        />
+                    </FormControl>
                 </div>
                 <div className={classes.formControl}>
                     <InputLabel>Email</InputLabel>
-                    <TextField required type="email" onChange={(e) => setEmail(e.target.value)} />
+                    <FormControl variant="outlined">
+                        <OutlinedInput
+                            placeholder="Your Email"
+                            value={email}
+                            type="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            startAdornment={<InputAdornment position="start">
+                                <AccountCircle />
+                            </InputAdornment>}
+                            aria-describedby="outlined-weight-helper-text"
+                            inputProps={{
+                                'aria-label': 'weight',
+                            }}
+                            required
+                        />
+                    </FormControl>
                 </div>
                 <div className={classes.formControl}>
                     <InputLabel>Contact</InputLabel>
-                    <TextField required type="number" onChange={(e) => setContact(e.target.value)} />
+                    <FormControl variant="outlined">
+                        <OutlinedInput
+                            value={contact}
+                            placeholder="Your Contact"
+                            type="number"
+                            onChange={(e) => setContact(e.target.value)}
+                            startAdornment={<InputAdornment position="start">
+                                <AccountCircle />
+                            </InputAdornment>}
+                            aria-describedby="outlined-weight-helper-text"
+                            inputProps={{
+                                'aria-label': 'weight',
+                            }}
+                            required
+                        />
+                    </FormControl>
                 </div>
                 <div className={classes.formControl}>
-                    <InputLabel>Address</InputLabel>
-                    <TextField type="text" onChange={(e) => setAddress(e.target.value)} />
+                    <Box display="grid" gridTemplateColumns="auto auto" gap="20px">
+                        <div className={classes.formControl}>
+                            <InputLabel>Province</InputLabel>
+                            <Select
+                                placeholder="Your Province"
+                                value={province}
+                                required
+                                onChange={(e) => setProvince(e.target.value)}
+                            >
+                                {
+                                    provinceList.map(({ name }, index) => {
+                                        return <MenuItem key={index} value={name}>{name}</MenuItem>
+                                    })
+                                }
+                            </Select>
+                        </div>
+                        <div className={classes.formControl}>
+                            <InputLabel>City</InputLabel>
+                            <Select
+                                disabled={!province}
+                                placeholder="Your City"
+                                value={city}
+                                required
+                                onChange={(e) => setCity(e.target.value)}
+                            >
+                                {province ?
+                                    provinceList.find((pr) => pr.name === province)
+                                        .cities.map((city, index) => <MenuItem key={index} value={city}>{city}</MenuItem>)
+                                    : []
+                                }
+                            </Select>
+                        </div>
+                    </Box>
                 </div>
                 <div className={classes.formControl}>
                     <InputLabel>Password</InputLabel>
-                    <TextField required type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <FormControl variant="outlined">
+                        <OutlinedInput
+                            placeholder="Your Password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
                 </div>
                 <div>
 

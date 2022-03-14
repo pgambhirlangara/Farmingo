@@ -4,8 +4,10 @@ const Farmer = new mongoose.Schema(
 	{
 		name: { type: String, required: true },
 		email: { type: String, required: true, unique: true },
-		contact: { type : Number, required: true },
-		address: { type: String },
+		contact: {type : Number, required: true },
+		city: {type: String},
+		zipCode: {type: String},
+		province: {type: String},
 		password: { type: String, required: true },
         verified: { type: Boolean, required: true, default: false }, 
 	},

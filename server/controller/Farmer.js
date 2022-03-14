@@ -1,4 +1,4 @@
-const User = require('../models/farmer');
+const Farmer = require('../models/farmer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -6,14 +6,17 @@ const jwt = require('jsonwebtoken');
 const registerFarmer = async (req, res) => {
     try {
         let newPassword = await bcrypt.hash(req.body.password, 10);
-        const output = await User.create({
+        const output = await Farmer.create({
             name: req.body.name,
             password: newPassword,
-            email: req.body.email
+            email: req.body.email,
+            city: req.body.city,
+            province: req.body.province,
+            contact: req.body.contact
         })
 
         return res.status(200).json({
-            message: "Succesfully logged in",
+            message: "Farmer Registered Succesfully",
             data: output
         })
 
@@ -27,27 +30,34 @@ const registerFarmer = async (req, res) => {
 // Login of farmer
 const loginFarmer = async (req, res) => {
     const email = req.body.email;
-    let farmer = await User.findOne({ email: email});
-    console.log(farmer, "farmer");
+    let farmer = await Farmer.findOne({ email: email});
     if (farmer) {
         const isValidPassword = await bcrypt.compare(req.body.password, farmer.password);
         if (isValidPassword) {
             const token = jwt.sign({
                 name: req.body.name,
                 email: req.body.email
-            }, 'hello123')
+            }, process.env.JWT_SECRET)
             return res.status(200).json({
                 token,
                 message:"Succesfully Logged In"
             })
+        } else {
+            return res.status(401).json({
+                message:"Incorrect Password!"
+            })
         }
+    } else {
+        return res.status(500).json({
+            message:"User doesn't exist, please register"
+        })
     }
 
 }
 
 // Get all farmers
 const getFarmers = (req, res) => {
-    User.find()
+    Farmer.find()
     .then((result) => {
         return res.status(200).json({
             message: 'Succesfully fetched farmers',
@@ -65,7 +75,7 @@ const getFarmers = (req, res) => {
 const updateFarmer = (req, res) => {
     const id = req.params.id;
 
-    User.findOneAndUpdate({ _id : id }, req.body)
+    Farmer.findOneAndUpdate({ _id : id }, req.body)
     .then((result) => {
         res.status(200).json({
             message: 'Succesfully updated farmer',
@@ -77,7 +87,7 @@ const updateFarmer = (req, res) => {
 // Delete a farmer by id
 const deleteFarmer = (req, res) => {
     const id = req.params.id;
-    User.findByIdAndDelete(id)
+    Farmer.findByIdAndDelete(id)
     .then((result) => {
         return res.status(200).json({
             message: "Farmer succesfully delete",
@@ -95,7 +105,7 @@ const deleteFarmer = (req, res) => {
 const getFarmerById = (req, res) => {
     const id = req.params.id;
 
-    User.findById(id)
+    Farmer.findById(id)
     .then((result) => {
         return res.status(200).json({
             message: `Farmer found succesfully with id ${id}`,

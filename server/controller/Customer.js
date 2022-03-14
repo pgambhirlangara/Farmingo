@@ -77,7 +77,7 @@ const registerCustomer = async (req, res) => {
         })
 
         return res.status(200).json({
-            message: "Succesfully logged in",
+            message: "Customer Registered Succesfully",
             data: output
         })
 
