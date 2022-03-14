@@ -34,7 +34,8 @@ function App() {
         <Route path="farmer/orderDetails" element={<OrderDetails />} />
         <Route path="farmer/settings" element={<Settings />} />
         <Route path="farmer/profile" element={<ProfileInformation />} />
-        <Route path="farmer/FarmProfile" element={<FarmProfile />} />
+        <Route path="farmer/createprofile" element={<FarmProfile />} />
+        <Route path="farmers/profile" element={<FarmProfile />} />
         <Route path="farmer/addUser" element={<FarmerAddUser />} />
         <Route path="farmer/faq" element={<Faqfarmer />} />
 

@@ -4,16 +4,15 @@ import {
   Button,
   IconButton,
   Drawer,
-  Link,
   MenuItem,
   Divider,
+  Link,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import { headersData } from "../../constants/constant";
-
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -36,37 +35,46 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     display: "flex",
-    justifyContent: "space-between"
+    margin: "0px 20px",
+    justifyContent: "space-between",
   },
   drawerContainer: {
     padding: "20px 30px",
     backgroundColor: "#EEF6EE",
-    height: "100%"
+    height: "100%",
   },
   farmingoLogoImage: {
     width: "200px",
     [theme.breakpoints.down("md")]: {
-      display: "none"
+      display: "none",
     },
   },
   headerMenuIcon: {
     width: "50px",
-    height: "24px"
+    height: "24px",
   },
   mobileToolbar: {
-    width: "400px !important"
+    width: "400px !important",
   },
   menuList: {
     [theme.breakpoints.down("md")]: {
       display: "flex",
       alignItems: "center",
-      borderBottom: "1px solid #cdcdcd"
+      borderBottom: "1px solid #cdcdcd",
     },
-  }
+  },
 }));
 
 export default function Header() {
-  const { header, menuButton, toolbar, drawerContainer, farmingoLogoImage, headerMenuIcon, menuList } = useStyles();
+  const {
+    header,
+    menuButton,
+    toolbar,
+    drawerContainer,
+    farmingoLogoImage,
+    headerMenuIcon,
+    menuList,
+  } = useStyles();
 
   const [state, setState] = useState({
     mobileView: false,
@@ -95,7 +103,9 @@ export default function Header() {
     return (
       <Toolbar className={toolbar}>
         {farmingoLogo}
-        <div>{getMenuButtons()}</div>
+        <div>
+          {getMenuButtons()}
+        </div>
       </Toolbar>
     );
   };
@@ -127,7 +137,9 @@ export default function Header() {
             onClose: handleDrawerClose,
           }}
         >
-          <div className={drawerContainer}>{getDrawerChoices()}</div>
+          <div className={drawerContainer}>
+            {getDrawerChoices()}
+          </div>
         </Drawer>
 
         <div>{farmingoLogo}</div>
@@ -148,6 +160,7 @@ export default function Header() {
             key: label,
           }}
         >
+          {/* <Box display="flex" gap="5px" alignItems="center"> */}
           <img className={headerMenuIcon} src={icon} alt="image" />
           <MenuItem>{label}</MenuItem>
 
@@ -158,26 +171,32 @@ export default function Header() {
   };
 
   const farmingoLogo = (
-    <RouterLink to="/">
-      <img className={farmingoLogoImage} src="../assets/HORIZONTAL.png" alt="logo" />
+   <RouterLink to="/">
+    <img
+      className={farmingoLogoImage}
+      src="../assets/HORIZONTAL.png"
+      alt="logo"
+    />
     </RouterLink>
   );
 
   const getMenuButtons = () => {
     return headersData.map(({ label, href, icon }) => {
       return (
-        <Button
-          {...{
-            key: label,
-            color: "inherit",
-            to: href,
-            component: RouterLink,
-            className: menuButton,
-          }}
-        >
-          <img className={headerMenuIcon} src={icon} alt="image" />
-          {label}
-        </Button>
+        <>
+          <Button
+            {...{
+              key: label,
+              color: "inherit",
+              to: href,
+              component: RouterLink,
+              className: menuButton,
+            }}
+          >
+            <img className={headerMenuIcon} src={icon} alt="image" />
+            {label}
+          </Button>
+        </>
       );
     });
   };

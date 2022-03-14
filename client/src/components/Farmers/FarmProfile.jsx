@@ -26,7 +26,7 @@ export default function FarmProfile() {
             },
         },
         headingone:{
-            textAlign:"center"
+            textAlign:"center",
         },
         formmove: {
             width:"80%",
@@ -77,7 +77,7 @@ export default function FarmProfile() {
             [theme.breakpoints.up("sm")]:{
                 padding:"70px",
                 width:"47%",
-                height:"10%",
+                height:"100%",
                 border:"1px green solid",
                 borderRadius:"10px",
                 backgroundColor:"white !important",
@@ -195,6 +195,9 @@ export default function FarmProfile() {
                 backgroundColor:"white"
         }
         },
+        headingParent: {
+            marginTop: "100px"
+        }
        
     }
     }));
@@ -224,7 +227,7 @@ export default function FarmProfile() {
   return (
     
     <form className={ classes.addform} >
-        <div ><h1 className={classes.headingone}>Create a profile of your farm</h1></div>
+        <div className={classes.headingParent} ><h1 className={classes.headingone}>Create a profile of your farm</h1></div>
         <div className={classes.headingdiv} ><h2 className={classes.headingtwo}>You can establish a unique identity of your farm by creating a new 
 profile of your farm in wich to upload a list of your products.</h2></div>
         <div className={classes.outerdiv}>

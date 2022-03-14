@@ -233,8 +233,9 @@ const Welcome = () => {
                     <Divider className={classes.divider} />
                     <p className={classes.leftSectionDescription}>  As a farmer, you sell directly to customers rather than through distributors. We market your brand, handle orders, and more, all while you benefit from an online presence that will help you build a loyal customer base. You are paid</p>
                     <Divider className={classes.divider} />
-
+                    <Link className={classes.link} to="farmer/createprofile" >
                     <Button variant="contained" color="secondary" className={classes.joinUsButton}>Join us</Button>
+                    </Link>
                 </div>
 
                 <div className={classes.rightSection}>

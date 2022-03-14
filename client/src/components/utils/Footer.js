@@ -37,7 +37,7 @@ const Footer = () => {
       color: "white",
     },
     footerLeftSection: {
-      padding: "0px 150px",
+      padding: "0px 25%",
       display: "flex",
       flexDirection: "column",
       gap: "8px",
