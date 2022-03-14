@@ -33,7 +33,6 @@ function App() {
         <Route path="farmer/home" element={<FarmerProductPage />} />
         <Route path="farmer/order-history" element={<FarmerOrder />} />
         <Route path="farmer/contactUs" element={<ContactUs />} />
-        <Route path="farmer/orderDetails" element={<OrderDetails />} />
         <Route path="farmer/settings" element={<Settings />} />
         <Route path="farmer/profile" element={<ProfileInformation />} />
         <Route path="farmer/createprofile" element={<FarmProfile />} />
@@ -45,6 +44,7 @@ function App() {
           path="farmer/product/:id"
           element={<FarmerProductInformation />}
         />
+        <Route path="farmer/orderDetails/:id" element={<OrderDetails />} />
         <Route path="customer/faq" element={<Customerfaq />} />
 
       </Routes>

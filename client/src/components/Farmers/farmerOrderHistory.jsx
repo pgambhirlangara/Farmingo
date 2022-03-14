@@ -10,6 +10,7 @@ import {
 } from "@mui/base";
 
 import { styled, Box } from "@mui/system";
+import { orderHistory } from "../../constants/constant";
 
 const Tab = styled(TabUnstyled)`
   color: white;
@@ -217,14 +218,11 @@ const FarmerOrderHistory = (props) => {
             </TabsList>
             <TabPanel value={0}>
               <div className={classes.panelContainer}>
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
+                {
+                  orderHistory.map((data) => {
+                    return <FarmerOrderItem data={data} />
+                  })
+                }
               </div>
             </TabPanel>
             <TabPanel value={1}>

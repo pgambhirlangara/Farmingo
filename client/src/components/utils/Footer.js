@@ -90,7 +90,7 @@ const Footer = () => {
       <div className={classes.footerLeftSection}>
         <img
           className={classes.footerLogo}
-          src="../assets/team3_farmingo_positive_final.png"
+          src="/assets/team3_farmingo_positive_final.png"
           alt="logo"
         />
         <h3 className={classes.footerTitle}>Subscribe to keep up with the latest news</h3>
@@ -106,7 +106,7 @@ const Footer = () => {
               <img
                 className={classes.arrowIcon}
                 alt="arrow"
-                src="../assets/arrow.png"
+                src="/assets/arrow.png"
               />
             </Button>
           </div>
