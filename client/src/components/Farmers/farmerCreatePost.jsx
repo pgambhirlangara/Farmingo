@@ -127,14 +127,19 @@ export default function FarmerCreatePost() {
             color: "white !important",
             height: 51
         },
+        label: {
+            fontWeight: "800 !important",
+            color: "black"
+        },
         actionButtonContainer: {
             width: "65%",
-            display :"flex",
+            display: "flex",
             flexDirection: "column",
             gap: 20,
             marginTop: "30px",
             [theme.breakpoints.down("md")]: {
-                width: "75%",            },
+                width: "75%",
+            },
         },
         orderDetailDescription: {
             padding: "8px"
@@ -162,7 +167,8 @@ export default function FarmerCreatePost() {
             width: "60%",
             background: "white",
             [theme.breakpoints.down("md")]: {
-                width: "85%",            },
+                width: "85%",
+            },
         }
 
     }));
@@ -193,9 +199,9 @@ export default function FarmerCreatePost() {
                             your product listings</h2>
                     </div>
                     <form className={classes.form}>
-                        <InputLabel>Product Name</InputLabel>
+                        <InputLabel className={classes.label}>Product Name</InputLabel>
                         <TextField value={productName} onChange={(e) => setProductName(e.target.value)} className={classes.formInput} type="text" placeholder="Name of the product..." />
-                        <InputLabel>Category</InputLabel>
+                        <InputLabel className={classes.label}>Category</InputLabel>
                         <Select
                             placeholder="Your Province"
                             value={category}
@@ -209,9 +215,9 @@ export default function FarmerCreatePost() {
                                 })
                             }
                         </Select>
-                        <InputLabel>Stock (in lb)</InputLabel>
+                        <InputLabel className={classes.label}>Stock (in lb)</InputLabel>
                         <TextField className={classes.formInput} type="number" placeholder="in LB..." onChange={(e) => setStock(e.target.value)} />
-                        <InputLabel>Harvest Day</InputLabel>
+                        <InputLabel className={classes.label}>Harvest Day</InputLabel>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <Stack className={classes.formInput}
                                 spacing={3}>
@@ -223,9 +229,9 @@ export default function FarmerCreatePost() {
                                 />
                             </Stack>
                         </LocalizationProvider>
-                        <InputLabel>Price</InputLabel>
+                        <InputLabel className={classes.label}>Price</InputLabel>
                         <TextField className={classes.formInput} type="number" placeholder="in CAD" onChange={(e) => setPrice(e.target.value)} />
-                        <InputLabel>Product Description</InputLabel>
+                        <InputLabel className={classes.label}>Product Description</InputLabel>
                         <TextField className={classes.formInput} type="text" multiline placeholder="Nutrition Facts...." />
                         <div className={classes.actionButtonContainer}>
                             <Button variant='contained' color="secondary" className={classes.actionButton}>Upload Image of the Product <FileUploadIcon /></Button>
