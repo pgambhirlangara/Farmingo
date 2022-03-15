@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import FarmerProductItem from "./farmerProductItem";
 import AddIcon from '@mui/icons-material/Add';
 import { farmProducts } from "../../constants/constant";
+import { Link } from "react-router-dom";
 
 const FarmerProductPage = () => {
 
@@ -41,6 +42,9 @@ const FarmerProductPage = () => {
                 padding: "20px"
             },
         },
+        createPost: {
+            textDecoration: "none"
+        },
         farmProducts: {
             display: "grid",
             gridTemplateColumns: "auto auto auto auto auto auto",
@@ -73,7 +77,8 @@ const FarmerProductPage = () => {
                <div className={classes.farmProductSubContainer}>
                <section className={classes.farmPostSection}>
                     <h3>Post something new!</h3>
-                    <Button type="button" variant="contained" color="secondary" endIcon={<AddIcon />}>Create new post</Button>
+                    <Link className={classes.createPost} to="../farmer/createpost">                    <Button type="button" variant="contained" color="secondary" endIcon={<AddIcon />}>Create new post</Button>
+</Link>
                     <h3>View and Edit your products</h3>
                     <h4>Here is the list of your products on sale, click in to the product to manage the list and update it.</h4>
                 </section>

@@ -18,6 +18,7 @@ import ProfileInformation from "./components/Farmers/profileInformation";
 import Customerfaq from "./components/Customers/customerfaq";
 import FarmProfile from "./components/Farmers/FarmProfile";
 import Faqfarmer from "./components/Farmers/faqfarmer";
+import FarmerCreatePost from "./components/Farmers/farmerCreatePost";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="farmers/profile" element={<FarmProfile />} />
         <Route path="farmer/addUser" element={<FarmerAddUser />} />
         <Route path="farmer/faq" element={<Faqfarmer />} />
+        <Route path="farmer/createpost" element={<FarmerCreatePost />} />
 
         <Route
           path="farmer/product/:id"

@@ -261,3 +261,19 @@ export const orderHistory = [
     total: "$600"
   }
 ]
+
+
+export const categoryList = [
+  {
+    id: 1,
+    name: "Vegetables"
+  },
+  {
+    id: 2,
+    name: "Fruits"
+  },
+  {
+    id: 3,
+    name: "Dry Fruits"
+  }
+]
