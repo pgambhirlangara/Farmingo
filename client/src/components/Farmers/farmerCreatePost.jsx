@@ -8,6 +8,7 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import FarmerGallery from './farmerGallery';
 
 export default function FarmerCreatePost() {
 
@@ -178,6 +179,14 @@ export default function FarmerCreatePost() {
     }, []);
 
 
+    const openGallery = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    }
+
 
 
     const classes = useStyles();
@@ -187,6 +196,7 @@ export default function FarmerCreatePost() {
     const [stock, setStock] = useState(0);
     const [harvestDate, setHarvestDate] = useState("");
     const [price, setPrice] = useState(0);
+    const [open, setOpen] = useState(false);
 
     return (
         <>
@@ -234,12 +244,13 @@ export default function FarmerCreatePost() {
                         <InputLabel className={classes.label}>Product Description</InputLabel>
                         <TextField className={classes.formInput} type="text" multiline placeholder="Nutrition Facts...." />
                         <div className={classes.actionButtonContainer}>
-                            <Button variant='contained' color="secondary" className={classes.actionButton}>Upload Image of the Product <FileUploadIcon /></Button>
+                            <Button variant='contained' color="secondary" onClick={openGallery} className={classes.actionButton}>Upload Image of the Product <FileUploadIcon /></Button>
                             <Button variant='contained' className={classes.actionButton}>Create a post </Button>
                         </div>
 
                     </form>
 
+                    <FarmerGallery open={open} handleClose={handleClose}  />
 
 
                 </div>

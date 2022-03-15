@@ -1,5 +1,6 @@
 import { Button, Card, CardActions, CardContent, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useEffect } from "react";
 
 const FarmerProductInformation = () => {
 
@@ -56,6 +57,11 @@ const FarmerProductInformation = () => {
     }));
 
     const classes = useStyles();
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, []);
+
 
     return (
         <Grid container spacing={2} className={classes.productContainer}>

@@ -228,30 +228,37 @@ const FarmerOrderHistory = (props) => {
             <TabPanel value={1}>
               {" "}
               <div className={classes.panelContainer}>
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
+                <div className={classes.panelContainer}>
+                {
+                  orderHistory.map((data) => {
+                    return <FarmerOrderItem data={data} />
+                  })
+                }
+              </div>
               </div>
             </TabPanel>
             <TabPanel value={2}>
               {" "}
               <div className={classes.panelContainer}>
-                <FarmerOrderItem />
+              <div className={classes.panelContainer}>
+                {
+                  orderHistory.map((data) => {
+                    return <FarmerOrderItem data={data} />
+                  })
+                }
+                </div>
               </div>
             </TabPanel>
             <TabPanel value={3}>
               {" "}
               <div className={classes.panelContainer}>
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
-                <FarmerOrderItem />
+              <div className={classes.panelContainer}>
+                {
+                  orderHistory.map((data) => {
+                    return <FarmerOrderItem data={data} />
+                  })
+                }
+                </div>
               </div>
             </TabPanel>
           </TabsUnstyled>

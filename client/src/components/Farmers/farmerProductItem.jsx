@@ -1,6 +1,6 @@
 import { Button, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
 const FarmerProductItem = (props) => {
 
@@ -23,14 +23,18 @@ const FarmerProductItem = (props) => {
         },
         productTitle: {
             margin: 0,
-            fontWeight: 800
+            fontWeight: 800,
+            textAlign: "center"
         },
         productPrice: {
             margin: 0
         },
         editButton: {
             color: "white !important",
-            width: "50% !important"
+            width: "80% !important"
+        },
+        editButtonContainer: {
+            textDecoration: "none"
         }
     }));
 
@@ -41,7 +45,9 @@ const FarmerProductItem = (props) => {
             <img className={classes.image} src={props.image} alt={props.name} />
             <h4 className={classes.productTitle}>{props.name}</h4>
             <p className={classes.productPrice}>{props.price}</p>
-            <Button className={classes.editButton} variant="contained">Edit</Button>
+            <Link to={`../farmer/product/${props.id}`} className={classes.editButtonContainer}>
+                <Button className={classes.editButton} variant="contained">Edit</Button>
+            </Link>
         </Paper>
     )
 }

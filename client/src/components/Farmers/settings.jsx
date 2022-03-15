@@ -155,8 +155,6 @@ export default function Settings() {
                     <Divider />
                     <Link to="farmer/payment" className={classes.settingAction}><AccountCircle />Payment</Link>
                     <Divider />
-                    <Link to="../farmer/faq" className={classes.settingAction}><AccountCircle />FAQ</Link>
-                    <Divider />
                     <div onClick={logout} className={classes.settingAction}><AccountCircle />Log Out</div>
                 </div>
             </div>

@@ -67,7 +67,7 @@ export default function FarmerAddUser() {
             [theme.breakpoints.up("sm")]:{
                 padding:"70px",
                 width:"40%",
-                height:"10%",
+                height:"100%",
                 border:"1px green solid",
                 borderRadius:"10px",
                 backgroundColor:"white !important",

@@ -1,188 +1,185 @@
 import React from 'react'
-import { Button, TextField } from "@mui/material";
+import { Button, Divider, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
-import { border, borderRadius, display, fontWeight, textAlign } from '@mui/system';
-export default function ContactUs() {
+import { border, borderRadius, display, fontSize, fontWeight, letterSpacing, padding, textAlign, width } from '@mui/system';
+import { Link } from 'react-router-dom';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import EmailIcon from '@mui/icons-material/Email';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import MessageIcon from '@mui/icons-material/Message';
+
+export default function Settings() {
 
     const useStyles = makeStyles((theme) => ({
-        maindiv:{
-            height:"100vh",
-            display:"flex"
-
-
+        maindiv: {
+            display: "flex",
+            height: "100vh",
+            width: "100%"
         },
-        divone:{
-            [theme.breakpoints.down("xs")]: {
-                flex:"0.7",
-            },
+        head: {
+            fontSize: "28px"
+        },
+        divone: {
+            //change width and height according to the mock ups
+            flex: "1",
+            backgroundImage: "url('../assets/settingsImage.jpg'), linear-gradient(90deg, rgba(91, 175, 97, 0.5) 1.28%, rgba(248, 177, 51, 0.5) 105.7%);",
+            filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));",
+            backgroundBlendMode: "multiply",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
             [theme.breakpoints.down("sm")]: {
-                flex:"0.7",
-            },
-            [theme.breakpoints.down("md")]: {
-                flex:"0",
-            },
-        flex:"1.3",
-        width:"907px",
-        backgroundColor:"black",
+                display: "none"
+            }
+
         },
-        divtwo:{
-            flex:"1",
-            display:"flex",
-            justifyContent:"center",
-            alignItems:"center",
-            height:"100%",
-            flexDirection:"column",
-            backgroundColor:theme.palette.primary.a100,
-            width:"405px"
-        },
-        headingone:{
-            textAlign:"center",
-            display:"flex",
-            justifyContent:"center",
-            alignItems:"end",
-            flex:"1"
-        },
-        box:{
-            flex:"1",
-            width:"70%",
-            height:"100vh",
-            border:"1px green solid",
-            borderTopLeftRadius:"26px",
-            borderTopRightRadius:"26px",
-            display:"flex",
-            flexDirection:"column",
-            backgroundColor:"white",
-            [theme.breakpoints.down("xs")]: {
-                width:"100%"
-            },
+        divtwo: {
+            flex: "0.5",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#EEF6EE",
             [theme.breakpoints.down("sm")]: {
-                width:"100%"
-            },
-            [theme.breakpoints.up("md")]: {
-                width:"70%"
-            },
-          
-        },
-        head:{
-            fontWeight:"bold"
-        },
-        farmeremail:{
-            fontWeight:"600",
-            fontSize:"25px",
-            marginLeft:"50px",
-            marginTop:"10px",
-            [theme.breakpoints.down("sm")]:{
-                fontSize:"14px"
+                flex: "1"
             }
         },
-        line1:{
-            width:"80%",
-            border:"1px black solid",
-            marginBottom:"10px",
-        },
-        mainline:{
-            display:"flex",
-            justifyContent:"center",
-        },
-        email:{
-                
-                textAlign:"center",
-                marginBottom:"10px",
-                fontSize:"20px",
-                position:"absolute",
-                top:"50px",
-                [theme.breakpoints.down("sm")]:{
-                    top:"428px",
-                    right:"39px",
-                    position:"absolute",
-                    fontSize:"14px"
-    
-    
-                }
-                
-                
-                
-        },
-        farmerphone:{
-            fontSize:"24px",
-            fontWeight:"600",
-            marginLeft:"50px",
-            [theme.breakpoints.down("sm")]:{
-                fontSize:"14px",
-                position:"absolute",
-                right:"300px",
-                top:"476px"
+        headingone: {
+            flex: "0.7",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "end",
+            [theme.breakpoints.down("sm")]: {
+                flex: "0.3"
             }
         },
-        phone:{
-            fontSize:"20px",
-            marginBottom:"30px",
-            position:"absolute",
-            top:"490px",
-            right:"344px",
-            [theme.breakpoints.down("sm")]:{
-                top:"476px",
-                right:"39px",
-                position:"absolute",
-                fontSize:"14px"
+        box: {
+            flex: "1",
+            width: "405px",
+            border: "1px green solid",
+            borderTopLeftRadius: "28px",
+            borderTopRightRadius: "28px",
+            display: "flex",
+            backgroundColor: "white",
+            flexDirection: "column",
+            [theme.breakpoints.down("sm")]: {
+                width: "100%"
+            }
 
 
-            }
-           
         },
-        faq:{
-            fontSize:"24px",
-            fontWeight:"600",
-            marginLeft:"50px",
-            [theme.breakpoints.down("sm")]:{
-                fontSize:"14px"
-            }
-        },
-        mainline1:{
-            marginTop:"35px",
+        mainline: {
+            display: "flex",
+            justifyContent: "center"
 
-            display:"flex",
-            justifyContent:"center"
-            
+        },
+        line1: {
+            width: "70%",
+            border: "1px solid black",
+        },
+        farmeremail: {
+            textAlign: "left",
+            fontSize: "24px",
+            marginLeft: "96px",
+            padding: "10px",
+            marginTop: "30px",
+            letterSpacing: "1px"
+
+        },
+        adduser: {
+            textAlign: "left",
+            fontSize: "24px",
+            padding: "10px",
+            marginLeft: "96px",
+            letterSpacing: "1px"
+
+        },
+        farmerphone: {
+            textAlign: "left",
+            fontSize: "24px",
+            padding: "10px",
+            marginLeft: "96px",
+            letterSpacing: "1px"
+        },
+        phone: {
+            textAlign: "center",
+            fontSize: "24px",
+            padding: "10px",
+            letterSpacing: "1px"
+        },
+        settingImage: {
+            width: "100%",
+            height: "100%"
+        },
+        settingAction: {
+            textDecoration: "none",
+            fontSize: "24px",
+            color: "black",
+            padding: "20px 40px",
+            display: "flex",
+            alignItems: "flex-start",
+            flexDirection: "column",
+            "&:hover": {
+                color: theme.palette.primary.main
+            }
+        },
+        detailContainer: {
+            display: "flex",
+            alignItems: "center",
+            gap: "20px",
+            textDecoration: "none"
+        },
+        metaInfo: {
+            fontSize: "18px"
         }
 
-        
     }));
 
 
 
 
- const classes = useStyles();
- const addusers = async (e) => {
-    
-    const users = {
-       
-    }
-}
+    const classes = useStyles();
+    const addusers = async (e) => {
 
-  return (
-    <div className={classes.maindiv}>
-        <div className={classes.divone}>
-        <img src="" alt="" />    
-        </div>
-        <div className={classes.divtwo}>
-            <div className={classes.headingone}>
-                <h1 className={classes.head}>Contact Us</h1>
-                </div>
-            <div className={classes.box}>
-                <div className={classes.farmeremail}>Email</div>
-                <div className={classes.email}>customerservice@farmingo.ca</div>
-                <div className={classes.mainline}><div className={classes.line1}></div></div>
-            
-                <div className={classes.farmerphone}>Phone</div>
-                <div className={classes.phone}>778-123-1234</div>
-                <div className={classes.mainline1}><div className={classes.line1}></div></div>
-                <div className={classes.faq}>FAQ</div>
-                </div>
+        const users = {
+
+        }
+    }
+
+    const logout = () => {
+        alert("Logged out");
+    }
+
+    return (
+        <div className={classes.maindiv}>
+            <div className={classes.divone}>
+                {/* <img className={classes.settingImage} src="../assets/settingsImage.jpg" alt="settingspage" />     */}
             </div>
-        
-        
+            <div className={classes.divtwo}>
+                <div className={classes.headingone}>
+                    <h1 className={classes.head}>Contact Us</h1>
+                </div>
+                <div className={classes.box}>
+                    <div className={classes.settingAction}><div className={classes.detailContainer}>
+                        <EmailIcon />Email</div>
+                        <span className={classes.metaInfo}>customerservice@farmingo.ca</span>
+                    </div>
+                    <Divider />
+                    <div className={classes.settingAction}><div className={classes.detailContainer}>
+                        <LocalPhoneIcon />Phone</div>
+                        <span className={classes.metaInfo}>XXX - XXXX - XXXX</span>
+                    </div>                    <Divider />
+                    <div className={classes.settingAction}><div className={classes.detailContainer}>
+                        <Link className={classes.detailContainer} to="../farmer/faq">
+                            <MessageIcon />FAQ's
+                    </Link>
+                    </div>
+                </div>
+                
+            </div>
         </div>
-  )
+
+
+        </div >
+    )
 }

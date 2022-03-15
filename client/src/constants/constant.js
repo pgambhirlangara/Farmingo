@@ -1,29 +1,34 @@
 export const Faqfarmer = [
   {
     question: "Are contracts legally binding?",
-    answer: "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions."
+    answer:
+      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
   },
   {
     question: "Are contracts legally binding?",
-    answer: "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions."
+    answer:
+      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
   },
   {
     question: "Are contracts legally binding?",
-    answer: "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions."
+    answer:
+      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
   },
   {
     question: "Are contracts legally binding?",
-    answer: "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions."
+    answer:
+      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
   },
   {
     question: "Are contracts legally binding?",
-    answer: "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions."
+    answer:
+      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
   },
   {
     question: "Are contracts legally binding?",
-    answer: "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions."
-  }
-
+    answer:
+      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
+  },
 ];
 
 export const testimonials = [
@@ -31,27 +36,27 @@ export const testimonials = [
     image: "/assets/farmer1.jpg",
     name: "Jorge Avelino",
     comment: "Amazing!",
-    rating: 5
+    rating: 5,
   },
   {
     image: "/assets/farmer2.jpg",
     name: "Oscar Hierro",
     comment: "Easy to follow!",
-    rating: 5
+    rating: 5,
   },
   {
     image: "/assets/farmer3.jpg",
     name: "Antonio Gallardo",
     comment: "Love it!",
-    rating: 5
+    rating: 5,
   },
   {
     image: "/assets/farmer4.jpg",
     name: "Marcia Rubio",
     comment: "I find new customers!",
-    rating: 5
-  }
-]
+    rating: 5,
+  },
+];
 
 export const Province = [
   {
@@ -152,128 +157,148 @@ export const headersData = [
   {
     label: "Products",
     href: "/farmer/home",
-    icon: "/assets/products.svg"
+    icon: "/assets/products.svg",
   },
   {
     label: "Order History",
     href: "/farmer/order-history",
-    icon: "/assets/order_details.svg"
+    icon: "/assets/order_details.svg",
   },
   {
     label: "Contact Us",
     href: "/farmer/contactUs",
-    icon: "/assets/contact_us.svg"
+    icon: "/assets/contact_us.svg",
   },
   {
     label: "Settings",
     href: "/farmer/settings",
-    icon: "/assets/settings.svg"
+    icon: "/assets/settings.svg",
   },
 ];
-
 
 export const orderDetails = [
   {
     image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
-    price: "$100"
+    price: "$100",
   },
   {
     image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
-    price: "$100"
+    price: "$100",
   },
   {
     image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
-    price: "$100"
+    price: "$100",
   },
   {
     image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
-    price: "$100"
+    price: "$100",
   },
   {
     image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
-    price: "$100"
+    price: "$100",
   },
   {
     image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
-    price: "$100"
+    price: "$100",
   },
   {
     image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
-    price: "$100"
+    price: "$100",
   },
   {
     image: "/assets/apple.jpg",
     title: "Pink Apple",
     amount: "30lb",
-    price: "$100"
-  }
-]
-
+    price: "$100",
+  },
+];
 
 export const orderHistory = [
   {
     id: "order1",
     orderDate: "01/01/2001",
-    total: "$600"
+    total: "$600",
   },
   {
     id: "order1",
     orderDate: "01/01/2001",
-    total: "$600"
+    total: "$600",
   },
   {
     id: "order1",
     orderDate: "01/01/2001",
-    total: "$600"
+    total: "$600",
   },
   {
     id: "order1",
     orderDate: "01/01/2001",
-    total: "$600"
+    total: "$600",
   },
   {
     id: "order1",
     orderDate: "01/01/2001",
-    total: "$600"
+    total: "$600",
   },
   {
     id: "order1",
     orderDate: "01/01/2001",
-    total: "$600"
+    total: "$600",
   },
   {
     id: "order1",
     orderDate: "01/01/2001",
-    total: "$600"
-  }
-]
-
+    total: "$600",
+  },
+];
 
 export const categoryList = [
   {
     id: 1,
-    name: "Vegetables"
+    name: "Vegetables",
   },
   {
     id: 2,
-    name: "Fruits"
+    name: "Fruits",
   },
   {
     id: 3,
-    name: "Dry Fruits"
-  }
-]
+    name: "Dry Fruits",
+  },
+];
+
+export const imageGallery = [
+  {
+    id: 1,
+    url: "/assets/farmer1.jpg",
+  },
+  {
+    id: 1,
+    url: "/assets/farmer1.jpg",
+  },
+  {
+    id: 1,
+    url: "/assets/farmer1.jpg",
+  },
+  {
+    id: 1,
+    url: "/assets/farmer1.jpg",
+  },
+  {
+    id: 1,
+    url: "/assets/farmer1.jpg",
+  },
+];

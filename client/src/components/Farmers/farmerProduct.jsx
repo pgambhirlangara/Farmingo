@@ -25,7 +25,7 @@ const FarmerProductPage = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "10px",
-            padding: "40px"
+            padding: "20px"
         },
         farmName: {
             margin: 0
@@ -47,10 +47,11 @@ const FarmerProductPage = () => {
         },
         farmProducts: {
             display: "grid",
-            gridTemplateColumns: "auto auto auto auto auto auto",
-            gap: "40px",
+            padding: "0px 150px",
+            gridTemplateColumns: "repeat(6, 1fr)",
+            gap: "4px",
             [theme.breakpoints.down("lg")]: {
-                gridTemplateColumns: "auto auto auto auto",
+                gridTemplateColumns: "repeat(3, 1fr)",
                 gap: "30px"
             },
             [theme.breakpoints.down("md")]: {
@@ -58,7 +59,7 @@ const FarmerProductPage = () => {
                 gap: "20px"
             },
             [theme.breakpoints.down("sm")]: {
-                gridTemplateColumns: "100%"
+                gridTemplateColumns: "auto auto"
             },
 
         }
