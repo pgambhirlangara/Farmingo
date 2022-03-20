@@ -246,6 +246,7 @@ export default function FarmerCreatePost() {
             setMessage(response.data.message);
             setOpen(true);
             setButtonDisabled(false);
+            setSeverity('success');
             setTimeout(() => {
                 navigate('../farmer/home');
             }, 2000);
