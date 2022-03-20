@@ -19,7 +19,7 @@ import Customerfaq from "./components/Customers/customerfaq";
 import FarmProfile from "./components/Farmers/FarmProfile";
 import Faqfarmer from "./components/Farmers/faqfarmer";
 import FarmerCreatePost from "./components/Farmers/farmerCreatePost";
-
+import FarmerEditPost from "./components/Farmers/farmerEditPost";
 
 function App() {
   return (
@@ -41,14 +41,13 @@ function App() {
         <Route path="farmer/addUser" element={<FarmerAddUser />} />
         <Route path="farmer/faq" element={<Faqfarmer />} />
         <Route path="farmer/createpost" element={<FarmerCreatePost />} />
-
         <Route
           path="farmer/product/:id"
           element={<FarmerProductInformation />}
         />
+        <Route path="farmer/product/edit/:id" element={<FarmerEditPost />} />
         <Route path="farmer/orderDetails/:id" element={<OrderDetails />} />
         <Route path="customer/faq" element={<Customerfaq />} />
-
       </Routes>
       <Footer />
     </div>

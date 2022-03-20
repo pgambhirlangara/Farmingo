@@ -6,10 +6,10 @@ import { categoryList } from '../../constants/constant';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export default function FarmerCreatePost() {
+export default function FarmerEditPost() {
 
     const useStyles = makeStyles((theme) => ({
         maindiv: {
@@ -22,7 +22,7 @@ export default function FarmerCreatePost() {
             },
         },
         divone: {
-            backgroundImage: "url('../../assets/orderDetail.jpg'), linear-gradient(90deg, rgba(91, 175, 97, 0.5) 1.28%, rgba(248, 177, 51, 0.5) 105.7%);",
+            backgroundImage: "url('../../../assets/orderDetail.jpg'), linear-gradient(90deg, rgba(91, 175, 97, 0.5) 1.28%, rgba(248, 177, 51, 0.5) 105.7%);",
             filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));",
             backgroundBlendMode: "multiply",
             backgroundPosition: "center",
@@ -98,6 +98,10 @@ export default function FarmerCreatePost() {
             display: "flex",
             flexDirection: "column"
 
+        },
+        editImage: {
+            width: "80%",
+            borderRadius: "24px"
         },
         threeone: {
             width: "90%",
@@ -189,6 +193,12 @@ export default function FarmerCreatePost() {
             borderRadius: "24px",
             fontWeight: "bold",
             fontSize: "0.875rem"
+        },
+        editButtonContainer: {
+            display: "grid",
+            gridTemplateColumns: "20% 80%",
+            justifyContent: "center",
+            alignItems: "center",
         }
 
     }));
@@ -196,15 +206,6 @@ export default function FarmerCreatePost() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, []);
-
-
-    const openGallery = () => {
-        setOpen(true);
-    }
-
-    const handleClose = () => {
-        setOpen(false);
-    }
 
 
 
@@ -220,7 +221,10 @@ export default function FarmerCreatePost() {
     const [image, setImage] = useState("");
     const [severity, setSeverity] = useState('success');
     const [message, setMessage] = useState("");
-    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [farmProduct, setFarmProduct] = useState({});
+    let { id } = useParams();
+
+
     const navigate = useNavigate();
 
     const anchorOrigin = {
@@ -228,8 +232,35 @@ export default function FarmerCreatePost() {
          horizontal: "center"
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        fetchData();
+    }, []);
 
-    const createPost = async (e) => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${id}`);
+            setMessage(response.data.message);
+            setFarmProduct(response.data.data);
+            setProductName(response.data.data.title);
+            setPrice(response.data.data.price);
+            setStock(response.data.data.stock);
+            setHarvestDate(response.data.data.harvestDate);
+            setCategory(response.data.data.category);
+            setDescription(response.data.data.description);
+            setImage(response.data.data.image);
+            setOpen(true);
+            setSeverity('success');
+
+        } catch (error) {
+            setSeverity('error');
+            setOpen(true);
+            setMessage(error.response.data.message);
+        }
+    }
+
+
+    const editPost = async (e) => {
         console.log(image);
         e.preventDefault();
         const post = {
@@ -243,11 +274,9 @@ export default function FarmerCreatePost() {
             description
         }
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/posts/create`, post);
-
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/posts/${id}`, post);
             setMessage(response.data.message);
             setOpen(true);
-            setButtonDisabled(false);
             setSeverity('success');
             setTimeout(() => {
                 navigate('../farmer/home');
@@ -255,7 +284,6 @@ export default function FarmerCreatePost() {
         } catch (error) {
             setSeverity('error');
             setOpen(true);
-            setButtonDisabled(false);
             setMessage(error.response.data.message);
         }
     }
@@ -264,8 +292,6 @@ export default function FarmerCreatePost() {
         const file = event.target.files[0];
         const convertedFile = await convertToBase64(file);
         setImage(convertedFile);
-
-        // Request will be sent from here in the future
     }
     const convertToBase64 = (file) => {
         return new Promise(resolve => {
@@ -301,25 +327,25 @@ export default function FarmerCreatePost() {
                         <h2 className={classes.head}>Create a post of your product and view it in
                             your product listings</h2>
                     </div>
-                    <form className={classes.form} onSubmit={createPost}>
+                    <form className={classes.form} onSubmit={editPost}>
                         <InputLabel className={classes.label}>Product Name</InputLabel>
                         <TextField value={productName} onChange={(e) => setProductName(e.target.value)} className={classes.formInput} type="text" placeholder="Name of the product..." />
                         <InputLabel className={classes.label}>Category</InputLabel>
                         <Select
                             placeholder="Your Province"
                             value={category}
-                            required
+                                              required
                             className={classes.formInput}
                             onChange={(e) => setCategory(e.target.value)}
                         >
                             {
                                 categoryList.map(({ name, id }, index) => {
-                                    return <MenuItem key={index} value={name}>{name}</MenuItem>
+                                    return <MenuItem key={index} value={id}>{name}</MenuItem>
                                 })
                             }
                         </Select>
                         <InputLabel className={classes.label}>Stock (in lb)</InputLabel>
-                        <TextField className={classes.formInput} type="number" placeholder="in LB..." onChange={(e) => setStock(e.target.value)} />
+                        <TextField value={stock} className={classes.formInput} type="number" placeholder="in LB..." onChange={(e) => setStock(e.target.value)} />
                         <InputLabel className={classes.label}>Harvest Day</InputLabel>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <Stack className={classes.formInput}
@@ -333,13 +359,16 @@ export default function FarmerCreatePost() {
                             </Stack>
                         </LocalizationProvider>
                         <InputLabel className={classes.label}>Price</InputLabel>
-                        <TextField className={classes.formInput} type="number" placeholder="in CAD" onChange={(e) => setPrice(e.target.value)} />
+                        <TextField value={price} className={classes.formInput} type="number" placeholder="in CAD" onChange={(e) => setPrice(e.target.value)} />
                         <InputLabel className={classes.label}>Product Description</InputLabel>
-                        <TextField className={classes.formInput} type="text" onChange={(e) => setDescription(e.target.value)} multiline placeholder="Nutrition Facts...." />
+                        <TextField value={description} className={classes.formInput} type="text" onChange={(e) => setDescription(e.target.value)} multiline placeholder="Nutrition Facts...." />
                         <div className={classes.actionButtonContainer}>
+                            <div className={classes.editButtonContainer}>
+                            <img className={classes.editImage} src={image} alt="" />
                                 <label for="upload"  className={classes.uploadImage}>Upload Image of the Product</label>
                                 <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
-                            <Button type="submit" variant='contained' className={classes.actionButton}>Create a post </Button>
+                            </div>
+                            <Button type="submit" variant='contained' className={classes.actionButton}>Save Changes</Button>
                         </div>
 
                     </form>

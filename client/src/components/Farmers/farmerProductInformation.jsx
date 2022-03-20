@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, Alert, Snackbar } from "@mui/ma
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const FarmerProductInformation = () => {
 
@@ -108,6 +108,12 @@ const FarmerProductInformation = () => {
             alignItems: "center",
             gap: "20px",
             justifyContent: "center"
+        },
+        editButtonContainer: {
+            textDecoration: "none",
+            display: "flex",
+            justifyContent: "center",
+            width: "100%"
         }
     }));
 
@@ -118,6 +124,8 @@ const FarmerProductInformation = () => {
     const [farmProduct, setFarmProduct] = useState({});
     const [hidden, setHidden] = useState(false);
 
+
+    
     let { id } = useParams();
     const anchorOrigin = {
         vertical: "bottom",
@@ -204,7 +212,9 @@ const FarmerProductInformation = () => {
                         <Button disabled={hidden} className={classes.button} onClick={() => updatePostStatus(true)} variant="contained" color="primary">Hide Post</Button>
                     </CardActions>
                     <div className={classes.mainActionButtonContainer}>
+                        <Link className={classes.editButtonContainer} to={`../farmer/product/edit/${id}`}>
                         <Button className={classes.editButton} variant="outlined" color="secondary">Edit Details</Button>
+                        </Link>
                         <Button className={classes.saveButton} color="primary">Save</Button>
                     </div>
                 </Card>
