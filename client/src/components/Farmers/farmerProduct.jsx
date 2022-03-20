@@ -20,7 +20,7 @@ const FarmerProductPage = () => {
             background: "white",
             border: `1px solid ${theme.palette.primary.main}`,
             borderRadius: "20px",
-           
+
         },
         farmNameSection: {
             display: "flex",
@@ -75,6 +75,12 @@ const FarmerProductPage = () => {
                 margin: 0,
                 textAlign: "center"
             },
+        },
+        createPostButton: {
+            width: "343px",
+            [theme.breakpoints.down("sm")]: {
+                width: "100%"
+            },
         }
     }));
 
@@ -89,7 +95,7 @@ const FarmerProductPage = () => {
         fetchData();
     }, [])
 
-    const fetchData = async() => {
+    const fetchData = async () => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts`);
             console.log(response.data.data, "Response");
@@ -103,7 +109,7 @@ const FarmerProductPage = () => {
             setOpen(true);
             setMessage(error.response.data.message);
         }
-    } 
+    }
 
     const handleAlertClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -112,15 +118,15 @@ const FarmerProductPage = () => {
 
         setOpen(false);
     };
-    
+
     const anchorOrigin = {
         vertical: "bottom",
-         horizontal: "center"
+        horizontal: "center"
     }
 
     return (
         <div>
-             <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
+            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
                 <Alert className={classes.snackbar} onClose={handleAlertClose} severity={severity}>
                     {message}
                 </Alert>
@@ -134,7 +140,7 @@ const FarmerProductPage = () => {
                 <div className={classes.farmProductSubContainer}>
                     <section className={classes.farmPostSection}>
                         <h3>Post something new!</h3>
-                        <Link className={classes.createPost} to="../farmer/createpost">                    <Button fullWidth type="button" variant="contained" color="secondary" endIcon={<AddIcon />}>Create new post</Button>
+                        <Link className={classes.createPost} to="../farmer/createpost"> <Button className={classes.createPostButton} type="button" variant="contained" color="secondary" endIcon={<AddIcon />}>Create new post</Button>
                         </Link>
                         <h3>View and Edit your products</h3>
                         <h4 className={classes.productDescription}>Here is the list of your products on sale, click in to the product to manage the list and update it.</h4>
@@ -142,7 +148,7 @@ const FarmerProductPage = () => {
                     <section className={classes.farmProducts}>
                         {
                             farmProducts.map((item) => {
-                                return <FarmerProductItem name={item.title} price={item.price} image={item.image} />
+                                return <FarmerProductItem name={item.title} price={item.price} id={item._id} image={item.image} />
                             })
                         }
                     </section>

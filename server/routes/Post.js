@@ -14,7 +14,7 @@ router.put('/:id', validateUser, updatePost);
 
 router.delete('/:id', validateUser, deletePost);
 
-router.get('/:id', validateUser, getPostById);
+router.get('/:id', getPostById);
 
 function logger(req, res, next) {
     console.log('Runnning your requests.....');

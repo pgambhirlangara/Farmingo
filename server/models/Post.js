@@ -28,6 +28,9 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    hide: {
+      type: Boolean
+    },
     farmer: { type: mongoose.Schema.Types.ObjectId, ref: "Farmer" },
   },
   {timestamps: true }

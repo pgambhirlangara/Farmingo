@@ -215,6 +215,7 @@ export default function FarmerCreatePost() {
     const [stock, setStock] = useState(0);
     const [harvestDate, setHarvestDate] = useState("");
     const [price, setPrice] = useState(0);
+    const [description, setDescription] = useState("");
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState("");
     const [severity, setSeverity] = useState('success');
@@ -238,7 +239,8 @@ export default function FarmerCreatePost() {
             harvestDate,
             price,
             image,
-            email: "knowprabhjyot@gmail.com"
+            email: "knowprabhjyot@gmail.com",
+            description
         }
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/posts/create`, post);
@@ -274,25 +276,6 @@ export default function FarmerCreatePost() {
             }
         })
     }
-
-
-    
-
-
-    // const uploadImage = async (event) => {
-    //     console.log(event.target.files);
-    //     if (event.target.files && event.target.files[0]) {
-    //         // let blob = URL.createObjectURL(event.target.files[0]);
-    //         // let img = new Image();
-    //         // img.src = blob;
-    //         // await img.decode();
-    //         // let dataStream = URL.revokeObjectURL(img.src);
-    //         // console.log(dataStream);
-    //         setImage(event.target.files[0]);
-    //         // console.log(image, "value");
-    //     }
-    // }
-
 
     const handleAlertClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -352,11 +335,10 @@ export default function FarmerCreatePost() {
                         <InputLabel className={classes.label}>Price</InputLabel>
                         <TextField className={classes.formInput} type="number" placeholder="in CAD" onChange={(e) => setPrice(e.target.value)} />
                         <InputLabel className={classes.label}>Product Description</InputLabel>
-                        <TextField className={classes.formInput} type="text" multiline placeholder="Nutrition Facts...." />
+                        <TextField className={classes.formInput} type="text" onChange={(e) => setDescription(e.target.value)} multiline placeholder="Nutrition Facts...." />
                         <div className={classes.actionButtonContainer}>
                                 <label for="upload"  className={classes.uploadImage}>Upload Image of the Product</label>
                                 <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
-                            {/* <Button type='file' variant='contained' color="secondary" className={classes.actionButton}>Upload Image of the Product <FileUploadIcon /></Button> */}
                             <Button type="submit" variant='contained' className={classes.actionButton}>Create a post </Button>
                         </div>
 
