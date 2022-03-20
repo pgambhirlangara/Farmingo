@@ -11,7 +11,7 @@ const createFarmProfile = async (req, res) => {
             const farmProfile = await FarmProfile.create({
                 farmName: req.body.farmName,
                 description: req.body.description,
-                daysOfOperation: req.body.daysOfOperation,
+                daysOfOperation: JSON.stringify(req.body.daysOfOperation),
                 hoursOfOperation: req.body.hoursOfOperation,
                 contact: req.body.contact,
                 address: req.body.address,

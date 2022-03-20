@@ -1,10 +1,12 @@
 import React from 'react'
-import { Box, Button, MenuItem, Select, TextField } from "@mui/material";
+import { Alert, Box, Button, MenuItem, Select, Snackbar, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 
 import { border, color, display, fontWeight, height, padding } from '@mui/system';
 import { days, Province } from '../../constants/constant';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function FarmProfile() {
     const useStyles = makeStyles((theme) => ({
 
@@ -204,6 +206,19 @@ export default function FarmProfile() {
                 marginTop: "100px"
             }
 
+        },
+        uploadImage: {
+            backgroundColor: "#F15A22",
+            color: "white",
+            cursor: "pointer",
+            minWidth: "64px",
+            height: "51px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "24px",
+            fontWeight: "bold",
+            fontSize: "0.875rem"
         }
     }));
 
@@ -218,10 +233,84 @@ export default function FarmProfile() {
     const [daysOfOperation, setDaysOfOperation] = useState([]);
     const [hoursOfOperation, setHoursOfOperation] = useState("");
     const [description, setDescription]  = useState("");
+    const [message, setMessage] = useState("");
+    const [open, setOpen] = useState(false);
+    const [image, setImage] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [severity, setSeverity] = useState('success');
+    const navigate = useNavigate();
+
+
+    const createFarmProfile = async (e) => {
+        e.preventDefault();
+        const farmProfile = {
+            farmName,
+            address,
+            zipCode,
+            province,
+            contact,
+            daysOfOperation,
+            hoursOfOperation,
+            email: "knowprabhjyot@gmail.com",
+            image,
+            description
+        }
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farm/create`, farmProfile);
+
+            setMessage(response.data.message);
+            setOpen(true);
+            setButtonDisabled(false);
+            setSeverity('success');
+            setTimeout(() => {
+                navigate('../farmer/home');
+            }, 2000);
+        } catch (error) {
+            setSeverity('error');
+            setOpen(true);
+            setButtonDisabled(false);
+            setMessage(error.response.data.message);
+        }
+    }
+
+
+    const onSelectFile = async (event) => {
+        const file = event.target.files[0];
+        const convertedFile = await convertToBase64(file);
+        setImage(convertedFile);
+    }
+    const convertToBase64 = (file) => {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                resolve(reader.result);
+            }
+        })
+    }
+
+    const handleAlertClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    const anchorOrigin = {
+        vertical: "bottom",
+         horizontal: "center"
+    }
+
 
     return (
 
-        <form className={classes.addform} >
+        <form className={classes.addform} onSubmit={createFarmProfile} >
+                        <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
+                <Alert className={classes.snackbar} onClose={handleAlertClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
             <Box marginTop="100px" >
                 <h1 className={classes.headingone}>Create a profile of your farm</h1>
             </Box>
@@ -301,10 +390,11 @@ export default function FarmProfile() {
                 <div className={classes.btndiv}>
 
                     <div className={classes.btnform}>
-                        <Button className={classes.addButton1} variant="contained" ><span className={classes.btnname}> Upload image of the farm </span></Button>
+                    <label for="upload"  className={classes.uploadImage}>Upload Image of the Product</label>
+                                <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
                     </div>
                     <div className={classes.btnform}>
-                        <Button className={classes.addButton} variant="contained" ><span className={classes.btnname}> Save </span></Button>
+                        <Button type="submit" className={classes.addButton} variant="contained" ><span className={classes.btnname}> Save </span></Button>
                     </div>
 
                 </div>

@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 4000;
 const customerRoutes = require('./routes/Customer');
 const farmerRoutes = require('./routes/Farmer');
 const postRoutes = require('./routes/Post');
+const farmRoutes = require('./routes/FarmProfile');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -34,6 +35,7 @@ app.get('/', (request, response) => {
 app.use('/customer', customerRoutes);
 app.use('/farmer', farmerRoutes);
 app.use('/posts', postRoutes);
+app.use('/farm', farmRoutes);
 
 app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 

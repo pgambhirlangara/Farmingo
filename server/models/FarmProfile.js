@@ -6,6 +6,7 @@ const FarmerProfile = new mongoose.Schema(
     hoursOfOperation: { type: Number, required: true },
     contact: { type: Number, required: true},
     daysOfOperation: { type: String, required: true},
+    hoursOfOperation: { type: String, required: true},
     zipCode: { type: String },
     province: { type: String },
     description: { type: String},
@@ -15,4 +16,4 @@ const FarmerProfile = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.models.Farmer || mongoose.model("FarmerProfile", FarmerProfile);
+module.exports = mongoose.models.FarmerProfile || mongoose.model("FarmerProfile", FarmerProfile);
