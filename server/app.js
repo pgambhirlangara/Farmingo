@@ -3,9 +3,10 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const customerRoutes = require('./routes/Customer');
 const farmerRoutes = require('./routes/Farmer');
+const postRoutes = require('./routes/Post');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const morgan = require('morgan')
+const morgan = require('morgan');
 require('dotenv').config();
 
 
@@ -32,6 +33,7 @@ app.get('/', (request, response) => {
 // middleware
 app.use('/customer', customerRoutes);
 app.use('/farmer', farmerRoutes);
+app.use('/posts', postRoutes);
 
 app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 

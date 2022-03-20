@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
-import { Button, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { Alert, Button, InputLabel, MenuItem, Select, Snackbar, Stack, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
-import { border, borderRadius, display, fontWeight, textAlign, width } from '@mui/system';
-import { categoryList, orderDetails } from '../../constants/constant';
+import { categoryList } from '../../constants/constant';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import FarmerGallery from './farmerGallery';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function FarmerCreatePost() {
 
@@ -170,6 +169,26 @@ export default function FarmerCreatePost() {
             [theme.breakpoints.down("md")]: {
                 width: "85%",
             },
+        },
+        fileUpload: {
+            background: "#F15A22",
+            padding: "20px",
+            borderRadius: "24px",
+            color: "white",
+            
+        },
+        uploadImage: {
+            backgroundColor: "#F15A22",
+            color: "white",
+            cursor: "pointer",
+            minWidth: "64px",
+            height: "51px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "24px",
+            fontWeight: "bold",
+            fontSize: "0.875rem"
         }
 
     }));
@@ -197,10 +216,100 @@ export default function FarmerCreatePost() {
     const [harvestDate, setHarvestDate] = useState("");
     const [price, setPrice] = useState(0);
     const [open, setOpen] = useState(false);
+    const [image, setImage] = useState("");
+    const [severity, setSeverity] = useState('success');
+    const [message, setMessage] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const navigate = useNavigate();
+
+    const anchorOrigin = {
+        vertical: "bottom",
+         horizontal: "center"
+    }
+
+
+    const createPost = async (e) => {
+        console.log(image);
+        e.preventDefault();
+        const post = {
+            title: productName,
+            category,
+            stock,
+            harvestDate,
+            price,
+            image,
+            email: "knowprabhjyot@gmail.com"
+        }
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/posts/create`, post);
+
+            setMessage(response.data.message);
+            setOpen(true);
+            setButtonDisabled(false);
+            setTimeout(() => {
+                navigate('../farmer/home');
+            }, 2000);
+        } catch (error) {
+            setSeverity('error');
+            setOpen(true);
+            setButtonDisabled(false);
+            setMessage(error.response.data.message);
+        }
+    }
+
+    const onSelectFile = async (event) => {
+        const file = event.target.files[0];
+        const convertedFile = await convertToBase64(file);
+        setImage(convertedFile);
+
+        // Request will be sent from here in the future
+    }
+    const convertToBase64 = (file) => {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                resolve(reader.result);
+            }
+        })
+    }
+
+
+    
+
+
+    // const uploadImage = async (event) => {
+    //     console.log(event.target.files);
+    //     if (event.target.files && event.target.files[0]) {
+    //         // let blob = URL.createObjectURL(event.target.files[0]);
+    //         // let img = new Image();
+    //         // img.src = blob;
+    //         // await img.decode();
+    //         // let dataStream = URL.revokeObjectURL(img.src);
+    //         // console.log(dataStream);
+    //         setImage(event.target.files[0]);
+    //         // console.log(image, "value");
+    //     }
+    // }
+
+
+    const handleAlertClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+    
 
     return (
         <>
             <div className={classes.maindiv}>
+            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
+                <Alert className={classes.snackbar} onClose={handleAlertClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
                 <div className={classes.divone}>
                 </div>
                 <div className={classes.divtwo}>
@@ -208,7 +317,7 @@ export default function FarmerCreatePost() {
                         <h2 className={classes.head}>Create a post of your product and view it in
                             your product listings</h2>
                     </div>
-                    <form className={classes.form}>
+                    <form className={classes.form} onSubmit={createPost}>
                         <InputLabel className={classes.label}>Product Name</InputLabel>
                         <TextField value={productName} onChange={(e) => setProductName(e.target.value)} className={classes.formInput} type="text" placeholder="Name of the product..." />
                         <InputLabel className={classes.label}>Category</InputLabel>
@@ -244,14 +353,15 @@ export default function FarmerCreatePost() {
                         <InputLabel className={classes.label}>Product Description</InputLabel>
                         <TextField className={classes.formInput} type="text" multiline placeholder="Nutrition Facts...." />
                         <div className={classes.actionButtonContainer}>
-                            <Button variant='contained' color="secondary" onClick={openGallery} className={classes.actionButton}>Upload Image of the Product <FileUploadIcon /></Button>
-                            <Button variant='contained' className={classes.actionButton}>Create a post </Button>
+                                <label for="upload"  className={classes.uploadImage}>Upload Image of the Product</label>
+                                <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
+                            {/* <Button type='file' variant='contained' color="secondary" className={classes.actionButton}>Upload Image of the Product <FileUploadIcon /></Button> */}
+                            <Button type="submit" variant='contained' className={classes.actionButton}>Create a post </Button>
                         </div>
 
                     </form>
 
-                    <FarmerGallery open={open} handleClose={handleClose}  />
-
+                    {/* <FarmerGallery open={open} handleClose={handleClose}  /> */}
 
                 </div>
             </div>

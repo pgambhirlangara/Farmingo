@@ -104,7 +104,8 @@ const FarmerLogin = () => {
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
     const anchorOrigin = {
-        vertical: "bottom", horizontal: "center"
+        vertical: "bottom",
+         horizontal: "center"
     }
 
     const classes = useStyles();
@@ -157,7 +158,7 @@ const FarmerLogin = () => {
 
     return (
         <form className={classes.farmerLogin}>
-            <Snackbar  anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
+            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
                 <Alert className={classes.snackbar} onClose={handleAlertClose} severity={severity}>
                     {message}
                 </Alert>
@@ -170,6 +171,7 @@ const FarmerLogin = () => {
                     <FormControl variant="outlined">
                         <OutlinedInput
                             value={email}
+                            placeholder="Enter Email here"
                             onChange={(e) => setEmail(e.target.value)}
                             startAdornment={<InputAdornment position="start">
                                 <AccountCircle />
@@ -188,6 +190,7 @@ const FarmerLogin = () => {
                             type={values.showPassword ? 'text' : 'password'}
                             value={values.password}
                             onChange={handleChange('password')}
+                            placeholder="Enter Password here"
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
