@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, Grid } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Alert, Snackbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -116,17 +116,50 @@ const FarmerProductInformation = () => {
     const [message, setMessage] = useState("");
     const [severity, setSeverity] = useState('success');
     const [farmProduct, setFarmProduct] = useState({});
+    const [hidden, setHidden] = useState(false);
+
     let { id } = useParams();
+    const anchorOrigin = {
+        vertical: "bottom",
+         horizontal: "center"
+    }
+
+    const handleAlertClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+    
 
     useEffect(() => {
         window.scrollTo(0, 0)
         fetchData();
     }, []);
 
+    const updatePostStatus = async (isHidden) => {
+        const updateFarm = {...farmProduct, hide: isHidden};
+        try {
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/posts/${id}`, updateFarm);
+            setMessage(response.data.message);
+            setHidden(true ? isHidden : false);
+            setOpen(true);
+            // setButtonDisabled(false);
+            setSeverity('success');
+        } catch (error) {
+            setSeverity('error');
+            setOpen(true);
+            // setButtonDisabled(false);
+            setMessage(error.response.data.message);
+        }
+    }
+
     const fetchData = async () => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${id}`);
             console.log(response.data.data, "Response");
+            setHidden(true ? response.data.data.hide : false);
             setMessage(response.data.message);
             setFarmProduct(response.data.data);
             setOpen(true);
@@ -142,6 +175,11 @@ const FarmerProductInformation = () => {
 
     return (
         <div className={classes.productContainer}>
+             <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
+                <Alert className={classes.snackbar} onClose={handleAlertClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
             <div className={classes.divone}>
             </div>
             <div className={classes.divtwo}>
@@ -162,8 +200,8 @@ const FarmerProductInformation = () => {
                         <p>{farmProduct.description}</p>
                     </CardContent>
                     <CardActions className={classes.buttonContainer}>
-                        <Button className={classes.button} variant="contained" color="secondary">Active Post</Button>
-                        <Button className={classes.button} variant="contained" color="primary">Hide Post</Button>
+                        <Button disabled={!hidden} className={classes.button} onClick={() => updatePostStatus(false)} variant="contained" color="secondary">Active Post</Button>
+                        <Button disabled={hidden} className={classes.button} onClick={() => updatePostStatus(true)} variant="contained" color="primary">Hide Post</Button>
                     </CardActions>
                     <div className={classes.mainActionButtonContainer}>
                         <Button className={classes.editButton} variant="outlined" color="secondary">Edit Details</Button>

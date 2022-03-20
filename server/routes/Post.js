@@ -10,7 +10,7 @@ router.post('/create', createPost);
 
 router.get('/', getAllPosts);
 
-router.put('/:id', validateUser, updatePost);
+router.put('/:id', updatePost);
 
 router.delete('/:id', validateUser, deletePost);
 
