@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     size: "18px",
     marginLeft: "38px",
-    backgroundColor: `${theme.palette.primary.secondary} !important`,
+    backgroundColor: `${theme.palette.secondary.main} !important`,
     color: "white !important"
   }
 }));
