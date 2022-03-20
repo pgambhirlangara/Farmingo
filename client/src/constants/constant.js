@@ -174,6 +174,11 @@ export const headersData = [
     href: "/farmer/settings",
     icon: "/assets/settings.svg",
   },
+  {
+    label: "Create Farm Profile",
+    href: "/farmer/createProfile",
+    icon: "/assets/settings.svg"
+  }
 ];
 
 export const orderDetails = [
@@ -302,3 +307,14 @@ export const imageGallery = [
     url: "/assets/farmer1.jpg",
   },
 ];
+
+
+export const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+]

@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    fontFamily: "Open Sans, sans-serif",
     fontWeight: 700,
     size: "18px",
     marginLeft: "38px",
@@ -64,6 +63,13 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: "1px solid #cdcdcd",
     },
   },
+  lastMenu: {
+    fontWeight: 700,
+    size: "18px",
+    marginLeft: "38px",
+    backgroundColor: `${theme.palette.primary.secondary} !important`,
+    color: "white !important"
+  }
 }));
 
 export default function Header() {
@@ -75,6 +81,8 @@ export default function Header() {
     farmingoLogoImage,
     headerMenuIcon,
     menuList,
+    lastMenu,
+    lastMenuIcon
   } = useStyles();
 
   const [state, setState] = useState({
@@ -182,7 +190,7 @@ export default function Header() {
   );
 
   const getMenuButtons = () => {
-    return headersData.map(({ label, href, icon }) => {
+    return headersData.map(({ label, href, icon }, index) => {
       return (
         <>
           <Button
@@ -191,7 +199,7 @@ export default function Header() {
               color: "inherit",
               to: href,
               component: RouterLink,
-              className: menuButton,
+              className: index == 4 ? lastMenu : menuButton,
             }}
           >
             <img className={headerMenuIcon} src={icon} alt="image" />
