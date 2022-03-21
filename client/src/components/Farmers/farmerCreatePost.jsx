@@ -221,6 +221,7 @@ export default function FarmerCreatePost() {
     const [severity, setSeverity] = useState('success');
     const [message, setMessage] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(false);
+    const user = JSON.parse(localStorage.getItem('user'));
     const navigate = useNavigate();
 
     const anchorOrigin = {
@@ -239,7 +240,7 @@ export default function FarmerCreatePost() {
             harvestDate,
             price,
             image,
-            email: "knowprabhjyot@gmail.com",
+            email: user.email,
             description
         }
         try {

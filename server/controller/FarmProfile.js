@@ -93,6 +93,7 @@ const getFarmById = (req, res) => {
 
     FarmProfile.findById(id)
     .then((result) => {
+        console.log(result);
         return res.status(200).json({
             message: `Farm found succesfully with id ${id}`,
             data: result

@@ -203,10 +203,6 @@ export default function FarmerEditPost() {
 
     }));
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, []);
-
 
 
     const classes = useStyles();
@@ -223,6 +219,8 @@ export default function FarmerEditPost() {
     const [message, setMessage] = useState("");
     const [farmProduct, setFarmProduct] = useState({});
     let { id } = useParams();
+    const user = JSON.parse(localStorage.getItem('user'));
+
 
 
     const navigate = useNavigate();
@@ -270,7 +268,7 @@ export default function FarmerEditPost() {
             harvestDate,
             price,
             image,
-            email: "knowprabhjyot@gmail.com",
+            email: user.email,
             description
         }
         try {

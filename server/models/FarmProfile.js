@@ -10,6 +10,7 @@ const FarmerProfile = new mongoose.Schema(
     zipCode: { type: String },
     province: { type: String },
     description: { type: String},
+    address: { type: String }, 
     image: { type: String},
     farmer: { type: mongoose.Schema.Types.ObjectId, ref: "Farmer" },
   },

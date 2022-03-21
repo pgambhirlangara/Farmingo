@@ -1,226 +1,453 @@
-import React from 'react'
-import { backdropClasses, Button, InputLabel, Select, TextField } from "@mui/material";
+import React, { useEffect } from 'react'
+import { Alert, Box, Button, MenuItem, Select, Snackbar, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
-import { border, borderRadius, display, fontSize, fontWeight, lineHeight, margin, textAlign } from '@mui/system';
-import { Link } from 'react-router-dom';
 
-export default function ProfileInformation() {
+import { border, color, display, fontWeight, height, padding } from '@mui/system';
+import { days, Province } from '../../constants/constant';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+export default function EditFarmProfile() {
     const useStyles = makeStyles((theme) => ({
-        maindiv:{
-            width:"100%",
-            backgroundColor:"#EEF6EE",
-            height:"100%",
-            display: "flex",
-            justifyContent:"center",
-            alignItems:"center",
-            flexDirection:"column"
-        },
-        headingh1:{
-            textAlign:"center",
-            fontSize:"40px"
-        },
-        headingh2:{
-            textAlign:"center",
-            color:"gray",
-            fontSize:"28px",
-            margin:"0px"
-        },
-        addform:{
-            // need to set new width and height
-            width:"60%",
-            height:"100%",
-            border:"1px solid black ",
-            borderRadius:"20px",
-            display:"flex",
-            flexDirection:"column",
-            justifyContent:"center",
-            alignItems:"center",
-            gap:"20px"  
-        },
-        outerdiv:{
-            width:"100%",
-            height:"100%",
-            display:"flex",
-            flexDirection:"column",
-            padding:"40px"
-            
-        },
-        newdiv:{
-            display:"flex",
-            gap:"10px",
-            flex:"1"
-        },
-        imagediv:{
-            flex:"1",
-            backgroundColor:"black",
-            borderRadius:"24px",
-        },
-        content:{
-            flex:"1",
-            gap:"30px",
-            display:"flex",
-            flexDirection:"column"
+
+        addform: {
+            backgroundColor: theme.palette.primary.a100,
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "20px",
+            height: "calc(100vh - 64px)",
+            overflow: "auto"
 
         },
-        newdiv2:{
-            flex:"1",
-            display:"flex",
-            flexDirection:"column",
-            gap:"25px"
-            
+        headingtwo: {
+            textAlign: "center",
+            width: "53%",
+            [theme.breakpoints.up("sm")]: {
+                marginTop: "-15px",
+                color: "gray"
+            },
         },
-        labels:{
-            fontSize:"18px",
-            lineHeight:"41px",
-            letterSpacing:"1px",
-            fontWeight:"bold"
+        headingone: {
+            textAlign: "center",
         },
-        formmove:{
-            display:"flex",
-            flexDirection:"column",
-            
-
-        },
-        passdiv:{
-            width:"100%",
-            display:"flex",
-            justifyContent:"center",
-            alignItems:"center",
-            flexDirection:"column",
-            [theme.breakpoints.up("sm")]:{
-                display:"flex",
-                flexDirection:"row",
-                width:"80%",
-                justifyContent:"space-between",
-                gap:"66px"
-            }
-        },
-        
-        signupButton: {
-            color: "white !important",
-            width: "50%",
-            backgroundColor:"#F15922!important",
-            
-        },
-        buttonContainer: {
+        formmove: {
+            width: "80%",
             display: "flex",
             flexDirection: "column",
+            marginBottom: "10px",
+            [theme.breakpoints.down("md")]: {
+                height: "40px",
+                width: "333px",
+                marginBottom: "10px",
+                padding: "0",
+                display: "flex",
+                flexDirection: "column",
+            }
+        },
+        labels: {
+            display: "none",
+            color: "black",
+            [theme.breakpoints.up("sm")]: {
+                display: "block",
+                fontWeight: "bold",
+                marginBottom: "4px",
+                fontSize: "18px",
+                marginTop: "4px"
+            }
+        },
+        addButton: {
+            color: "white !important",
+            backgroundColor: "#58A85D !important",
+            width: "100%",
+            padding: "10px !important",
+
+        },
+        btnname: {
+            fontWeight: "bold"
+        },
+        formargin: {
+            marginBottom: "40px"
+        },
+        outerdiv: {
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            padding: "50px",
+            margin: "auto",
             justifyContent: "center",
             alignItems: "center",
-            gap: "10px"
+            flexDirection: "column",
+            [theme.breakpoints.up("sm")]: {
+                padding: "100px 70px !important",
+                width: "830px",
+                height: "100%",
+                border: "1px green solid",
+                borderRadius: "10px",
+                backgroundColor: "white !important",
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                alignItems: "center",
+                marginBottom: "50px"
+            }
+
         },
-        btn:{
-            marginTop:"40px"
+        textboxes: {
+            width: "547px",
+            height: "52px",
+            backgroundColor: "white",
+            marginBottom: "20px!important",
+            [theme.breakpoints.down("md")]: {
+                width: "333px",
+                height: "40px",
+                padding: "0px!important"
+            }
+
+        },
+        addressDiv: {
+            width: "80%",
+            display: "flex",
+            marginBottom: "20px",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "20px",
+            [theme.breakpoints.down("md")]: {
+                display: "flex",
+                flexDirection: "row",
+                height: "40px",
+                justifyContent: "space-between",
+                gap: "14px",
+                marginBottom: "20px"
+            }
+        },
+        headingdiv: {
+            display: "flex",
+            justifyContent: "center",
+
+        },
+        heads: {
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: "24px",
+            [theme.breakpoints.down("md")]: {
+                fontSize: "16px"
+            }
+        },
+        textboxesbig: {
+            width: "547px",
+            height: "150px",
+            backgroundColor: "white",
+            border: "1px gray solid ",
+            borderRadius: "13px",
+            [theme.breakpoints.down("md")]: {
+                width: "333px",
+                height: "80px"
+            }
+        },
+        bigarea: {
+            width: "80%",
+            display: "flex",
+            flexDirection: "column",
+            height: "150px",
+            marginBottom: "10px",
+            [theme.breakpoints.down("md")]: {
+                width: "333px",
+                height: "80px"
+            }
+
+        },
+        textboxes1: {
+            width: "257.87px",
+            height: "52px",
+            [theme.breakpoints.down("md")]: {
+                width: "134px",
+                height: "40px"
+            }
+        },
+        btndiv: {
+            display: "flex",
+            marginTop: "20px",
+            gap: "25px",
+            [theme.breakpoints.down("md")]: {
+                display: "flex",
+                flexDirection: "column"
+            }
+
+        },
+        btnform: {
+            width: "343px",
+            height: "51px"
+        },
+        addButton1: {
+            color: "white !important",
+            backgroundColor: "#F15922 !important",
+            width: "100%",
+            padding: "10px !important",
+            [theme.breakpoints.down("md")]: {
+                width: "343px",
+                height: "51px"
+
+            },
+            textboxes2: {
+                width: "257.87px",
+                height: "52px",
+                [theme.breakpoints.down("md")]: {
+                    width: "184px",
+                    height: "40px",
+                    backgroundColor: "white"
+                }
+            },
+            headingParent: {
+                marginTop: "100px !important"
+            },
+            mainheading: {
+                marginTop: "100px"
+            }
+        },
+        uploadImage: {
+            backgroundColor: "#F15A22",
+            color: "white",
+            cursor: "pointer",
+            minWidth: "64px",
+            height: "30px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "24px",
+            fontWeight: "bold",
+            fontSize: "0.875rem"
+        },
+        textContainer: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+        },
+        image: {
+            width: "100%",
+            borderRadius: "24px"
+        },
+        imageSection: {
+            display: "grid",
+            gridTemplateColumns: "30% 70%"
         }
-        
-
-
     }));
 
     const classes = useStyles();
 
- 
-    const [firstname, setfirstname] = useState('');
-    const [postalcode, setpostalcode] = useState('');
-    const [Province, setProvince] = useState('');
-    const [password, setpassword] = useState('');
-    const [phonenumber, setphonenumber] = useState('');
-    const [confirmp, setconfirmp] = useState('');
-    const [buttonDisabled, setbuttonDisabled] = useState(false);
 
-    const addusers = async (e) => {
-        setbuttonDisabled(true);
-        const users = {
-            firstname,
-            postalcode,
-            Province,
-            password,
-            phonenumber,
-            confirmp
+    const [farmName, setFarmName] = useState('');
+    const [address, setAddress] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [province, setProvince] = useState("");
+    const [contact, setContact] = useState(0);
+    const [daysOfOperation, setDaysOfOperation] = useState([]);
+    const [hoursOfOperation, setHoursOfOperation] = useState("");
+    const [description, setDescription] = useState("");
+    const [message, setMessage] = useState("");
+    const [open, setOpen] = useState(false);
+    const [image, setImage] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [severity, setSeverity] = useState('success');
+    const navigate = useNavigate();
+    const farmData = JSON.parse(localStorage.getItem('farm-profile'));
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        setSeverity('success');
+        setOpen(true);
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/farm/${farmData.id}`);
+            setMessage(response.data.message);
+            setFarmName(response.data.data.farmName);
+            setProvince(response.data.data.province);
+            setZipCode(response.data.data.zipCode);
+            setContact(response.data.data.contact);
+            setHoursOfOperation(response.data.data.hoursOfOperation);
+            setDaysOfOperation(JSON.parse(response.data.data.daysOfOperation));
+            setImage(response.data.data.image);
+            setAddress(response.data.data.address);
+            setDescription(response.data.data.description);
+            setOpen(false);
+
+        } catch (error) {
+            setSeverity('error');
+            setMessage(error.response.data.message);
+            setOpen(false);
         }
     }
 
-  return (
-    <div className={classes.maindiv}>
-        <h1 className={classes.headingh1}>Profile Information</h1>
-        <h6 className={classes.headingh2}>Here you can edit your profile information</h6>
 
-        <form className={ classes.addform} >
-        
-        <div className={classes.outerdiv}>
-        
-        <div className={classes.newdiv}>
-        <div className={classes.imagediv}></div>
-            <div className={classes.content}>
-            <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="farmname">Farm Name</label>
-                    <TextField className={classes.textboxes} placeholder='AAA Farm' required value={firstname} type="text" onChange={(e) => setfirstname(e.target.value)} />
+    const onSelectFile = async (event) => {
+        const file = event.target.files[0];
+        const convertedFile = await convertToBase64(file);
+        setImage(convertedFile);
+    }
+    const convertToBase64 = (file) => {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                resolve(reader.result);
+            }
+        })
+    }
+
+    const handleAlertClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    const anchorOrigin = {
+        vertical: "bottom",
+        horizontal: "center"
+    }
+
+    const editFarmProfile = async (e) => {
+        e.preventDefault();
+        const farmProfile = {
+            farmName,
+            address,
+            zipCode,
+            province,
+            contact,
+            daysOfOperation: JSON.stringify(daysOfOperation),
+            hoursOfOperation,
+            email: user.email,
+            description
+        }
+        try {
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/farm/${farmData.id}`, farmProfile);
+            setMessage(response.data.message);
+            setOpen(true);
+            setSeverity('success');
+            setTimeout(() => {
+                navigate('../farmer/home');
+            }, 2000);
+        } catch (error) {
+            setSeverity('error');
+            setOpen(true);
+            setMessage(error.response.data.message);
+        }
+    }
+
+
+    return (
+
+        <form className={classes.addform} onSubmit={editFarmProfile} >
+            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
+                <Alert className={classes.snackbar} onClose={handleAlertClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
+            <Box marginTop="100px" >
+                <h1 className={classes.headingone}>Profile Information</h1>
+            </Box>
+            <div className={classes.headingdiv} >
+                <h2 className={classes.headingtwo}>
+                    Here you can edit your profile information.
+                </h2>
+            </div>
+            <div className={classes.outerdiv}>
+
+                <div className={classes.imageSection}>
+                    <div className={classes.imageContainer}>
+                        <img className={classes.image} src={image} alt="" />
+                        <label for="upload" className={classes.uploadImage}>Upload Image of the Product</label>
+                        <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />                    </div>
+                    <div className={classes.textContainer}>
+                        <div className={classes.formmove}>
+                            <label className={classes.labels} htmlFor="Farm">Farm Name</label>
+                            <TextField fullWidth className={classes.textboxes} placeholder='Name of the farm...' required value={farmName} type="text" onChange={(e) => setFarmName(e.target.value)} />
+                        </div>
+                        <div className={classes.formmove}>
+                            <label className={classes.labels} htmlFor="Address">Address</label>
+                            <TextField fullWidth className={classes.textboxes} placeholder='Street...' required value={address} type="text" onChange={(e) => setAddress(e.target.value)} />
+                        </div>
+
+                        <div className={classes.addressDiv}>
+
+                            <div className={classes.formmove}>
+                                <label className={classes.labels} htmlFor="Zip Code">Zip code</label>
+                                <TextField className={classes.textboxes1} placeholder='Ex.V3A 0K8' required value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                            </div>
+                            <div className={classes.formmove}>
+                                <label className={classes.labels} htmlFor="Province">Province</label>
+                                <Select
+                                    placeholder="Your Province"
+                                    value={province}
+                                    required
+                                    onChange={(e) => setProvince(e.target.value)}
+                                >
+                                    {
+                                        Province.map(({ name }, index) => {
+                                            return <MenuItem key={index} value={name}>{name}</MenuItem>
+                                        })
+                                    }
+                                </Select>
+                            </div>
+
+                        </div>
+
+
+                    </div>
                 </div>
                 <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="farmname">Address</label>
-                    <TextField className={classes.textboxes} placeholder='AAA Farm' required value={firstname} type="text" onChange={(e) => setfirstname(e.target.value)} />
+                    <label className={classes.labels} htmlFor="email">Contact info</label>
+                    <TextField fullWidth className={classes.textboxes} placeholder='phone' type="number" required value={contact} type="text" onChange={(e) => setContact(e.target.value)} />
                 </div>
-
-                <div className={classes.passdiv}>
-            
-            <div className={classes.formmove}>
-                        <label className={classes.labels} htmlFor="postalcode">Postal Code</label>
-                        <TextField className={classes.textboxes} placeholder='A0A 0A0' required value={postalcode} type="password" onChange={(e) => setpostalcode(e.target.value)} />
-            </div>
-            <div className={classes.formmove}>
-                        <label className={classes.labels} htmlFor="confirmp">Province</label>
-                        <TextField className={classes.textboxes} placeholder='BC' required value={Province} type="text" onChange={(e) => setconfirmp(e.target.value)} />
-            </div>
-                
-                </div>
-                </div>
-               
-
-            
-            </div>
-           
-        
-        
-            <div className={classes.newdiv2}>
-            <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="contact">Contact Information</label>
-                    <TextField className={classes.textboxes} placeholder='Phone number' required value={phonenumber} type="number" onChange={(e) => setphonenumber(e.target.value)} />
-                </div>
-
-                <div className={classes.passdiv}>
+                <div className={classes.heads}>Days of Operation</div>
                 <div className={classes.formmove}>
-                        <label className={classes.labels} htmlFor="confirmp">Days of operation</label>
-                        <TextField className={classes.textboxes} placeholder='Select one' required value={confirmp} type="password" onChange={(e) => setconfirmp(e.target.value)} />
-            </div>
-                
-            <div className={classes.formmove}>
-                        <label className={classes.labels} htmlFor="confirmp">Hours of operation</label>
-                        <TextField className={classes.textboxes} placeholder='Select the opening hours' required value={confirmp} type="password" onChange={(e) => setconfirmp(e.target.value)} />
-            </div>
-                
+                    <Select
+                        value={daysOfOperation}
+                        className={classes.textboxes}
+                        required
+                        fullWidth
+                        multiple
+                        onChange={(e) => setDaysOfOperation(e.target.value)}
+                    >
+                        {
+                            days.map((name, index) => {
+                                return <MenuItem key={index} value={name}>{name}</MenuItem>
+                            })
+                        }
+                    </Select>
                 </div>
+
+                <div className={classes.heads}>Hours of operation</div>
                 <div className={classes.formmove}>
-                        <label className={classes.labels} htmlFor="confirmp">Description</label>
-                        <TextField className={classes.textboxes1} placeholder='Description of your farm' required value={confirmp} type="password" onChange={(e) => setconfirmp(e.target.value)} />
-            </div>
-
-                    <div className={classes.btn}>
-
-        <div className={classes.buttonContainer}>
-            <Button disabled={buttonDisabled} className={classes.signupButton}  variant="contained" color="primary" >Save</Button>
-            <Link className={classes.alreadyAccount} to="#"></Link>
-        </div>
-
-        </div>
-
-
-                
+                    <TextField fullWidth className={classes.textboxes} placeholder='Set the opening hours' required value={hoursOfOperation} type="number" onChange={(e) => setHoursOfOperation(e.target.value)} />
                 </div>
-        </div>
-        
-    </form>
-    
-    </div>
-  )
-  }
+
+                <div className={classes.bigarea}>
+                    <TextField rows="4" multiline fullWidth className={classes.textboxesbig} placeholder='Farm description...' required value={description} type="number" onChange={(e) => setDescription(e.target.value)} />
+
+                </div>
+
+
+                <div className={classes.btndiv}>
+
+                    <div className={classes.btnform}>
+                        <label for="upload" className={classes.uploadImage}>Upload Image of the Product</label>
+                        <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
+                    </div>
+                    <div className={classes.btnform}>
+                        <Button type="submit" className={classes.addButton} variant="contained" ><span className={classes.btnname}> Save </span></Button>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+
+    )
+}
+

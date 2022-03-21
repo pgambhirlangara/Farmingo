@@ -232,18 +232,20 @@ export default function FarmProfile() {
     const [contact, setContact] = useState(0);
     const [daysOfOperation, setDaysOfOperation] = useState([]);
     const [hoursOfOperation, setHoursOfOperation] = useState("");
-    const [description, setDescription]  = useState("");
+    const [description, setDescription] = useState("");
     const [message, setMessage] = useState("");
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [severity, setSeverity] = useState('success');
+    const user = JSON.parse(localStorage.getItem('user'));
+
     const navigate = useNavigate();
 
 
     const createFarmProfile = async (e) => {
         e.preventDefault();
-        const farmProfile = {
+        let farmProfile = {
             farmName,
             address,
             zipCode,
@@ -251,12 +253,15 @@ export default function FarmProfile() {
             contact,
             daysOfOperation,
             hoursOfOperation,
-            email: "knowprabhjyot@gmail.com",
+            email: user.email,
             image,
             description
         }
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/farm/create`, farmProfile);
+            console.log(response);
+            farmProfile = {...farmProfile, id: response.data.data._id}
+            localStorage.setItem('farm-profile', JSON.stringify(farmProfile));
 
             setMessage(response.data.message);
             setOpen(true);
@@ -299,14 +304,14 @@ export default function FarmProfile() {
 
     const anchorOrigin = {
         vertical: "bottom",
-         horizontal: "center"
+        horizontal: "center"
     }
 
 
     return (
 
         <form className={classes.addform} onSubmit={createFarmProfile} >
-                        <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
+            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
                 <Alert className={classes.snackbar} onClose={handleAlertClose} severity={severity}>
                     {message}
                 </Alert>
@@ -334,46 +339,46 @@ export default function FarmProfile() {
 
                     <div className={classes.formmove}>
                         <label className={classes.labels} htmlFor="Zip Code">Zip code</label>
-                        <TextField className={classes.textboxes1} placeholder='Ex.V3A 0K8' required value={zipCode}  onChange={(e) => setZipCode(e.target.value)} />
+                        <TextField className={classes.textboxes1} placeholder='Ex.V3A 0K8' required value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                     </div>
                     <div className={classes.formmove}>
                         <label className={classes.labels} htmlFor="Province">Province</label>
                         <Select
-                                placeholder="Your Province"
-                                value={province}
-                                required
-                                onChange={(e) => setProvince(e.target.value)}
-                            >
-                                {
-                                    Province.map(({ name }, index) => {
-                                        return <MenuItem key={index} value={name}>{name}</MenuItem>
-                                    })
-                                }
-                            </Select>
+                            placeholder="Your Province"
+                            value={province}
+                            required
+                            onChange={(e) => setProvince(e.target.value)}
+                        >
+                            {
+                                Province.map(({ name }, index) => {
+                                    return <MenuItem key={index} value={name}>{name}</MenuItem>
+                                })
+                            }
+                        </Select>
                     </div>
 
                 </div>
 
                 <div className={classes.formmove}>
                     <label className={classes.labels} htmlFor="email">Contact info</label>
-                    <TextField  fullWidth className={classes.textboxes} placeholder='phone' type="number" required value={contact} type="text" onChange={(e) => setContact(e.target.value)} />
+                    <TextField fullWidth className={classes.textboxes} placeholder='phone' type="number" required value={contact} type="text" onChange={(e) => setContact(e.target.value)} />
                 </div>
                 <div className={classes.heads}>Days of Operation</div>
                 <div className={classes.formmove}>
-                <Select
-                                value={daysOfOperation}
-                                className={classes.textboxes}
-                                required
-                                fullWidth
-                                multiple
-                                onChange={(e) => setDaysOfOperation(e.target.value)}
-                            >
-                                {
-                                    days.map((name, index) => {
-                                        return <MenuItem key={index} value={name}>{name}</MenuItem>
-                                    })
-                                }
-                            </Select>
+                    <Select
+                        value={daysOfOperation}
+                        className={classes.textboxes}
+                        required
+                        fullWidth
+                        multiple
+                        onChange={(e) => setDaysOfOperation(e.target.value)}
+                    >
+                        {
+                            days.map((name, index) => {
+                                return <MenuItem key={index} value={name}>{name}</MenuItem>
+                            })
+                        }
+                    </Select>
                 </div>
 
                 <div className={classes.heads}>Hours of operation</div>
@@ -382,7 +387,7 @@ export default function FarmProfile() {
                 </div>
 
                 <div className={classes.bigarea}>
-                <TextField rows="4"  multiline fullWidth className={classes.textboxesbig} placeholder='Farm description...' required value={description} type="number" onChange={(e) => setDescription(e.target.value)} />
+                    <TextField rows="4" multiline fullWidth className={classes.textboxesbig} placeholder='Farm description...' required value={description} type="number" onChange={(e) => setDescription(e.target.value)} />
 
                 </div>
 
@@ -390,8 +395,8 @@ export default function FarmProfile() {
                 <div className={classes.btndiv}>
 
                     <div className={classes.btnform}>
-                    <label for="upload"  className={classes.uploadImage}>Upload Image of the Product</label>
-                                <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
+                        <label for="upload" className={classes.uploadImage}>Upload Image of the Product</label>
+                        <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
                     </div>
                     <div className={classes.btnform}>
                         <Button type="submit" className={classes.addButton} variant="contained" ><span className={classes.btnname}> Save </span></Button>

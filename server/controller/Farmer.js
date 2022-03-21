@@ -40,6 +40,9 @@ const loginFarmer = async (req, res) => {
             }, process.env.JWT_SECRET)
             return res.status(200).json({
                 token,
+                id: farmer._id,
+                name: farmer.name,
+                email: farmer.email,
                 message:"Succesfully Logged In"
             })
         } else {

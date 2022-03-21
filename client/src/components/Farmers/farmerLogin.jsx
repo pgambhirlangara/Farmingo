@@ -122,6 +122,15 @@ const FarmerLogin = () => {
             setMessage(response.data.message);
             setOpen(true);
             setButtonDisabled(false);
+
+            const user = {
+                id: response.data.id,
+                email: response.data.email,
+                name: response.data.name
+            }
+
+            localStorage.setItem('user', JSON.stringify(user));
+
             setTimeout(() => {
                 navigate('../farmer/home');
             }, 2000);
