@@ -63,6 +63,15 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: "1px solid #cdcdcd",
     },
   },
+  lastMenuItem: {
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      alignItems: "center",
+      borderBottom: "1px solid #cdcdcd",
+      backgroundColor: `${theme.palette.secondary.main} !important`,
+      color: "white !important"
+    },
+  },
   lastMenu: {
     fontWeight: 700,
     size: "18px",
@@ -82,7 +91,8 @@ export default function Header() {
     headerMenuIcon,
     menuList,
     lastMenu,
-    lastMenuIcon
+    lastMenuIcon,
+    lastMenuItem
   } = useStyles();
 
   const [state, setState] = useState({
@@ -157,10 +167,10 @@ export default function Header() {
   };
 
   const getDrawerChoices = () => {
-    return headersData.map(({ label, href, icon }) => {
+    return headersData.map(({ label, href, icon }, index) => {
       return (
         <Link
-          className={menuList}
+          className={index == 4 ? lastMenuItem : menuList}
           {...{
             component: RouterLink,
             to: href,

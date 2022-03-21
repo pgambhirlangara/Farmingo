@@ -3,7 +3,7 @@ import { Button, Divider, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import { border, borderRadius, display, fontSize, fontWeight, letterSpacing, padding, textAlign, width } from '@mui/system';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 export default function Settings() {
 
@@ -128,15 +128,14 @@ export default function Settings() {
 
 
     const classes = useStyles();
-    const addusers = async (e) => {
-
-        const users = {
-
-        }
-    }
+    const navigate = useNavigate();
 
     const logout = () => {
-        alert("Logged out");
+       localStorage.removeItem('token');
+       localStorage.removeItem('user');
+       setTimeout(() => {
+        navigate('../farmer/login');
+       })
     }
 
     return (

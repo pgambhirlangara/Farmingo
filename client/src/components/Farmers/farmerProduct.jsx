@@ -1,4 +1,4 @@
-import { Alert, Button, Snackbar } from "@mui/material";
+import { Alert, Button, Skeleton, Snackbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import FarmerProductItem from "./farmerProductItem";
 import AddIcon from '@mui/icons-material/Add';
@@ -6,6 +6,7 @@ import { farmProducts } from "../../constants/constant";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Box } from "@mui/system";
 
 const FarmerProductPage = () => {
 
@@ -90,6 +91,8 @@ const FarmerProductPage = () => {
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [severity, setSeverity] = useState('success');
+    const [showData, setShowData] = useState(false);
+    const farmData = JSON.parse(localStorage.getItem('farm-profile'));
 
     useEffect(() => {
         fetchData();
@@ -98,12 +101,14 @@ const FarmerProductPage = () => {
     const fetchData = async () => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts`);
-            console.log(response.data.data, "Response");
             setMessage(response.data.message);
             setFarmProducts(response.data.data);
-            setOpen(true);
-            setSeverity('success');
-
+         
+            setTimeout(() => {
+                setShowData(true);
+                setOpen(true);
+                setSeverity('success');
+            }, 2000);
         } catch (error) {
             setSeverity('error');
             setOpen(true);
@@ -134,8 +139,8 @@ const FarmerProductPage = () => {
             <img className={classes.banner} src="../../../assets/farmer_home_banner.jpg" alt="Home" />
             <div className={classes.farmProductContainer}>
                 <section className={classes.farmNameSection}>
-                    <h1 className={classes.farmName}>Hi! Cloverdale Market Farm</h1>
-                    <p className={classes.farmAddress}>5688 168 St, Surrey, BC V3W 4C8</p>
+                    <h1 className={classes.farmName}>Hi! {farmData.farmName}</h1>
+                    <p className={classes.farmAddress}>{farmData.address}, {farmData.province}, {farmData.zipCode}</p>
                 </section>
                 <div className={classes.farmProductSubContainer}>
                     <section className={classes.farmPostSection}>
@@ -148,7 +153,19 @@ const FarmerProductPage = () => {
                     <section className={classes.farmProducts}>
                         {
                             farmProducts.map((item) => {
-                                return <FarmerProductItem name={item.title} price={item.price} id={item._id} image={item.image} />
+                                return (
+                                    <>
+                                        {
+                                            !showData ? <Box sx={{ pt: 0.5 }} padding="30px">
+                                                <Skeleton variant="rectangular" width={210} height={118} />
+                                                <Skeleton />
+                                                <Skeleton width="60%" />
+                                            </Box> : <FarmerProductItem name={item.title} price={item.price} id={item._id} image={item.image} />
+                                        }
+
+
+                                    </>
+                                )
                             })
                         }
                     </section>
