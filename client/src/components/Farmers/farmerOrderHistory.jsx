@@ -217,12 +217,15 @@ const FarmerOrderHistory = (props) => {
               <Tab>Problems</Tab>
             </TabsList>
             <TabPanel value={0}>
+            {" "}
               <div className={classes.panelContainer}>
+                <div className={classes.panelContainer}>
                 {
                   orderHistory.map((data) => {
                     return <FarmerOrderItem data={data} />
                   })
                 }
+                </div>
               </div>
             </TabPanel>
             <TabPanel value={1}>
