@@ -2,8 +2,6 @@ import React from 'react'
 import { Alert, Box, Button, CircularProgress, MenuItem, Select, Snackbar, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
-
-import { border, color, display, fontWeight, height, padding } from '@mui/system';
 import { days, Province } from '../../constants/constant';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -59,7 +57,6 @@ export default function FarmProfile() {
         },
         addButton: {
             color: "white !important",
-            backgroundColor: "#58A85D !important",
             width: "100%",
             padding: "10px !important",
 
@@ -92,7 +89,7 @@ export default function FarmProfile() {
                 flexDirection: "column",
                 alignItems: "center",
                 marginBottom: "50px",
-                padding: "250px"
+                padding: "200px"
             }
 
         },
@@ -180,7 +177,10 @@ export default function FarmProfile() {
         },
         btnform: {
             width: "343px",
-            height: "51px"
+            height: "51px",
+            display:"flex",
+            justifyContent: "center",
+            alignItems: "center"
         },
         addButton1: {
             color: "white !important",
@@ -213,6 +213,7 @@ export default function FarmProfile() {
             backgroundColor: "#F15A22",
             color: "white",
             cursor: "pointer",
+            width: "100%",
             minWidth: "64px",
             height: "51px",
             display: "flex",
@@ -247,6 +248,7 @@ export default function FarmProfile() {
 
 
     const createFarmProfile = async (e) => {
+        setButtonDisabled(true);
         e.preventDefault();
         let farmProfile = {
             farmName,
@@ -262,16 +264,15 @@ export default function FarmProfile() {
         }
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/farm/create`, farmProfile);
-            console.log(response);
             farmProfile = { ...farmProfile, id: response.data.data._id }
             localStorage.setItem('farm-profile', JSON.stringify(farmProfile));
 
             setMessage(response.data.message);
             setOpen(true);
-            setButtonDisabled(false);
             setSeverity('success');
             setTimeout(() => {
                 navigate('../farmer/home');
+                setButtonDisabled(false);
             }, 2000);
         } catch (error) {
             setSeverity('error');
@@ -403,7 +404,7 @@ export default function FarmProfile() {
                         <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
                     </div>
                     <div className={classes.btnform}>
-                        <Button disabled={buttonDisabled} type="submit" className={classes.addButton} variant="contained" ><span className={classes.btnname}>
+                        <Button color='primary' disabled={buttonDisabled} type="submit" className={classes.addButton} variant="contained" ><span className={classes.btnname}>
 
                             {buttonDisabled ? <CircularProgress size="1.5rem" style={{ marginRight: "8px" }} color="secondary" /> : null}
                             Save </span></Button>
