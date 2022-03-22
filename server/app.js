@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 4000;
-const customerRoutes = require('./routes/Customer');
 const farmerRoutes = require('./routes/Farmer');
 const postRoutes = require('./routes/Post');
 const farmRoutes = require('./routes/FarmProfile');
@@ -32,7 +31,6 @@ app.get('/', (request, response) => {
 })
 
 // middleware
-app.use('/customer', customerRoutes);
 app.use('/farmer', farmerRoutes);
 app.use('/posts', postRoutes);
 app.use('/farm', farmRoutes);
