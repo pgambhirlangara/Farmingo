@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Box, Button, MenuItem, Select, Snackbar, TextField } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, MenuItem, Select, Snackbar, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 
@@ -263,7 +263,7 @@ export default function FarmProfile() {
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/farm/create`, farmProfile);
             console.log(response);
-            farmProfile = {...farmProfile, id: response.data.data._id}
+            farmProfile = { ...farmProfile, id: response.data.data._id }
             localStorage.setItem('farm-profile', JSON.stringify(farmProfile));
 
             setMessage(response.data.message);
@@ -403,7 +403,10 @@ export default function FarmProfile() {
                         <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
                     </div>
                     <div className={classes.btnform}>
-                        <Button type="submit" className={classes.addButton} variant="contained" ><span className={classes.btnname}> Save </span></Button>
+                        <Button disabled={buttonDisabled} type="submit" className={classes.addButton} variant="contained" ><span className={classes.btnname}>
+
+                            {buttonDisabled ? <CircularProgress size="1.5rem" style={{ marginRight: "8px" }} color="secondary" /> : null}
+                            Save </span></Button>
                     </div>
 
                 </div>

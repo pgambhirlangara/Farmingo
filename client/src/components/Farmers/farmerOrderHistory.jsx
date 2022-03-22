@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import FarmerOrderItem from "./farmerOrderItem";
 import {
@@ -11,6 +11,8 @@ import {
 
 import { styled, Box } from "@mui/system";
 import { orderHistory } from "../../constants/constant";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Tab = styled(TabUnstyled)`
   color: white;
@@ -147,6 +149,21 @@ const FarmerOrderHistory = (props) => {
   }));
 
   const classes = useStyles();
+  const [showData, setShowData] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(orderHistory);
+    changeTab();
+  }, [])
+
+  const changeTab  = () =>{
+    setShowData(false);
+    setTimeout(() => {
+      setShowData(true);
+    }, 2000);
+  }
+
 
   return (
     <Box>
@@ -209,7 +226,7 @@ const FarmerOrderHistory = (props) => {
           <h1>Order History</h1>
         </Box>
         <Box className={classes.desktopContainer}>
-          <TabsUnstyled defaultValue={0}>
+          <TabsUnstyled defaultValue={0} onChange={changeTab}>
             <TabsList>
               <Tab>New Orders</Tab>
               <Tab>In Progress </Tab>
@@ -221,8 +238,20 @@ const FarmerOrderHistory = (props) => {
               <div className={classes.panelContainer}>
                 <div className={classes.panelContainer}>
                 {
-                  orderHistory.map((data) => {
-                    return <FarmerOrderItem data={data} />
+                  
+                  data.map((item) => {
+                   if (item.new) {
+                     if (!showData) {
+                       console.log("hello");
+                       return <Box sx={{ pt: 0.5 }} padding="30px">
+                       <Skeleton variant="rectangular" width={140} height={118} />
+                       <Skeleton width={140} />
+                       <Skeleton width="40%" />
+                     </Box>
+                     } else {
+                      return <FarmerOrderItem data={item} />
+                     }
+                   }
                   })
                 }
                 </div>
@@ -233,8 +262,18 @@ const FarmerOrderHistory = (props) => {
               <div className={classes.panelContainer}>
                 <div className={classes.panelContainer}>
                 {
-                  orderHistory.map((data) => {
-                    return <FarmerOrderItem data={data} />
+                  data.map((item) => {
+                    if (!item.complete) {
+                      if (!showData) {
+                        return <Box sx={{ pt: 0.5 }} padding="30px">
+                        <Skeleton variant="rectangular" width={140} height={118} />
+                        <Skeleton width={140} />
+                        <Skeleton width="40%" />
+                      </Box>
+                      } else {
+                       return <FarmerOrderItem data={item} />
+                      }
+                    }
                   })
                 }
               </div>
@@ -246,7 +285,9 @@ const FarmerOrderHistory = (props) => {
               <div className={classes.panelContainer}>
                 {
                   orderHistory.map((data) => {
+                   if (data.complete) {
                     return <FarmerOrderItem data={data} />
+                   }
                   })
                 }
                 </div>
@@ -258,7 +299,9 @@ const FarmerOrderHistory = (props) => {
               <div className={classes.panelContainer}>
                 {
                   orderHistory.map((data) => {
-                    return <FarmerOrderItem data={data} />
+                    if (data.issue) {
+                      return <FarmerOrderItem data={data} />
+                    }
                   })
                 }
                 </div>
