@@ -22,7 +22,7 @@ export default function FarmProfile() {
         },
         headingtwo: {
             textAlign: "center",
-            width: "53%",
+            width: "80%", // 53% previous
             [theme.breakpoints.up("sm")]: {
                 marginTop: "-15px",
                 color: "gray"
@@ -74,7 +74,8 @@ export default function FarmProfile() {
             width: "100%",
             height: "100%",
             display: "flex",
-            padding: "50px",
+            gap: "20px",
+            // padding: "50px",
             margin: "auto",
             justifyContent: "center",
             alignItems: "center",
@@ -90,7 +91,8 @@ export default function FarmProfile() {
                 justifyContent: "center",
                 flexDirection: "column",
                 alignItems: "center",
-                marginBottom: "50px"
+                marginBottom: "50px",
+                padding: "190px"
             }
 
         },
@@ -229,7 +231,8 @@ export default function FarmProfile() {
     const [address, setAddress] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [province, setProvince] = useState("");
-    const [contact, setContact] = useState(0);
+    // const [contact, setContact] = useState(0);
+    const [contact, setContact] = useState("");
     const [daysOfOperation, setDaysOfOperation] = useState([]);
     const [hoursOfOperation, setHoursOfOperation] = useState("");
     const [description, setDescription] = useState("");
@@ -361,7 +364,7 @@ export default function FarmProfile() {
 
                 <div className={classes.formmove}>
                     <label className={classes.labels} htmlFor="email">Contact info</label>
-                    <TextField fullWidth className={classes.textboxes} placeholder='phone' type="number" required value={contact} type="text" onChange={(e) => setContact(e.target.value)} />
+                    <TextField fullWidth className={classes.textboxes} placeholder='phone' type="number" required value={contact} onChange={(e) => setContact(e.target.value)} />
                 </div>
                 <div className={classes.heads}>Days of Operation</div>
                 <div className={classes.formmove}>
@@ -371,6 +374,7 @@ export default function FarmProfile() {
                         required
                         fullWidth
                         multiple
+                        label="Days"
                         onChange={(e) => setDaysOfOperation(e.target.value)}
                     >
                         {
