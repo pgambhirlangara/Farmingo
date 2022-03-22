@@ -1,17 +1,17 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const Farmer = new mongoose.Schema(
-	{
-		name: { type: String, required: true },
-		email: { type: String, required: true, unique: true },
-		contact: { type : Number, required: true },
-		address: { type: String },
-		password: { type: String, required: true },
-        verified: { type: Boolean, required: true, default: false }, 
-	},
-	{ collection: 'farmer-data' }
-)
+const FarmerSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    contact: { type: Number, required: true },
+    city: { type: String },
+    zipCode: { type: String },
+    province: { type: String },
+    password: { type: String, required: true },
+    verified: { type: Boolean, required: true, default: false },
+  },
+  { timestamps: true }
+);
 
-const model = mongoose.model('farmerData', Farmer);
-
-module.exports = model;
+module.exports = mongoose.models.Farmer || mongoose.model("Farmer", FarmerSchema);

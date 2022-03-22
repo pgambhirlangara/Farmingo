@@ -1,8 +1,9 @@
-import { Alert, Button, Snackbar, TextField } from "@mui/material";
+import { Alert, Button, Checkbox, FormControlLabel, Snackbar, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import FormGroup from '@mui/material/FormGroup';
 
 function CustomerLogin() {
     const useStyles = makeStyles((theme) => ({
@@ -18,6 +19,10 @@ function CustomerLogin() {
         customerLoginHeading: {
             color: "#182918",
             margin: 0,
+            [theme.breakpoints.down("md")]:
+            {
+                display:"none!important"
+            }
         },
         customerLoginContent: {
             backgroundColor: "white",
@@ -27,7 +32,13 @@ function CustomerLogin() {
             display: "flex",
             flexDirection: "column",
             gap: "20px",
-            border: `1px solid ${theme.palette.primary.main}`
+            border: `1px solid ${theme.palette.primary.main}`,
+            marginBottom:"50px",
+            [theme.breakpoints.down("md")]:
+            {
+                border:"none!important",
+                backgroundColor:"#ECF4EC"
+            }
         },
         formControl: {
             display: "flex",
@@ -43,11 +54,29 @@ function CustomerLogin() {
         },
         loginButton: {
             color: "white !important",
-            width: "50%"
+            width: "50%",
+            backgroundColor:"#F15922!important"
         },
         noAccount: {
             color: theme.palette.secondary.main
-        }
+        },
+        textboxes:{
+            [theme.breakpoints.down("md")]:
+            {
+                
+                backgroundColor:"white"
+            }
+
+        },
+        logoimg:{
+            width:"50%",
+            height:"150px",
+            [theme.breakpoints.up("md")]:{
+                    display:"none"
+
+            }
+            
+        },
     }));
 
     const [email, setEmail] = useState('');
@@ -103,17 +132,22 @@ function CustomerLogin() {
                     {message}
                 </Alert>
             </Snackbar>
-
+            <div className={classes.logoimg}>LOGO</div>
             <h2 className={classes.customerLoginHeading}>Welcome</h2>
             <div className={classes.customerLoginContent}>
                 <div className={classes.formControl}>
                     <label htmlFor="email">Email</label>
-                    <TextField required value={email} type="email" onChange={(e) => setEmail(e.target.value)} />
+                    <TextField className={classes.textboxes} required value={email} type="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={classes.formControl}>
                     <label htmlFor="password">Password</label>
-                    <TextField required value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <TextField className={classes.textboxes} required value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
+                <div className={classes.check}>
+                    <FormGroup>
+                        <FormControlLabel control={<Checkbox/>} label = "Remember me "/>
+                    </FormGroup>
+                    </div>
                 <div>
                     <div className={classes.buttonContainer}>
                         <Button disabled={buttonDisabled} className={classes.loginButton} onClick={customerLogin} variant="contained" color="primary">Login</Button>
