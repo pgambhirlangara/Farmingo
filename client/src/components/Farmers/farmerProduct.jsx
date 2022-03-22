@@ -159,9 +159,12 @@ const FarmerProductPage = () => {
                         <h3>View and Edit your products</h3>
                         <h4 className={classes.productDescription}>Here is the list of your products on sale, click in to the product to manage the list and update it.</h4>
                     </section>
+                    <section>
+                        {farmProducts.length === 0 ? <div style={{display: "flex", justifyContent: "center", alignItems: "center", padding: "100px"}} >You need to add products to view them</div> : null}
+                    </section>
                     <section className={classes.farmProducts}>
                         {
-                            farmProducts.length === 0 ? <div >You need to add products to view them</div> : 
+                            farmProducts.length !== 0  ?
                             farmProducts.map((item) => {
                                 return (
                                     <>
@@ -176,7 +179,7 @@ const FarmerProductPage = () => {
 
                                     </>
                                 )
-                            })
+                            }) : null
                         }
                     </section>
                 </div>
