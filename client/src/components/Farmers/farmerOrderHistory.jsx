@@ -234,7 +234,9 @@ const FarmerOrderHistory = (props) => {
               <Tab>Problems</Tab>
             </TabsList>
             <TabPanel value={0}>
+            {" "}
               <div className={classes.panelContainer}>
+                <div className={classes.panelContainer}>
                 {
                   
                   data.map((item) => {
@@ -252,6 +254,7 @@ const FarmerOrderHistory = (props) => {
                    }
                   })
                 }
+                </div>
               </div>
             </TabPanel>
             <TabPanel value={1}>
