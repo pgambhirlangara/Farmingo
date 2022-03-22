@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
-import { Alert, Button, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Snackbar, TextField } from "@mui/material";
+import { Alert, Button, CircularProgress, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Snackbar, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { Province as provinceList } from "../../constants/constant";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -129,8 +129,8 @@ const FarmerSignup = () => {
                 console.log(response);
                 setMessage(response.data.message);
                 setOpen(true);
-                setButtonDisabled(false);
                 setTimeout(() => {
+                    setButtonDisabled(false);
                     navigate('../farmer/login');
                 }, 1000);
             }
@@ -296,8 +296,8 @@ const FarmerSignup = () => {
                 <div>
 
                     <div className={classes.buttonContainer}>
+                    {buttonDisabled ? <CircularProgress size="1.5rem" style={{marginRight: "8px"}} color="primary"/> : null}
                         <Button disabled={buttonDisabled} className={classes.signupButton} onClick={signup} variant="contained" color="primary" >Add User</Button>
-                        <Link className={classes.alreadyAccount} to="../farmer/login">Already have an account ?</Link>
                     </div>
 
                 </div>

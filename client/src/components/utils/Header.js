@@ -91,7 +91,6 @@ export default function Header() {
     headerMenuIcon,
     menuList,
     lastMenu,
-    lastMenuIcon,
     lastMenuItem
   } = useStyles();
 
@@ -180,7 +179,7 @@ export default function Header() {
           }}
         >
           {/* <Box display="flex" gap="5px" alignItems="center"> */}
-          <img className={headerMenuIcon} src={icon} alt="image" />
+          { icon ? <img className={headerMenuIcon} src={icon} alt="image" /> : null}
           <MenuItem>{label}</MenuItem>
 
           <Divider />
@@ -212,7 +211,7 @@ export default function Header() {
               className: index == 4 ? lastMenu : menuButton,
             }}
           >
-            <img className={headerMenuIcon} src={icon} alt="image" />
+            { icon ? <img className={headerMenuIcon} src={icon} alt="image" /> : null}
             {label}
           </Button>
         </>

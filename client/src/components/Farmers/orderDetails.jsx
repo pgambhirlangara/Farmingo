@@ -3,7 +3,7 @@ import { Button, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import { border, borderRadius, display, fontWeight, textAlign, width } from '@mui/system';
-import { orderDetails } from '../../constants/constant';
+import { orderDetails, orderHistory } from '../../constants/constant';
 export default function OrderDetails() {
 
     const useStyles = makeStyles((theme) => ({
@@ -152,6 +152,7 @@ export default function OrderDetails() {
 
 
     const classes = useStyles();
+    const [orderDetail, setOrderDetail] = useState([]);
     const addusers = async (e) => {
 
     }
@@ -159,7 +160,7 @@ export default function OrderDetails() {
     return (
         <>
             <div className={classes.totalSection}>
-                <span className={classes.totalSectionTitle}>Wallmart: </span> <span>Total $1200.85</span>
+                <span className={classes.totalSectionTitle}>Wallmart: </span> <span>Total {orderHistory[0].total}</span>
             </div>
             <div className={classes.maindiv}>
                 <div className={classes.divone}>
@@ -169,17 +170,21 @@ export default function OrderDetails() {
                         <h1 className={classes.head}>Order Details</h1>
                     </div>
                     {
-                        orderDetails.map((data) => {
+                        orderHistory.map(({items}) => {
+                           return items.map((item) => {
+                            console.log(item);
                             return (
                                 <div className={classes.orderDetailContainer}>
-                                    <img className={classes.orderDetailImage} src={data.image} alt="" />
+                                    <img className={classes.orderDetailImage} src={item.image} alt="" />
                                     <div className={classes.orderDetailDescription}>
-                                        <h3 className={classes.orderp}>{data.title}</h3>
-                                        <p className={classes.orderp}><span className={classes.orderDescTitle}>Total Amount:</span> {data.amount}</p>
-                                        <p className={classes.orderp}><span className={classes.orderDescTitle}>Total Price:</span> {data.price}</p>
+                                        <h3 className={classes.orderp}>{item.title}</h3>
+                                        <p className={classes.orderp}><span className={classes.orderDescTitle}>Total Amount:</span> {item.amount}</p>
+                                        <p className={classes.orderp}><span className={classes.orderDescTitle}>Total Price:</span> {item.price}</p>
                                     </div>
                                 </div>
                             )
+                           })
+                           
                         })
                     }
 

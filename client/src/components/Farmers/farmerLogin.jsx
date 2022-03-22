@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import { Alert, Button, FormControl, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, Snackbar, TextField } from "@mui/material";
+import { Alert, Button, CircularProgress, FormControl, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, Snackbar, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { login } from "../../auth";
 
 
 const FarmerLogin = () => {
@@ -121,7 +122,6 @@ const FarmerLogin = () => {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/login`, loginData);
             setMessage(response.data.message);
             setOpen(true);
-            setButtonDisabled(false);
 
             const user = {
                 id: response.data.id,
@@ -129,10 +129,11 @@ const FarmerLogin = () => {
                 name: response.data.name
             }
 
-            localStorage.setItem('user', JSON.stringify(user));
+            login(user);
 
             setTimeout(() => {
                 navigate('../farmer/home');
+                setButtonDisabled(false);
             }, 2000);
         } catch (error) {
             setSeverity('error');
@@ -217,7 +218,9 @@ const FarmerLogin = () => {
                 </div>
                 <div>
                     <div className={classes.buttonContainer}>
-                        <Button disabled={buttonDisabled} className={classes.loginButton} onClick={farmerLogin} variant="contained" color="secondary">Login</Button>
+                        <Button disabled={buttonDisabled} className={classes.loginButton} onClick={farmerLogin} variant="contained" color="secondary">
+                            
+                        {buttonDisabled ? <CircularProgress size="1.5rem" style={{marginRight: "8px"}} color="primary"/> : null} Login</Button>
                         <Link className={classes.noAccount} to="../farmer/signup">Don't have an account ?</Link>
                         <Link className={classes.noAccount} to="../forgotpassword">Forgot Password ?</Link>
 

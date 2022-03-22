@@ -162,7 +162,7 @@ export default function Settings() {
                 <div className={classes.box}>
                     <div className={classes.settingAction}><div className={classes.detailContainer}>
                         <EmailIcon />Email</div>
-                        <span className={classes.metaInfo}>customerservice@farmingo.ca</span>
+                        <span className={classes.metaInfo}><a style={{ textDecoration: "none"}} href="mailto:info@farmingo.com" type="email">customerservice@farmingo.ca</a></span>
                     </div>
                     <Divider />
                     <div className={classes.settingAction}><div className={classes.detailContainer}>
