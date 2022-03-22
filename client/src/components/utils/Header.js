@@ -13,6 +13,7 @@ import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import { headersData } from "../../constants/constant";
+import { isLogin } from "../../auth";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -122,7 +123,7 @@ export default function Header() {
       <Toolbar className={toolbar}>
         {farmingoLogo}
         <div>
-          {getMenuButtons()}
+          {isLogin() ?  getMenuButtons() : null}
         </div>
       </Toolbar>
     );
@@ -136,7 +137,7 @@ export default function Header() {
 
     return (
       <Toolbar>
-        <IconButton
+        { isLogin() ? <>      <IconButton
           {...{
             edge: "start",
             color: "inherit",
@@ -158,8 +159,7 @@ export default function Header() {
           <div className={drawerContainer}>
             {getDrawerChoices()}
           </div>
-        </Drawer>
-
+        </Drawer></> : null}
         <div>{farmingoLogo}</div>
       </Toolbar>
     );

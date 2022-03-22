@@ -436,10 +436,7 @@ export default function EditFarmProfile() {
 
                 <div className={classes.btndiv}>
 
-                    <div className={classes.btnform}>
-                        <label for="upload" className={classes.uploadImage}>Upload Image of the Product</label>
-                        <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
-                    </div>
+                   
                     <div className={classes.btnform}>
                         <Button type="submit" className={classes.addButton} variant="contained" ><span className={classes.btnname}> Save </span></Button>
                     </div>

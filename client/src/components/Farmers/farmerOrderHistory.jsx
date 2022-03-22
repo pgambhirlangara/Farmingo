@@ -42,7 +42,7 @@ const Tab = styled(TabUnstyled)`
 const TabPanel = styled(TabPanelUnstyled)`
   width: 100%;
   height: 450px;
-  top: 230px;
+  top: 310px;
   background-color: white;
   z-index: 100;
   position: absolute;
@@ -51,13 +51,13 @@ const TabPanel = styled(TabPanelUnstyled)`
   border: 1px solid #74c26c;
   border-radius: 0 24px 24px 24px;
   @media (min-width: 1900px) {
-    top: 280px;
+    top: 310px;
   }
   @media (min-width: 1700px) and (max-width: 1900px) {
-    top: 270px;
+    top: 320px;
   }
   @media (min-width: 1300px) and (max-width: 1700px) {
-    top: 250px;
+    top: 280px;
   }
   @media (min-width: 1000px) and (max-width: 1300px) {
     top: 240px;
@@ -108,6 +108,7 @@ const FarmerOrderHistory = (props) => {
     },
     totalDesktopHeader: {
       margin: "25px",
+      marginTop: "70px"
     },
     orderDesktop: {
       marginTop: "40px",
@@ -150,6 +151,7 @@ const FarmerOrderHistory = (props) => {
 
   const classes = useStyles();
   const [showData, setShowData] = useState(false);
+  const [total, setTotal] = useState(623);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -220,7 +222,7 @@ const FarmerOrderHistory = (props) => {
       </Box>
       <Box className={classes.desktopView}>
         <Box className={classes.totalDesktop}>
-          <h2 className={classes.totalDesktopHeader}>Total: $1200.85</h2>
+          <h2 className={classes.totalDesktopHeader}>Total: ${total}</h2>
         </Box>
         <Box className={classes.orderDesktop}>
           <h1>Order History</h1>

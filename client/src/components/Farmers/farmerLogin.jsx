@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { makeStyles } from "@mui/styles";
-import { Alert, Button, CircularProgress, FormControl, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, Snackbar, TextField } from "@mui/material";
+import { Alert, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, Slide, Snackbar, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -104,6 +104,20 @@ const FarmerLogin = () => {
     const navigate = useNavigate();
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
+    const Transition = forwardRef(function Transition(props, ref) {
+        return <Slide direction="up" ref={ref} {...props} />;
+      });
+
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpenDialog(true);
+    };
+
+    const handleClose = () => {
+        setOpenDialog(false);
+    };
+      
     const anchorOrigin = {
         vertical: "bottom",
          horizontal: "center"
@@ -222,8 +236,25 @@ const FarmerLogin = () => {
                             
                         {buttonDisabled ? <CircularProgress size="1.5rem" style={{marginRight: "8px"}} color="primary"/> : null} Login</Button>
                         <Link className={classes.noAccount} to="../farmer/signup">Don't have an account ?</Link>
-                        <Link className={classes.noAccount} to="../forgotpassword">Forgot Password ?</Link>
-
+                        <a href="#" onClick={handleClickOpen} style={{ color: "black"}}>Forgot Password ?</a>
+                        <Dialog
+                            open={openDialog}
+                            TransitionComponent={Transition}
+                            keepMounted
+                            onClose={handleClose}
+                            aria-describedby="alert-dialog-slide-description"
+                        >
+                            <DialogTitle>{"Reset Password!"}</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-slide-description">
+                                   Contact Farmingo Customer Care to Reset your Password
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Thanks!</Button>
+                                <Button color="secondary"><a href="mailto:info@farmingo.com" style={{ textDecoration: "none"}} type="email">Confused ?</a></Button>
+                            </DialogActions>
+                        </Dialog>
                     </div>
                 </div>
             </div>
