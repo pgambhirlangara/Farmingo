@@ -92,7 +92,7 @@ export default function FarmProfile() {
                 flexDirection: "column",
                 alignItems: "center",
                 marginBottom: "50px",
-                padding: "190px"
+                padding: "250px"
             }
 
         },
