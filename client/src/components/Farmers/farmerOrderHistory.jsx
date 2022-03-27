@@ -148,6 +148,9 @@ const FarmerOrderHistory = (props) => {
     farmButton: {
       height: "50px",
     },
+    tabSpan: {
+      marginTop: "10px",
+    },
   }));
 
   const classes = useStyles();
@@ -230,10 +233,18 @@ const FarmerOrderHistory = (props) => {
         <Box className={classes.desktopContainer}>
           <TabsUnstyled defaultValue={0} onChange={changeTab}>
             <TabsList>
-              <Tab>New Orders</Tab>
-              <Tab>In Progress </Tab>
-              <Tab>Completed</Tab>
-              <Tab>Problems</Tab>
+              <Tab>
+                <span className={classes.tabSpan}>New Orders</span>
+              </Tab>
+              <Tab>
+                <span className={classes.tabSpan}>In Progress</span>
+              </Tab>
+              <Tab>
+                <span className={classes.tabSpan}>Completed</span>
+              </Tab>
+              <Tab>
+                <span className={classes.tabSpan}>Problems</span>
+              </Tab>
             </TabsList>
             <TabPanel value={0}>
               <div className={classes.panelContainer}>
