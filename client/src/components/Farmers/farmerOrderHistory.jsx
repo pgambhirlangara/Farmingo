@@ -28,7 +28,7 @@ const Tab = styled(TabUnstyled)`
   border-radius: 24px;
   display: flex;
   justify-content: center;
-  font-size: 1.3vw;
+  font-size: 1.4vw;
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
