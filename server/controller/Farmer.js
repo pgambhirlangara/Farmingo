@@ -1,4 +1,4 @@
-const Farmer = require('../models/farmer');
+const Farmer = require('../models/Farmer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 

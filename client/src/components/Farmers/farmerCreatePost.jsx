@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Alert, Button, InputLabel, MenuItem, Select, Snackbar, Stack, TextField } from "@mui/material";
+import { Alert, Button, CircularProgress, InputLabel, MenuItem, Select, Snackbar, Stack, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import { categoryList } from '../../constants/constant';
@@ -244,13 +244,14 @@ export default function FarmerCreatePost() {
             description
         }
         try {
+            setButtonDisabled(true);
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/posts/create`, post);
 
             setMessage(response.data.message);
             setOpen(true);
-            setButtonDisabled(false);
             setSeverity('success');
             setTimeout(() => {
+                setButtonDisabled(false);
                 navigate('../farmer/home');
             }, 2000);
         } catch (error) {
@@ -340,7 +341,10 @@ export default function FarmerCreatePost() {
                         <div className={classes.actionButtonContainer}>
                                 <label for="upload"  className={classes.uploadImage}>Upload Image of the Product</label>
                                 <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
-                            <Button type="submit" variant='contained' className={classes.actionButton}>Create a post </Button>
+                            <Button disabled={buttonDisabled} type="submit" variant='contained' className={classes.actionButton}>
+                            {buttonDisabled ? <CircularProgress size="1.5rem" style={{marginRight: "8px"}} color="primary"/> : null}
+                                Create a post 
+                                </Button>
                         </div>
 
                     </form>

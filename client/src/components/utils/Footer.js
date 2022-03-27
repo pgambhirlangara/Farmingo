@@ -118,16 +118,16 @@ const Footer = () => {
       </div>
 
       <div className={classes.footerRightSection}>
-        <Link className={classes.link} to="/farmer/home">
-          Solutions
-        </Link>
-        <Link className={classes.link} to="/farmer/home">
+      <Link className={classes.link} to="/farmer/home">
           Home
         </Link>
-        <Link className={classes.link} to="/farmer/home">
-          Services
+        <Link className={classes.link} to="/farmer/settings">
+          Settings
         </Link>
-        <Link className={classes.link} to="/farmer/home">
+        <Link className={classes.link} to="/farmer/addUser">
+          Add User
+        </Link>
+        <Link className={classes.link} to="/farmer/contactUs">
           Contact
         </Link>
       </div>

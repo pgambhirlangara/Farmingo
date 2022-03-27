@@ -92,15 +92,24 @@ const FarmerProductPage = () => {
     const [message, setMessage] = useState("");
     const [severity, setSeverity] = useState('success');
     const [showData, setShowData] = useState(false);
-    const farmData = JSON.parse(localStorage.getItem('farm-profile'));
+    const [farmData, setFarmData] = useState({
+        farmName: "There",
+        address: "Please create",
+        province: "a farm",
+        zipCode: ""
+    });
 
     useEffect(() => {
         fetchData();
+        if (localStorage.getItem('farm-profile')) {
+            setFarmData(JSON.parse(localStorage.getItem('farm-profile')));
+        }
     }, [])
 
     const fetchData = async () => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts`);
+            console.log(response, "Response");
             setMessage(response.data.message);
             setFarmProducts(response.data.data);
          
@@ -112,7 +121,7 @@ const FarmerProductPage = () => {
         } catch (error) {
             setSeverity('error');
             setOpen(true);
-            setMessage(error.response.data.message);
+            setMessage(error.data.message);
         }
     }
 
@@ -139,8 +148,8 @@ const FarmerProductPage = () => {
             <img className={classes.banner} src="../../../assets/farmer_home_banner.jpg" alt="Home" />
             <div className={classes.farmProductContainer}>
                 <section className={classes.farmNameSection}>
-                    <h1 className={classes.farmName}>Hi! {farmData.farmName}</h1>
-                    <p className={classes.farmAddress}>{farmData.address}, {farmData.province}, {farmData.zipCode}</p>
+                    <h1 className={classes.farmName}>Hi! {farmData?.farmName}</h1>
+                    <p className={classes.farmAddress}>{farmData?.address}, {farmData?.province}, {farmData?.zipCode}</p>
                 </section>
                 <div className={classes.farmProductSubContainer}>
                     <section className={classes.farmPostSection}>
@@ -150,8 +159,12 @@ const FarmerProductPage = () => {
                         <h3>View and Edit your products</h3>
                         <h4 className={classes.productDescription}>Here is the list of your products on sale, click in to the product to manage the list and update it.</h4>
                     </section>
+                    <section>
+                        {farmProducts.length === 0 ? <div style={{display: "flex", justifyContent: "center", alignItems: "center", padding: "100px"}} >You need to add products to view them</div> : null}
+                    </section>
                     <section className={classes.farmProducts}>
                         {
+                            farmProducts.length !== 0  ?
                             farmProducts.map((item) => {
                                 return (
                                     <>
@@ -166,7 +179,7 @@ const FarmerProductPage = () => {
 
                                     </>
                                 )
-                            })
+                            }) : null
                         }
                     </section>
                 </div>

@@ -5,6 +5,10 @@ import { useState } from "react";
 import { border, borderRadius, display, fontSize, fontWeight, letterSpacing, padding, textAlign, width } from '@mui/system';
 import { Link, useNavigate } from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import AddIcon from '@mui/icons-material/Add';
+import PaymentIcon from '@mui/icons-material/Payment';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 export default function Settings() {
 
     const useStyles = makeStyles((theme) => ({
@@ -150,11 +154,11 @@ export default function Settings() {
                 <div className={classes.box}>
                     <Link to="../farmer/profile" className={classes.settingAction}><AccountCircle />Profile Information</Link>
                     <Divider />
-                    <Link to="../farmer/addUser" className={classes.settingAction}><AccountCircle />Add User</Link>
+                    <Link to="../farmer/addUser" className={classes.settingAction}><AddIcon />Add User</Link>
                     <Divider />
-                    <Link to="farmer/payment" className={classes.settingAction}><AccountCircle />Payment</Link>
+                    <Link to="farmer/payment" className={classes.settingAction}><PaymentIcon />Payment</Link>
                     <Divider />
-                    <div onClick={logout} className={classes.settingAction}><AccountCircle />Log Out</div>
+                    <div onClick={logout} className={classes.settingAction}><LogoutIcon />Log Out</div>
                 </div>
             </div>
 
