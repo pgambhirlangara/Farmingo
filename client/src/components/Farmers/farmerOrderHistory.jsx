@@ -42,7 +42,7 @@ const Tab = styled(TabUnstyled)`
 const TabPanel = styled(TabPanelUnstyled)`
   width: 100%;
   height: 450px;
-  top: 310px;
+  top: 330px;
   background-color: white;
   z-index: 100;
   position: absolute;
@@ -51,16 +51,16 @@ const TabPanel = styled(TabPanelUnstyled)`
   border: 1px solid #74c26c;
   border-radius: 0 24px 24px 24px;
   @media (min-width: 1900px) {
-    top: 310px;
+    top: 330px;
   }
   @media (min-width: 1700px) and (max-width: 1900px) {
     top: 320px;
   }
   @media (min-width: 1300px) and (max-width: 1700px) {
-    top: 280px;
+    top: 315px;
   }
-  @media (min-width: 1000px) and (max-width: 1300px) {
-    top: 240px;
+  @media (min-width: 900px) and (max-width: 1300px) {
+    top: 300px;
   }
 `;
 
@@ -105,10 +105,11 @@ const FarmerOrderHistory = (props) => {
       color: "#FFFFFF",
       width: "100%",
       textAlign: "center",
+      letterSpacing: "1px",
     },
     totalDesktopHeader: {
-      margin: "25px",
-      marginTop: "70px",
+      margin: "20px",
+      marginTop: "85px",
     },
     orderDesktop: {
       marginTop: "40px",
