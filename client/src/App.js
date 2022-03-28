@@ -48,6 +48,9 @@ function App() {
         <Route path="farmer/product/edit/:id" element={<FarmerEditPost />} />
         <Route path="farmer/orderDetails/:id" element={<OrderDetails />} />
         <Route path="customer/faq" element={<Customerfaq />} />
+
+        <Route path="utils/transactionSuccess" element={<transactionSuccess />} />
+
       </Routes>
       <Footer />
     </div>
