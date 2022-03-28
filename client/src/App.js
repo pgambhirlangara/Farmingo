@@ -50,6 +50,7 @@ function App() {
         <Route path="customer/faq" element={<Customerfaq />} />
 
         <Route path="utils/transactionSuccess" element={<transactionSuccess />} />
+        <Route path="utils/transactionFail" element={<transactionFail />} />
 
       </Routes>
       <Footer />
