@@ -42,6 +42,12 @@ export default function FarmProfile() {
                 padding: "0",
                 display: "flex",
                 flexDirection: "column",
+            },
+            [theme.breakpoints.between('sm','md')]: {
+                marginBottom:"46px"
+            },
+            [theme.breakpoints.between('xs','sm')]: {
+                flex:"1"
             }
         },
         labels: {
@@ -53,12 +59,16 @@ export default function FarmProfile() {
                 marginBottom: "4px",
                 fontSize: "18px",
                 marginTop: "4px"
-            }
+            },
+            [theme.breakpoints.between('sm','md')]: {
+                marginTop:"14px"            }
+           
         },
         addButton: {
             color: "white !important",
             width: "100%",
             padding: "10px !important",
+            height:"51px"
 
         },
         btnname: {
@@ -89,8 +99,12 @@ export default function FarmProfile() {
                 flexDirection: "column",
                 alignItems: "center",
                 marginBottom: "50px",
-                padding: "200px"
+                padding: "293px"
+            },
+            [theme.breakpoints.between('xs','sm')]: {
+                height:"auto"
             }
+            
 
         },
         textboxes: {
@@ -102,6 +116,9 @@ export default function FarmProfile() {
                 width: "333px",
                 height: "40px",
                 padding: "0px!important"
+            },
+            [theme.breakpoints.between('sm','md')]: {
+                marginBottom:"10px"
             }
 
         },
@@ -112,14 +129,19 @@ export default function FarmProfile() {
             justifyContent: "center",
             alignItems: "center",
             gap: "20px",
-            [theme.breakpoints.down("md")]: {
-                display: "flex",
-                flexDirection: "row",
-                height: "40px",
-                justifyContent: "space-between",
-                gap: "14px",
-                marginBottom: "20px"
-            }
+            [theme.breakpoints.between('sm', 'md')]: {
+                width:"40%!important",
+            
+               
+        },
+        [theme.breakpoints.between('xs', 'sm')]: {
+            width:"100%",
+            display:"flex",
+            justifyContent:"space-between"
+        
+           
+    },
+            
         },
         headingdiv: {
             display: "flex",
@@ -132,7 +154,10 @@ export default function FarmProfile() {
             fontSize: "24px",
             [theme.breakpoints.down("md")]: {
                 fontSize: "16px"
-            }
+            },
+            [theme.breakpoints.between('sm', 'md')]: {
+                marginTop:"45px"
+        }
         },
         textboxesbig: {
             width: "547px",
@@ -143,6 +168,10 @@ export default function FarmProfile() {
             [theme.breakpoints.down("md")]: {
                 width: "333px",
                 height: "80px"
+            },
+            [theme.breakpoints.between('sm','md')]: {
+                marginBottom:"20px",
+                height:"125px"
             }
         },
         bigarea: {
@@ -172,6 +201,9 @@ export default function FarmProfile() {
             [theme.breakpoints.down("md")]: {
                 display: "flex",
                 flexDirection: "column"
+            },
+            [theme.breakpoints.between('sm','md')]: {
+                marginTop:"46px"
             }
 
         },
@@ -222,7 +254,18 @@ export default function FarmProfile() {
             borderRadius: "24px",
             fontWeight: "bold",
             fontSize: "0.875rem"
+        },
+        heads1:{
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: "24px",
+        [theme.breakpoints.down("md")]: {
+            fontSize: "16px"
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            marginTop:"10px"
         }
+    }
     }));
 
     const classes = useStyles();
@@ -386,7 +429,7 @@ export default function FarmProfile() {
                     </Select>
                 </div>
 
-                <div className={classes.heads}>Hours of operation</div>
+                <div className={classes.heads1}>Hours of operation</div>
                 <div className={classes.formmove}>
                     <TextField fullWidth className={classes.textboxes} placeholder='Set the opening hours' required value={hoursOfOperation} type="number" onChange={(e) => setHoursOfOperation(e.target.value)} />
                 </div>
