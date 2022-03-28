@@ -121,7 +121,7 @@ const FarmerProductPage = () => {
         } catch (error) {
             setSeverity('error');
             setOpen(true);
-            setMessage(error.response.data.message);
+            setMessage(error.data.message);
         }
     }
 

@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 
-const FarmerOrderItem = ({data}) => {
+const FarmerOrderItem = ({ data }) => {
   const useStyles = makeStyles((theme) => ({
     farmOrderItem: {
       display: "flex",
@@ -33,6 +33,7 @@ const FarmerOrderItem = ({data}) => {
       fontWeight: "700",
       lineHeight: "30px",
       margin: "0",
+      color: "black",
     },
     paragraph: {
       color: "rgba(38, 38, 38, 0.6)",
@@ -56,16 +57,20 @@ const FarmerOrderItem = ({data}) => {
       fontStyle: "normal",
       fontWeight: "700",
       lineHeight: "30px",
+      color: "black",
     },
     orderItemContainer: {
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   }));
 
   const classes = useStyles();
 
   return (
-    <Link className={classes.orderItemContainer} to={`../farmer/orderdetails/${data.id}`}>
+    <Link
+      className={classes.orderItemContainer}
+      to={`../farmer/orderdetails/${data.id}`}
+    >
       <Box className={classes.farmOrderItem}>
         <Box className={classes.farmLeft}>
           <h1 className={classes.header}>Farmer</h1>

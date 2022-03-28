@@ -48,6 +48,10 @@ function App() {
         <Route path="farmer/product/edit/:id" element={<FarmerEditPost />} />
         <Route path="farmer/orderDetails/:id" element={<OrderDetails />} />
         <Route path="customer/faq" element={<Customerfaq />} />
+
+        <Route path="utils/transactionSuccess" element={<transactionSuccess />} />
+        <Route path="utils/transactionFail" element={<transactionFail />} />
+
       </Routes>
       <Footer />
     </div>
