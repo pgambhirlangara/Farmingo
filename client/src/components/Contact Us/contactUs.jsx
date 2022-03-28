@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Divider, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
-import { border, borderRadius, display, fontSize, fontWeight, letterSpacing, padding, textAlign, width } from '@mui/system';
+import { border, borderRadius, color, display, fontSize, fontWeight, letterSpacing, padding, textAlign, width } from '@mui/system';
 import { Link } from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
@@ -127,10 +127,12 @@ export default function Settings() {
             display: "flex",
             alignItems: "center",
             gap: "20px",
-            textDecoration: "none"
+            textDecoration: "none",
+            color:"black"
         },
         metaInfo: {
-            fontSize: "18px"
+            fontSize: "18px",
+
         }
 
     }));
@@ -162,7 +164,7 @@ export default function Settings() {
                 <div className={classes.box}>
                     <div className={classes.settingAction}><div className={classes.detailContainer}>
                         <EmailIcon />Email</div>
-                        <span className={classes.metaInfo}><a style={{ textDecoration: "none"}} href="mailto:info@farmingo.com" type="email">customerservice@farmingo.ca</a></span>
+                        <span className={classes.metaInfo}><a style={{ textDecoration: "none", color:"black"}} href="mailto:info@farmingo.com" type="email">customerservice@farmingo.ca</a></span>
                     </div>
                     <Divider />
                     <div className={classes.settingAction}><div className={classes.detailContainer}>
