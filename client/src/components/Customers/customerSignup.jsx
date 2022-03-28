@@ -119,8 +119,8 @@ const CustomerSignup = () => {
                 </Alert>
             </Snackbar>
             <h2 className={classes.customerSignupHeading}>Create a profile</h2>
-            <h3 className={classes.customerSignupSubHeading}>You can establish a unique identity of your farm by creating a new
-                profile of your farm in wich to upload a list of your products.</h3>
+            <h3 className={classes.customerSignupSubHeading}>After creating a profile, you can interact with farmers to buy products for your business
+            </h3>
             <div className={classes.customerSignupContent}>
                 <div className={classes.formControl}>
                     <InputLabel>Name</InputLabel>

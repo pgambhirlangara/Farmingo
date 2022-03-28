@@ -1,4 +1,8 @@
 
+html, body, #root, .App {
+  height: 100%;
+}
+
 body, button, h1,h2,h3,h4,h5,h6 {
   font-family: Nunito !important;
 }
@@ -7,5 +11,9 @@ button {
   border-radius: 24px !important;
   font-weight: bold !important;
   text-transform: none !important;
+  box-shadow: none !important;
 }
 
+#subscribeInput {
+  padding: 8px;
+}

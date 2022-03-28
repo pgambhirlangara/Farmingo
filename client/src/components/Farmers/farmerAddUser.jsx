@@ -1,172 +1,309 @@
-import React from 'react'
-import { Button, TextField } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useState } from "react";
+import axios from "axios";
+import { makeStyles } from "@mui/styles";
+import { Alert, Button, CircularProgress, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Snackbar, TextField } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { Province as provinceList } from "../../constants/constant";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Box } from "@mui/system";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
 
-import { border, color, display, fontWeight, padding } from '@mui/system';
-export default function FarmerAddUser() {
+const FarmerSignup = () => {
+
     const useStyles = makeStyles((theme) => ({
-
-        addform: {
+        farmerSignup: {
             backgroundColor: theme.palette.primary.a100,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "20px",
-            height: "100%",
-            
+            gap: "20px"
         },
-        headingtwo:{
-            textAlign: "center",
-            [theme.breakpoints.up("sm")]: {
-                marginTop:"-15px",
-                color:"gray"
-            },
+        farmerSignupHeading: {
+            color: "#182918",
+            margin: 0,
+            marginTop: "100px",
+            [theme.breakpoints.down("md")]: {
+                display: "none"
+            }
         },
-        headingone:{
-            textAlign:"center"
+        farmerSignupSubHeading: {
+            margin: 0,
+            padding: "0px 80px",
+            [theme.breakpoints.down("md")]: {
+                display: "none"
+            }
+
         },
-        formmove: {
-            width:"80%",
+        farmerSignupContent: {
+            backgroundColor: "white",
+            width: "50%",
+            padding: "50px",
+            borderRadius: "20px",
             display: "flex",
             flexDirection: "column",
-            height:"50%",
-            marginBottom:"10px"
+            gap: "20px",
+            margin: "40px",
+            border: `1px solid ${theme.palette.primary.main}`,
+            [theme.breakpoints.down("md")]: {
+                backgroundColor: "transparent",
+                border: "none",
+                padding: "0px",
+                width: "80%",
+                marginTop: 0
+            },
         },
-        labels:{
-            display:"none",
-            color:"black",
-            [theme.breakpoints.up("sm")]:{
-                display:"block",
-                fontWeight:"bold",
-                marginBottom:"4px",
-                marginTop:"4px"
-            }
+        formControl: {
+            display: "flex",
+            flexDirection: "column",
+            color: "black"
         },
-        addButton: {
+        buttonContainer: {
+            textAlign: "center",
+            paddingTop: "40px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px"
+        },
+        signupButton: {
             color: "white !important",
-            backgroundColor:"#F15922 !important",
-            width:"100%",
-            padding:"10px !important",
-            
+            width: "200px", // check with designers
+            [theme.breakpoints.down("md")]: {
+                borderRadius: "24px",
+                width: "154px",
+                height: "51px",
+                margin: "10px 0px"
+            },
         },
-        btnname:{
-            fontWeight:"bold"
+        logo: {
+            display: "none",
+            [theme.breakpoints.down("md")]: {
+                width: "234px",
+                height: "234px",
+                display: "block"
+            },
         },
-        formargin:{
-            marginBottom:"40px"
-        },
-        outerdiv:{
-            width:"100%",
-            height:"100%",
-            display:"flex",
-            justifyContent:"center",
-            alignItems:"center",
-            flexDirection:"column",
-            [theme.breakpoints.up("sm")]:{
-                padding:"70px",
-                width:"40%",
-                height:"10%",
-                border:"1px green solid",
-                borderRadius:"10px",
-                backgroundColor:"white !important",
-                display:"flex",
-                justifyContent:"center",
-                flexDirection:"column",
-                alignItems: "center",
-                marginBottom:"50px"
-            }
-
-        },
-        textboxes:{
-            width:"100%",
-            backgroundColor:"white",
-            
-        },
-        passdiv:{
-            width:"100%",
-            display:"flex",
-            justifyContent:"center",
-            alignItems:"center",
-            flexDirection:"column",
-            [theme.breakpoints.up("sm")]:{
-                display:"flex",
-                flexDirection:"row",
-                width:"80%",
-                justifyContent:"space-between",
-                gap:"66px"
-            }
-        }
     }));
-    
-    const classes = useStyles();
-    const [firstname, setfirstname] = useState('');
-    const [lastname, setlastname] = useState('');
-    const [email, setemail] = useState('');
-    const [password, setpassword] = useState('');
-    const [phonenumber, setphonenumber] = useState('');
-    const [confirmp, setconfirmp] = useState('');
-    const [buttonDisabled, setbuttonDisabled] = useState(false);
 
-    const addusers = async (e) => {
-        setbuttonDisabled(true);
-        const users = {
-            firstname,
-            lastname,
-            email,
-            password,
-            phonenumber,
-            confirmp
-        }
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [contact, setContact] = useState(0);
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState('success');
+    const [message, setMessage] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [city, setCity] = useState("");
+    const [province, setProvince] = useState("");
+    // const [zipCode, setZipCode] = useState("");
+    const [values, setValues] = useState({
+        password: '',
+        showPassword: false,
+    });
+
+    const anchorOrigin = {
+        vertical: "top", horizontal: "center"
     }
-   
-    
-  return (
-    
-    <form className={ classes.addform} >
-        <div ><h1 className={classes.headingone}>Add User</h1></div>
-        <div ><h2 className={classes.headingtwo}>A second user can be added to your account to help you manage it</h2></div>
-        <div className={classes.outerdiv}>
-        
 
-        <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="firstname">First Name</label>
-                    <TextField className={classes.textboxes} placeholder='First Name' required value={firstname} type="text" onChange={(e) => setfirstname(e.target.value)} />
-                </div>
-        <div className={classes.formmove}>
-        <label className={classes.labels} htmlFor="lastname">Last Name</label>
-                    <TextField className={classes.textboxes} placeholder='Last Name' required value={lastname} type="text" onChange={(e) => setlastname(e.target.value)} />
-        </div>
-        <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="email">Email</label>
-                    <TextField className={classes.textboxes} placeholder='Email' required value={email} type="text" onChange={(e) => setemail(e.target.value)} />
-        </div>
-        <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="phonenumber">Phone Number</label>
-                    <TextField className={classes.textboxes} placeholder='Phone Number' required value={phonenumber} type="number" onChange={(e) => setphonenumber(e.target.value)} />
-        </div>
-        <div className={classes.passdiv}>
-            
-        <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="password">Password</label>
-                    <TextField className={classes.textboxes} placeholder='Password' required value={password} type="password" onChange={(e) => setpassword(e.target.value)} />
-        </div>
-        <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="confirmp">Confirm Password</label>
-                    <TextField className={classes.textboxes} placeholder='Confirm password' required value={confirmp} type="password" onChange={(e) => setconfirmp(e.target.value)} />
-        </div>
-            
-            </div>
-        
-        
-        
-        <div className={classes.formmove}>
-        <Button disabled={buttonDisabled} className={classes.addButton} onClick={addusers}  variant="contained" ><span className={classes.btnname}> Add User </span></Button>
-        </div>
-        </div>
-    </form>
+    const navigate = useNavigate();
+
+
+    const classes = useStyles();
+
+    const signup = async (e) => {
+        setButtonDisabled(true);
+        const signupData = {
+            name,
+            email,
+            password: values.password,
+            contact,
+            province,
+            city
+        }
+
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/register`, signupData);
+            if (response) {
+                console.log(response);
+                setMessage(response.data.message);
+                setOpen(true);
+                setTimeout(() => {
+                    setButtonDisabled(false);
+                    navigate('../farmer/login');
+                }, 1000);
+            }
+        } catch (error) {
+            setSeverity('error');
+            setOpen(true);
+            setButtonDisabled(false);
+            setMessage(error.response.data.message);
+        }
+
+    }
+
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    const handleClickShowPassword = () => {
+        setValues({
+            ...values,
+            showPassword: !values.showPassword,
+        });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
     
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    return (
+        <form className={classes.farmerSignup}>
+                <img className={classes.logo} src="../assets/team3_farmingo_final.png" alt="Logo" />
+            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
+
+            <h2 className={classes.farmerSignupHeading}>Add User</h2>
+            <h3 className={classes.farmerSignupSubHeading}>A second user can be added to your account to help you manage it
+            </h3>
+            <div className={classes.farmerSignupContent}>
+                <div className={classes.formControl}>
+                    <InputLabel>Name</InputLabel>
+                    <FormControl variant="outlined">
+                        <OutlinedInput
+                            placeholder="Your Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            startAdornment={<InputAdornment position="start">
+                                <AccountCircle />
+                            </InputAdornment>}
+                            aria-describedby="outlined-weight-helper-text"
+                            inputProps={{
+                                'aria-label': 'weight',
+                            }}
+                            required
+                        />
+                    </FormControl>
+                </div>
+                <div className={classes.formControl}>
+                    <InputLabel>Email</InputLabel>
+                    <FormControl variant="outlined">
+                        <OutlinedInput
+                            placeholder="Your Email"
+                            value={email}
+                            type="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            startAdornment={<InputAdornment position="start">
+                                <AccountCircle />
+                            </InputAdornment>}
+                            aria-describedby="outlined-weight-helper-text"
+                            inputProps={{
+                                'aria-label': 'weight',
+                            }}
+                            required
+                        />
+                    </FormControl>
+                </div>
+                <div className={classes.formControl}>
+                    <InputLabel>Contact</InputLabel>
+                    <FormControl variant="outlined">
+                        <OutlinedInput
+                            value={contact}
+                            placeholder="Your Contact"
+                            type="number"
+                            onChange={(e) => setContact(e.target.value)}
+                            startAdornment={<InputAdornment position="start">
+                                <AccountCircle />
+                            </InputAdornment>}
+                            aria-describedby="outlined-weight-helper-text"
+                            inputProps={{
+                                'aria-label': 'weight',
+                            }}
+                            required
+                        />
+                    </FormControl>
+                </div>
+                <div className={classes.formControl}>
+                    <Box display="grid" gridTemplateColumns="auto auto" gap="20px">
+                        <div className={classes.formControl}>
+                            <InputLabel>Province</InputLabel>
+                            <Select
+                                placeholder="Your Province"
+                                value={province}
+                                required
+                                onChange={(e) => setProvince(e.target.value)}
+                            >
+                                {
+                                    provinceList.map(({ name }, index) => {
+                                        return <MenuItem key={index} value={name}>{name}</MenuItem>
+                                    })
+                                }
+                            </Select>
+                        </div>
+                        <div className={classes.formControl}>
+                            <InputLabel>City</InputLabel>
+                            <Select
+                                disabled={!province}
+                                placeholder="Your City"
+                                value={city}
+                                required
+                                onChange={(e) => setCity(e.target.value)}
+                            >
+                                {province ?
+                                    provinceList.find((pr) => pr.name === province)
+                                        .cities.map((city, index) => <MenuItem key={index} value={city}>{city}</MenuItem>)
+                                    : []
+                                }
+                            </Select>
+                        </div>
+                    </Box>
+                </div>
+                <div className={classes.formControl}>
+                    <InputLabel>Password</InputLabel>
+                    <FormControl variant="outlined">
+                        <OutlinedInput
+                            placeholder="Your Password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+                </div>
+                <div>
+
+                    <div className={classes.buttonContainer}>
+                    {buttonDisabled ? <CircularProgress size="1.5rem" style={{marginRight: "8px"}} color="primary"/> : null}
+                        <Button disabled={buttonDisabled} className={classes.signupButton} onClick={signup} variant="contained" color="primary" >Add User</Button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
     )
 }
 
+export default FarmerSignup;

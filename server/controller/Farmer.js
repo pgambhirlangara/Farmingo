@@ -1,4 +1,4 @@
-const Farmer = require('../models/farmer');
+const Farmer = require('../models/Farmer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -11,13 +11,12 @@ const registerFarmer = async (req, res) => {
             password: newPassword,
             email: req.body.email,
             city: req.body.city,
-            zipCode: req.body.zipCode,
             province: req.body.province,
             contact: req.body.contact
         })
 
         return res.status(200).json({
-            message: "Succesfully logged in",
+            message: "Farmer Registered Succesfully",
             data: output
         })
 
@@ -38,12 +37,23 @@ const loginFarmer = async (req, res) => {
             const token = jwt.sign({
                 name: req.body.name,
                 email: req.body.email
-            }, 'hello123')
+            }, process.env.JWT_SECRET)
             return res.status(200).json({
                 token,
+                id: farmer._id,
+                name: farmer.name,
+                email: farmer.email,
                 message:"Succesfully Logged In"
             })
+        } else {
+            return res.status(401).json({
+                message:"Incorrect Password!"
+            })
         }
+    } else {
+        return res.status(500).json({
+            message:"User doesn't exist, please register"
+        })
     }
 
 }
