@@ -26,6 +26,7 @@ app.use(express.json({limit: '50mb'}));
 
 
 app.use(morgan("combined"));
+app.use(cors());
 
 app.get("/", (request, response) => {
   console.log("Requested home page");
