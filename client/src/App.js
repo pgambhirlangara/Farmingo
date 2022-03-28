@@ -20,6 +20,8 @@ import FarmProfile from "./components/Farmers/FarmProfile";
 import Faqfarmer from "./components/Farmers/faqfarmer";
 import FarmerCreatePost from "./components/Farmers/farmerCreatePost";
 import FarmerEditPost from "./components/Farmers/farmerEditPost";
+import TransactionS from "./components/Farmers/TransactionS";
+import TransactionF from "./components/Farmers/TransactionF";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="farmer/contactUs" element={<ContactUs />} />
         <Route path="farmer/settings" element={<Settings />} />
         <Route path="farmer/profile" element={<ProfileInformation />} />
+        <Route path="farmer/transactionS" element={<TransactionS/>} />
+        <Route path="farmer/transactionF" element={<TransactionF/>} />
         <Route path="farmer/createprofile" element={<FarmProfile />} />
         <Route path="farmers/profile" element={<FarmProfile />} />
         <Route path="farmer/addUser" element={<FarmerAddUser />} />
