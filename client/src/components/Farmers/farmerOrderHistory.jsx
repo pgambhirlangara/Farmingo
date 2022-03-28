@@ -28,7 +28,7 @@ const Tab = styled(TabUnstyled)`
   border-radius: 24px;
   display: flex;
   justify-content: center;
-  font-size: 1.3vw;
+  font-size: 1.4vw;
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
@@ -42,7 +42,7 @@ const Tab = styled(TabUnstyled)`
 const TabPanel = styled(TabPanelUnstyled)`
   width: 100%;
   height: 450px;
-  top: 310px;
+  top: 330px;
   background-color: white;
   z-index: 100;
   position: absolute;
@@ -51,16 +51,16 @@ const TabPanel = styled(TabPanelUnstyled)`
   border: 1px solid #74c26c;
   border-radius: 0 24px 24px 24px;
   @media (min-width: 1900px) {
-    top: 310px;
+    top: 330px;
   }
   @media (min-width: 1700px) and (max-width: 1900px) {
     top: 320px;
   }
   @media (min-width: 1300px) and (max-width: 1700px) {
-    top: 280px;
+    top: 315px;
   }
-  @media (min-width: 1000px) and (max-width: 1300px) {
-    top: 240px;
+  @media (min-width: 900px) and (max-width: 1300px) {
+    top: 300px;
   }
 `;
 
@@ -105,10 +105,11 @@ const FarmerOrderHistory = (props) => {
       color: "#FFFFFF",
       width: "100%",
       textAlign: "center",
+      letterSpacing: "1px",
     },
     totalDesktopHeader: {
-      margin: "25px",
-      marginTop: "70px"
+      margin: "20px",
+      marginTop: "85px",
     },
     orderDesktop: {
       marginTop: "40px",
@@ -147,6 +148,9 @@ const FarmerOrderHistory = (props) => {
     farmButton: {
       height: "50px",
     },
+    tabSpan: {
+      marginTop: "10px",
+    },
   }));
 
   const classes = useStyles();
@@ -157,15 +161,14 @@ const FarmerOrderHistory = (props) => {
   useEffect(() => {
     setData(orderHistory);
     changeTab();
-  }, [])
+  }, []);
 
-  const changeTab  = () =>{
+  const changeTab = () => {
     setShowData(false);
     setTimeout(() => {
       setShowData(true);
     }, 2000);
-  }
-
+  };
 
   return (
     <Box>
@@ -230,32 +233,42 @@ const FarmerOrderHistory = (props) => {
         <Box className={classes.desktopContainer}>
           <TabsUnstyled defaultValue={0} onChange={changeTab}>
             <TabsList>
-              <Tab>New Orders</Tab>
-              <Tab>In Progress </Tab>
-              <Tab>Completed</Tab>
-              <Tab>Problems</Tab>
+              <Tab>
+                <span className={classes.tabSpan}>New Orders</span>
+              </Tab>
+              <Tab>
+                <span className={classes.tabSpan}>In Progress</span>
+              </Tab>
+              <Tab>
+                <span className={classes.tabSpan}>Completed</span>
+              </Tab>
+              <Tab>
+                <span className={classes.tabSpan}>Problems</span>
+              </Tab>
             </TabsList>
             <TabPanel value={0}>
-            {" "}
               <div className={classes.panelContainer}>
                 <div className={classes.panelContainer}>
-                {
-                  
-                  data.map((item) => {
-                   if (item.new) {
-                     if (!showData) {
-                       console.log("hello");
-                       return <Box sx={{ pt: 0.5 }} padding="30px">
-                       <Skeleton variant="rectangular" width={140} height={118} />
-                       <Skeleton width={140} />
-                       <Skeleton width="40%" />
-                     </Box>
-                     } else {
-                      return <FarmerOrderItem data={item} />
-                     }
-                   }
-                  })
-                }
+                  {data.map((item) => {
+                    if (item.new) {
+                      if (!showData) {
+                        console.log("hello");
+                        return (
+                          <Box sx={{ pt: 0.5 }} padding="30px">
+                            <Skeleton
+                              variant="rectangular"
+                              width={140}
+                              height={118}
+                            />
+                            <Skeleton width={140} />
+                            <Skeleton width="40%" />
+                          </Box>
+                        );
+                      } else {
+                        return <FarmerOrderItem data={item} />;
+                      }
+                    }
+                  })}
                 </div>
               </div>
             </TabPanel>
@@ -263,49 +276,49 @@ const FarmerOrderHistory = (props) => {
               {" "}
               <div className={classes.panelContainer}>
                 <div className={classes.panelContainer}>
-                {
-                  data.map((item) => {
+                  {data.map((item) => {
                     if (!item.complete) {
                       if (!showData) {
-                        return <Box sx={{ pt: 0.5 }} padding="30px">
-                        <Skeleton variant="rectangular" width={140} height={118} />
-                        <Skeleton width={140} />
-                        <Skeleton width="40%" />
-                      </Box>
+                        return (
+                          <Box sx={{ pt: 0.5 }} padding="30px">
+                            <Skeleton
+                              variant="rectangular"
+                              width={140}
+                              height={118}
+                            />
+                            <Skeleton width={140} />
+                            <Skeleton width="40%" />
+                          </Box>
+                        );
                       } else {
-                       return <FarmerOrderItem data={item} />
+                        return <FarmerOrderItem data={item} />;
                       }
                     }
-                  })
-                }
-              </div>
+                  })}
+                </div>
               </div>
             </TabPanel>
             <TabPanel value={2}>
               {" "}
               <div className={classes.panelContainer}>
-              <div className={classes.panelContainer}>
-                {
-                  orderHistory.map((data) => {
-                   if (data.complete) {
-                    return <FarmerOrderItem data={data} />
-                   }
-                  })
-                }
+                <div className={classes.panelContainer}>
+                  {orderHistory.map((data) => {
+                    if (data.complete) {
+                      return <FarmerOrderItem data={data} />;
+                    }
+                  })}
                 </div>
               </div>
             </TabPanel>
             <TabPanel value={3}>
               {" "}
               <div className={classes.panelContainer}>
-              <div className={classes.panelContainer}>
-                {
-                  orderHistory.map((data) => {
+                <div className={classes.panelContainer}>
+                  {orderHistory.map((data) => {
                     if (data.issue) {
-                      return <FarmerOrderItem data={data} />
+                      return <FarmerOrderItem data={data} />;
                     }
-                  })
-                }
+                  })}
                 </div>
               </div>
             </TabPanel>
