@@ -50,7 +50,6 @@ const FarmerProductItem = (props) => {
     }));
 
     const classes = useStyles();
-
     return (
         <Paper className={classes.productContainer}>
             <img className={classes.image} src={props.image} alt={props.name} />
