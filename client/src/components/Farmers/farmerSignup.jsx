@@ -292,6 +292,7 @@ const FarmerSignup = () => {
                                     </IconButton>
                                 </InputAdornment>
                             }
+                            required
                         />
                     </FormControl>
                 </div>
