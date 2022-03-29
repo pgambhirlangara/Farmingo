@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "center",
       borderBottom: "1px solid #cdcdcd",
       backgroundColor: `${theme.palette.secondary.main} !important`,
-      color: "white !important"
+      color: "white !important",
     },
   },
   lastMenu: {
@@ -78,8 +78,9 @@ const useStyles = makeStyles((theme) => ({
     size: "18px",
     marginLeft: "38px",
     backgroundColor: `${theme.palette.secondary.main} !important`,
-    color: "white !important"
-  }
+    color: "white !important",
+    borderRadius: "24px !important",
+  },
 }));
 
 export default function Header() {
@@ -92,7 +93,7 @@ export default function Header() {
     headerMenuIcon,
     menuList,
     lastMenu,
-    lastMenuItem
+    lastMenuItem,
   } = useStyles();
 
   const [state, setState] = useState({
@@ -122,9 +123,7 @@ export default function Header() {
     return (
       <Toolbar className={toolbar}>
         {farmingoLogo}
-        <div>
-          {isLogin() ?  getMenuButtons() : null}
-        </div>
+        <div>{isLogin() ? getMenuButtons() : null}</div>
       </Toolbar>
     );
   };
@@ -137,29 +136,31 @@ export default function Header() {
 
     return (
       <Toolbar>
-        { isLogin() ? <>      <IconButton
-          {...{
-            edge: "start",
-            color: "inherit",
-            "aria-label": "menu",
-            "aria-haspopup": "true",
-            onClick: handleDrawerOpen,
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-
-        <Drawer
-          {...{
-            anchor: "left",
-            open: drawerOpen,
-            onClose: handleDrawerClose,
-          }}
-        >
-          <div className={drawerContainer}>
-            {getDrawerChoices()}
-          </div>
-        </Drawer></> : null}
+        {isLogin() ? (
+          <>
+            {" "}
+            <IconButton
+              {...{
+                edge: "start",
+                color: "inherit",
+                "aria-label": "menu",
+                "aria-haspopup": "true",
+                onClick: handleDrawerOpen,
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Drawer
+              {...{
+                anchor: "left",
+                open: drawerOpen,
+                onClose: handleDrawerClose,
+              }}
+            >
+              <div className={drawerContainer}>{getDrawerChoices()}</div>
+            </Drawer>
+          </>
+        ) : null}
         <div>{farmingoLogo}</div>
       </Toolbar>
     );
@@ -179,7 +180,9 @@ export default function Header() {
           }}
         >
           {/* <Box display="flex" gap="5px" alignItems="center"> */}
-          { icon ? <img className={headerMenuIcon} src={icon} alt="image" /> : null}
+          {icon ? (
+            <img className={headerMenuIcon} src={icon} alt="image" />
+          ) : null}
           <MenuItem>{label}</MenuItem>
 
           <Divider />
@@ -189,12 +192,12 @@ export default function Header() {
   };
 
   const farmingoLogo = (
-   <RouterLink to="/">
-    <img
-      className={farmingoLogoImage}
-      src="/assets/HORIZONTAL.png"
-      alt="logo"
-    />
+    <RouterLink to="/">
+      <img
+        className={farmingoLogoImage}
+        src="/assets/HORIZONTAL.png"
+        alt="logo"
+      />
     </RouterLink>
   );
 
@@ -211,7 +214,9 @@ export default function Header() {
               className: index == 4 ? lastMenu : menuButton,
             }}
           >
-            { icon ? <img className={headerMenuIcon} src={icon} alt="image" /> : null}
+            {icon ? (
+              <img className={headerMenuIcon} src={icon} alt="image" />
+            ) : null}
             {label}
           </Button>
         </>
