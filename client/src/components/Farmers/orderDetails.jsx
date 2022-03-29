@@ -168,9 +168,8 @@ export default function OrderDetails() {
           <div className={classes.headingone}>
             <h1 className={classes.head}>Order Details</h1>
           </div>
-          {orderHistory.map(({ items }) => {
+          {orderHistory.slice(0, 1).map(({ items }) => {
             return items.map((item) => {
-              console.log(item);
               return (
                 <div className={classes.orderDetailContainer}>
                   <img
