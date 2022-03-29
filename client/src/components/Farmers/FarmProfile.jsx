@@ -1,10 +1,12 @@
 import React from 'react'
-import { Alert, Box, Button, CircularProgress, MenuItem, Select, Snackbar, TextField } from "@mui/material";
+import { Alert, InputLabel, Box, Button, CircularProgress, MenuItem, Select, Snackbar, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import { days, Province } from '../../constants/constant';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { categoryList } from '../../constants/constant';
+
 export default function FarmProfile() {
     const useStyles = makeStyles((theme) => ({
 
@@ -178,7 +180,7 @@ export default function FarmProfile() {
         btnform: {
             width: "343px",
             height: "51px",
-            display:"flex",
+            display: "flex",
             justifyContent: "center",
             alignItems: "center"
         },
@@ -243,6 +245,7 @@ export default function FarmProfile() {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [severity, setSeverity] = useState('success');
     const user = JSON.parse(localStorage.getItem('user'));
+    const [category, setCategory] = useState("");
 
     const navigate = useNavigate();
 
@@ -260,7 +263,8 @@ export default function FarmProfile() {
             hoursOfOperation,
             email: user.email,
             image,
-            description
+            description,
+            category
         }
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/farm/create`, farmProfile);
@@ -366,6 +370,22 @@ export default function FarmProfile() {
                 <div className={classes.formmove}>
                     <label className={classes.labels} htmlFor="email">Contact info</label>
                     <TextField fullWidth className={classes.textboxes} placeholder='phone' type="number" required value={contact} onChange={(e) => setContact(e.target.value)} />
+                </div>
+                <div className={classes.formmove}>
+                    <InputLabel className={classes.label}>Category</InputLabel>
+                    <Select
+                        value={category}
+                        required
+                        className={classes.formInput}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        {
+                            categoryList.map(({ name, id }, index) => {
+                                return <MenuItem key={index} value={name}>{name}</MenuItem>
+                            })
+                        }
+                    </Select>
+
                 </div>
                 <div className={classes.heads}>Days of Operation</div>
                 <div className={classes.formmove}>

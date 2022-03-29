@@ -104,7 +104,7 @@ function CustomerLogin() {
                 setOpen(true);
                 setButtonDisabled(false);
                 setTimeout(() => {
-                    navigate('../home');
+                    navigate('../customer/home');
                 }, 1000);
             }
         } catch (error) {

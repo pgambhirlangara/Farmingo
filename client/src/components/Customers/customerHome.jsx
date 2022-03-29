@@ -1,7 +1,10 @@
 import React from 'react'
+import MainSearch from './MainSearch'
 
-export default function customerHome() {
+export default function CustomerHome() {
   return (
-    <div>customerHome</div>
+    <div>
+      <MainSearch />
+    </div>
   )
 }
