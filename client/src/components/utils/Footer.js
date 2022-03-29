@@ -6,7 +6,7 @@ const Footer = () => {
   const useStyles = makeStyles((theme) => ({
     footer: {
       background: "#182918",
-      width: "100%",
+
       display: "grid",
       gridTemplateColumns: "70% 30%",
       justifyContent: "space-around",
@@ -15,7 +15,7 @@ const Footer = () => {
       padding: 10,
       color: "white",
       [theme.breakpoints.down("md")]: {
-        display: "none"
+        display: "none",
       },
     },
     arrowButton: {
@@ -23,7 +23,7 @@ const Footer = () => {
       marginRight: "20px",
       height: "100%",
       width: "98px",
-      flexBasis: "20%"
+      flexBasis: "20%",
     },
     arrowIcon: {
       width: "16px",
@@ -43,7 +43,7 @@ const Footer = () => {
       gap: "8px",
       [theme.breakpoints.down("md")]: {
         padding: "8px",
-        alignItems: "center"
+        alignItems: "center",
       },
     },
     footerRightSection: {
@@ -54,7 +54,7 @@ const Footer = () => {
       alignItems: "center",
       [theme.breakpoints.down("md")]: {
         justifyContent: "center",
-        flexDirection: "row"
+        flexDirection: "row",
       },
     },
     textField: {
@@ -76,11 +76,11 @@ const Footer = () => {
       },
     },
     footerTitle: {
-      margin: 0
+      margin: 0,
     },
     footerSubtitle: {
-      margin: 0
-    }
+      margin: 0,
+    },
   }));
 
   const classes = useStyles();
@@ -93,11 +93,13 @@ const Footer = () => {
           src="/assets/team3_farmingo_positive_final.png"
           alt="logo"
         />
-        <h3 className={classes.footerTitle}>Subscribe to keep up with the latest news</h3>
+        <h3 className={classes.footerTitle}>
+          Subscribe to keep up with the latest news
+        </h3>
         <div className={classes.emailContainer}>
           <div className={classes.textFieldContainer}>
             <TextField
-            id="subscribeInput"
+              id="subscribeInput"
               color="secondary"
               className={classes.textField}
               placeholder="Email"
@@ -118,7 +120,7 @@ const Footer = () => {
       </div>
 
       <div className={classes.footerRightSection}>
-      <Link className={classes.link} to="/farmer/home">
+        <Link className={classes.link} to="/farmer/home">
           Home
         </Link>
         <Link className={classes.link} to="/farmer/settings">
