@@ -32,7 +32,7 @@ export default function EditFarmProfile() {
             textAlign: "center",
         },
         formmove: {
-            width: "80%",
+            width: "100%",
             display: "flex",
             flexDirection: "column",
             marginBottom: "10px",
@@ -73,7 +73,7 @@ export default function EditFarmProfile() {
             width: "100%",
             height: "100%",
             display: "flex",
-            // padding: "50px",
+            paddingTop: "400px",
             gap: "20px",
             margin: "auto",
             justifyContent: "center",
@@ -82,7 +82,7 @@ export default function EditFarmProfile() {
             [theme.breakpoints.up("sm")]: {
                 padding: "100px 70px !important",
                 width: "830px",
-                height: "100%",
+                height: "130%",
                 border: "1px green solid",
                 borderRadius: "10px",
                 backgroundColor: "white !important",
@@ -230,7 +230,7 @@ export default function EditFarmProfile() {
         },
         imageSection: {
             display: "grid",
-            gridTemplateColumns: "30% 70%"
+            gridTemplateColumns: "30% 70%",
         }
     }));
 

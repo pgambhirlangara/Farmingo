@@ -72,7 +72,7 @@ export default function FarmProfile() {
         outerdiv: {
             width: "100%",
             height: "100%",
-            display: "grid",
+            display: "flex",
             gap: "20px",
             padding: "50px",
             margin: "auto",
@@ -80,17 +80,18 @@ export default function FarmProfile() {
             alignItems: "center",
             flexDirection: "column",
             [theme.breakpoints.up("sm")]: {
-                padding: "50px !important",
+                padding: "100px 70px !important",
                 width: "830px",
-                height: "100%",
+                height: "130%",
                 border: "1px green solid",
                 borderRadius: "10px",
                 backgroundColor: "white !important",
+                display: "flex",
                 justifyContent: "center",
                 flexDirection: "column",
                 alignItems: "center",
                 marginBottom: "50px",
-                overflow: "auto !important"
+                padding: "200px"
             }
 
         },
