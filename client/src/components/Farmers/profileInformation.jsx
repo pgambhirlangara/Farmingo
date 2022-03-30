@@ -403,7 +403,7 @@ export default function EditFarmProfile() {
                 </div>
                 <div className={classes.formmove}>
                     <label className={classes.labels} htmlFor="email">Contact info</label>
-                    <TextField fullWidth className={classes.textboxes} placeholder='phone' type="number" required value={contact} type="text" onChange={(e) => setContact(e.target.value)} />
+                    <TextField fullWidth className={classes.textboxes} placeholder='phone' required value={contact} type="text" onChange={(e) => setContact(e.target.value)} />
                 </div>
                 <div className={classes.heads}>Days of Operation</div>
                 <div className={classes.formmove}>
