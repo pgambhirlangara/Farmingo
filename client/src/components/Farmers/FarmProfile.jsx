@@ -35,7 +35,6 @@ export default function FarmProfile() {
             width: "80%",
             display: "flex",
             flexDirection: "column",
-            height: "50%",
             marginBottom: "10px",
             [theme.breakpoints.down("md")]: {
                 height: "40px",
@@ -76,22 +75,18 @@ export default function FarmProfile() {
             gap: "20px",
             padding: "50px",
             margin: "auto",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignItems: "center",
             flexDirection: "column",
+            height: "fit-content",
             [theme.breakpoints.up("sm")]: {
                 padding: "100px 70px !important",
                 width: "830px",
-                height: "130%",
                 border: "1px green solid",
                 borderRadius: "10px",
                 backgroundColor: "white !important",
                 display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                alignItems: "center",
                 marginBottom: "50px",
-                padding: "200px"
             }
 
         },
