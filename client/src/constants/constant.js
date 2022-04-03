@@ -156,7 +156,7 @@ export const farmProducts = [
 export const headersData = [
   {
     label: "Products",
-    href: "/farmer/home",
+    href: "/",
     icon: "/assets/products.svg",
   },
   {

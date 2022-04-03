@@ -7,6 +7,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { login } from "../../auth";
+import { GoogleLogin } from 'react-google-login';
 
 
 const FarmerLogin = () => {
@@ -89,7 +90,7 @@ const FarmerLogin = () => {
         },
         snackbar: {
             backgroundColor: "yellow"
-        }
+        },
     }));
 
     const [email, setEmail] = useState('');
@@ -106,7 +107,7 @@ const FarmerLogin = () => {
 
     const Transition = forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
-      });
+    });
 
     const [openDialog, setOpenDialog] = useState(false);
 
@@ -117,10 +118,10 @@ const FarmerLogin = () => {
     const handleClose = () => {
         setOpenDialog(false);
     };
-      
+
     const anchorOrigin = {
         vertical: "bottom",
-         horizontal: "center"
+        horizontal: "center"
     }
 
     const classes = useStyles();
@@ -181,6 +182,37 @@ const FarmerLogin = () => {
         setOpen(false);
     };
 
+    const responseGoogle = async ({ profileObj }) => {
+        const signupData = {
+            name: profileObj.name,
+            email: profileObj.email,
+            contact: "",
+            provice: "",
+            password: ""
+        }
+       try {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/register`, signupData);
+        setMessage(response.data.message);
+        setOpen(true);
+        if (response) {
+            setTimeout(() => {
+                const user = {
+                    id: response.data.id,
+                    email: response.data.email,
+                    name: response.data.name
+                }
+                login(user);
+                navigate('/');
+                window.location.reload();
+            }, 1000);
+        }
+       } catch (error) {
+        setSeverity('error');
+        setOpen(true);
+        setMessage(error.response.data.message);
+       }
+    }
+
     return (
         <form className={classes.farmerLogin}>
             <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
@@ -234,10 +266,18 @@ const FarmerLogin = () => {
                 <div>
                     <div className={classes.buttonContainer}>
                         <Button disabled={buttonDisabled} className={classes.loginButton} onClick={farmerLogin} variant="contained" color="secondary">
-                            
-                        {buttonDisabled ? <CircularProgress size="1.5rem" style={{marginRight: "8px"}} color="primary"/> : null} Login</Button>
+
+                            {buttonDisabled ? <CircularProgress size="1.5rem" style={{ marginRight: "8px" }} color="primary" /> : null} Login</Button>
+                        <GoogleLogin
+                            clientId="306236583026-dbfomp4f03i03hejt7uu34n1p90cf4uk.apps.googleusercontent.com"
+                            buttonText="Login with Google"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                            className="googleLogin"
+                        />
                         <Link className={classes.noAccount} to="../farmer/signup">Don't have an account ?</Link>
-                        <a href="#" onClick={handleClickOpen} style={{ color: "black"}}>Forgot Password ?</a>
+                        <a href="#" onClick={handleClickOpen} style={{ color: "black" }}>Forgot Password ?</a>
                         <Dialog
                             open={openDialog}
                             TransitionComponent={Transition}
@@ -248,12 +288,12 @@ const FarmerLogin = () => {
                             <DialogTitle>{"Reset Password!"}</DialogTitle>
                             <DialogContent>
                                 <DialogContentText id="alert-dialog-slide-description">
-                                   Contact Farmingo Customer Care to Reset your Password
+                                    Contact Farmingo Customer Care to Reset your Password
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose}>Thanks!</Button>
-                                <Button color="secondary"><a href="mailto:info@farmingo.com" style={{ textDecoration: "none"}} type="email">Confused ?</a></Button>
+                                <Button color="secondary"><a href="mailto:info@farmingo.com" style={{ textDecoration: "none" }} type="email">Confused ?</a></Button>
                             </DialogActions>
                         </Dialog>
                     </div>
