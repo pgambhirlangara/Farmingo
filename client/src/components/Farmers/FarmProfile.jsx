@@ -88,7 +88,6 @@ export default function FarmProfile() {
                 display: "flex",
                 marginBottom: "50px",
             }
-
         },
         textboxes: {
             width: "547px",
