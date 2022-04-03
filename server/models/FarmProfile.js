@@ -13,6 +13,7 @@ const FarmerProfile = new mongoose.Schema(
     address: { type: String }, 
     image: { type: String},
     farmer: { type: mongoose.Schema.Types.ObjectId, ref: "Farmer" },
+    category: { type: String, required: true}
   },
   { timestamps: true }
 );

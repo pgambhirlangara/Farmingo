@@ -1,5 +1,5 @@
 const express = require('express');
-const { createFarmProfile, getAllFarms, deleteFarmProfile, getFarmById, updateFarmProfile } = require('../controller/FarmProfile');
+const { createFarmProfile, getAllFarms, getFarmerByName, deleteFarmProfile, getFarmById, updateFarmProfile } = require('../controller/FarmProfile');
 const router = express.Router();
 
 
@@ -14,6 +14,8 @@ router.put('/:id', updateFarmProfile);
 router.delete('/:id', deleteFarmProfile);
 
 router.get('/:id', getFarmById);
+
+router.get('/query/:name', getFarmerByName);
 
 function logger(req, res, next) {
     console.log('Runnning your requests.....');

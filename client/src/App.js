@@ -20,13 +20,17 @@ import FarmProfile from "./components/Farmers/FarmProfile";
 import Faqfarmer from "./components/Farmers/faqfarmer";
 import FarmerCreatePost from "./components/Farmers/farmerCreatePost";
 import FarmerEditPost from "./components/Farmers/farmerEditPost";
+import CustomerHome from "./components/Customers/customerHome";
+import CustomerProduct from "./components/Customers/customerProduct";
+import CustomerPayment from "./components/Customers/customerPayment";
+import { isLogin } from "./auth";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<Welcome />} />
+        <Route path="/" element={isLogin() ? <FarmerProductPage /> : <Welcome />} />
         <Route path="customer/signup" element={<CustomerSignup />} />
         <Route path="customer/login" element={<CustomerLogin />} />
         <Route path="farmer/signup" element={<FarmerSignup />} />
@@ -51,6 +55,9 @@ function App() {
 
         <Route path="utils/transactionSuccess" element={<transactionSuccess />} />
         <Route path="utils/transactionFail" element={<transactionFail />} />
+        <Route path="customer/home" element={<CustomerHome />} />
+        <Route path="customer/products/:id" element={<CustomerProduct />} />
+        <Route path="customer/payment" element={<CustomerPayment />} />
 
       </Routes>
       <Footer />

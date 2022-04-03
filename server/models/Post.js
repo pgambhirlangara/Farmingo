@@ -26,7 +26,6 @@ const PostSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     hide: {
       type: Boolean
