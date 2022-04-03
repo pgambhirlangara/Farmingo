@@ -146,7 +146,8 @@ const FarmerLogin = () => {
             login(user);
 
             setTimeout(() => {
-                navigate('../farmer/home');
+                navigate('/');
+                window.location.reload();
                 setButtonDisabled(false);
             }, 2000);
         } catch (error) {

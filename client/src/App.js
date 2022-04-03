@@ -30,12 +30,16 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={isLogin() ? <FarmerProductPage /> : <Welcome />} />
+        {isLogin() ? (
+          <Route path="/" element={<FarmerProductPage />} />
+        ) : (
+          <Route path="/" element={<Welcome />} />
+        )}
         <Route path="customer/signup" element={<CustomerSignup />} />
         <Route path="customer/login" element={<CustomerLogin />} />
         <Route path="farmer/signup" element={<FarmerSignup />} />
         <Route path="farmer/login" element={<FarmerLogin />} />
-        <Route path="farmer/home" element={<FarmerProductPage />} />
+        <Route path="/" element={<FarmerProductPage />} />
         <Route path="farmer/order-history" element={<FarmerOrder />} />
         <Route path="farmer/contactUs" element={<ContactUs />} />
         <Route path="farmer/settings" element={<Settings />} />
@@ -53,12 +57,14 @@ function App() {
         <Route path="farmer/orderDetails/:id" element={<OrderDetails />} />
         <Route path="customer/faq" element={<Customerfaq />} />
 
-        <Route path="utils/transactionSuccess" element={<transactionSuccess />} />
+        <Route
+          path="utils/transactionSuccess"
+          element={<transactionSuccess />}
+        />
         <Route path="utils/transactionFail" element={<transactionFail />} />
         <Route path="customer/home" element={<CustomerHome />} />
         <Route path="customer/products/:id" element={<CustomerProduct />} />
         <Route path="customer/payment" element={<CustomerPayment />} />
-
       </Routes>
       <Footer />
     </div>
