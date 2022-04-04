@@ -5,17 +5,16 @@ export const Faqfarmer = [
       "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
   },
   {
-    question: "Are contracts legally binding?",
-    answer:
-      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
+    question: "How the products are being delivered?",
+    answer: " ",
   },
   {
-    question: "Are contracts legally binding?",
-    answer:
-      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
+    question: "If I would like to invest, how could I do that?",
+    answer: "",
   },
   {
-    question: "Are contracts legally binding?",
+    question:
+      "Are farmers using eco-friendly methods to produce fruits and vegetables?",
     answer:
       "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
   },
@@ -177,8 +176,8 @@ export const headersData = [
   {
     label: "Create Farm Profile",
     href: "/farmer/createProfile",
-    icon: null
-  }
+    icon: null,
+  },
 ];
 
 export const orderDetails = [
@@ -637,7 +636,6 @@ export const imageGallery = [
   },
 ];
 
-
 export const days = [
   "Monday",
   "Tuesday",
@@ -645,5 +643,5 @@ export const days = [
   "Thursday",
   "Friday",
   "Saturday",
-  "Sunday"
-]
+  "Sunday",
+];
