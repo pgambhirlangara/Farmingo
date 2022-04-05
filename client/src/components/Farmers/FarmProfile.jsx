@@ -377,7 +377,6 @@ export default function FarmProfile() {
                 </div>
                 <div className={classes.formmove}>
                     <label className={classes.labels} htmlFor="category">Category</label>
-                    {/* <InputLabel className={classes.label}>Category</InputLabel> */}
                     <Select
                         value={category}
                         required
@@ -412,7 +411,7 @@ export default function FarmProfile() {
                 </div>
 
                 <div className={classes.formmove}>
-                    <label className={classes.labels} htmlFor="daysofOperation">Hours of operation</label>
+                    <label className={classes.labels} htmlFor="hoursOfOperation">Hours of operation</label>
                     <TextField fullWidth className={classes.textboxes} placeholder='Set the opening hours' required value={hoursOfOperation} type="number" onChange={(e) => setHoursOfOperation(e.target.value)} />
                 </div>
 

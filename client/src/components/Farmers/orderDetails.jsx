@@ -159,7 +159,7 @@ export default function OrderDetails() {
   return (
     <>
       <div className={classes.totalSection}>
-        <span className={classes.totalSectionTitle}>Wallmart: </span>{" "}
+        <span className={classes.totalSectionTitle}></span>{" "}
         <span>Total {orderHistory[0].total}</span>
       </div>
       <div className={classes.maindiv}>

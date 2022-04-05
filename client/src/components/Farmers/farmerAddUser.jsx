@@ -8,6 +8,8 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Box } from "@mui/system";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 const FarmerSignup = () => {
 
@@ -206,7 +208,7 @@ const FarmerSignup = () => {
                             type="email"
                             onChange={(e) => setEmail(e.target.value)}
                             startAdornment={<InputAdornment position="start">
-                                <AccountCircle />
+                               <EmailIcon />
                             </InputAdornment>}
                             aria-describedby="outlined-weight-helper-text"
                             inputProps={{
@@ -225,7 +227,7 @@ const FarmerSignup = () => {
                             type="number"
                             onChange={(e) => setContact(e.target.value)}
                             startAdornment={<InputAdornment position="start">
-                                <AccountCircle />
+                                <PhoneIcon />
                             </InputAdornment>}
                             aria-describedby="outlined-weight-helper-text"
                             inputProps={{

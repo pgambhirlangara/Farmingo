@@ -253,7 +253,7 @@ const FarmerProductPage = () => {
                         <Skeleton
                           variant="rectangular"
                           width={210}
-                          height={118}
+                          height={230}
                         />
                         <Skeleton />
                         <Skeleton width="60%" />

@@ -25,3 +25,12 @@ button {
 .googleLogin div {
   background-color: transparent !important;
 }
+
+.MuiAccordion-root:before {
+  background-color: unset !important;
+}
+
+.MuiCollapse-root {
+  background: #f0ffee;
+    border-radius: 20px;
+}

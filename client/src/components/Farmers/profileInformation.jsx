@@ -73,13 +73,13 @@ export default function EditFarmProfile() {
             width: "100%",
             height: "fit-content",
             display: "flex",
-            gap: "20px",
+            gap: "10px",
             margin: "auto",
             justifyContent: "flex-start",
             alignItems: "center",
             flexDirection: "column",
             [theme.breakpoints.up("sm")]: {
-                padding: "100px 70px !important",
+                padding: "70px !important",
                 width: "830px",
                 border: "1px green solid",
                 borderRadius: "10px",
@@ -403,8 +403,8 @@ export default function EditFarmProfile() {
                     <label className={classes.labels} htmlFor="email">Contact info</label>
                     <TextField fullWidth className={classes.textboxes} placeholder='phone' required value={contact} type="text" onChange={(e) => setContact(e.target.value)} />
                 </div>
-                <div className={classes.heads}>Days of Operation</div>
                 <div className={classes.formmove}>
+                <label className={classes.labels} htmlFor="daysofOperation">Days of Operation</label>
                     <Select
                         value={daysOfOperation}
                         className={classes.textboxes}
@@ -421,12 +421,13 @@ export default function EditFarmProfile() {
                     </Select>
                 </div>
 
-                <div className={classes.heads}>Hours of operation</div>
                 <div className={classes.formmove}>
+                <label className={classes.labels} htmlFor="hoursOfOperation">Hours of operation</label>
                     <TextField fullWidth className={classes.textboxes} placeholder='Set the opening hours' required value={hoursOfOperation} type="number" onChange={(e) => setHoursOfOperation(e.target.value)} />
                 </div>
 
                 <div className={classes.bigarea}>
+                <label className={classes.labels} htmlFor="description">Farm Description</label>
                     <TextField rows="4" multiline fullWidth className={classes.textboxesbig} placeholder='Farm description...' required value={description} type="number" onChange={(e) => setDescription(e.target.value)} />
                 </div>
 
