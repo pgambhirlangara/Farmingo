@@ -119,18 +119,16 @@ const Footer = () => {
       </div>
 
       <div className={classes.footerRightSection}>
-        <Link className={classes.link} to="/farmer/home">
+        <Link className={classes.link} to="/">
           Home
         </Link>
-        <Link className={classes.link} to="/farmer/settings">
-          Settings
-        </Link>
-        <Link className={classes.link} to="/farmer/addUser">
-          Add User
+        <Link className={classes.link} to="/farmer/FAQ">
+          FAQ
         </Link>
         <Link className={classes.link} to="/farmer/contactUs">
           Contact
         </Link>
+        <a   target="_blank" style={{ textDecoration: "none", color: "black", backgroundColor: "#FDC350", borderRadius: "10px", padding: "5px 20px"}} href="https://gofund.me/e8d0a7ab">Invest</a>
       </div>
     </footer>
   );

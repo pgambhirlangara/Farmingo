@@ -1,5 +1,6 @@
-import { Button, Divider } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Slide } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { forwardRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { testimonials } from "../../constants/constant";
 
@@ -198,7 +199,20 @@ const Welcome = () => {
     },
   }));
 
+  const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
   const classes = useStyles();
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+};
+
+const handleClose = () => {
+    setOpenDialog(false);
+};
 
   return (
     <section>
@@ -223,16 +237,32 @@ const Welcome = () => {
                 Farmer
               </Button>
             </Link>
-            <Link className={classes.link} to="customer/login">
               <Button
                 className={classes.button}
+                onClick={handleClickOpen}
                 color="secondary"
                 variant="contained"
                 style={{ fontSize: "16px" }}
               >
                 Customer
               </Button>
-            </Link>
+              <Dialog
+                open={openDialog}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleClose}
+                aria-describedby="alert-dialog-slide-description"
+              >
+                <DialogTitle>{"CUSTOMER FLOW!"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-slide-description">
+                    Farmingo Team is working on this customer flow :)
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Thanks!</Button>
+                </DialogActions>
+              </Dialog>
           </div>
         </div>
       </div>

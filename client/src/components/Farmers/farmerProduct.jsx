@@ -1,4 +1,4 @@
-import { Alert, Button, Skeleton, Snackbar } from "@mui/material";
+import { Alert, Button, LinearProgress, Skeleton, Snackbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import FarmerProductItem from "./farmerProductItem";
 import AddIcon from "@mui/icons-material/Add";
@@ -119,6 +119,7 @@ const FarmerProductPage = () => {
   const classes = useStyles();
 
   const [farmProducts, setFarmProducts] = useState([]);
+  const [spinner, showSpinner] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("success");
@@ -138,6 +139,7 @@ const FarmerProductPage = () => {
   }, []);
 
   const fetchData = async () => {
+    showSpinner(true);
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/posts`
@@ -150,10 +152,12 @@ const FarmerProductPage = () => {
         setShowData(true);
         setOpen(true);
         setSeverity("success");
+        showSpinner(false);
       }, 2000);
     } catch (error) {
       setSeverity("error");
       setOpen(true);
+      showSpinner(false);
       setMessage(error.data.message);
     }
   };
@@ -193,6 +197,10 @@ const FarmerProductPage = () => {
         alt="Home"
       />
       <div className={classes.farmProductContainer}>
+      {
+        spinner ? 
+        <LinearProgress color="secondary" /> : ""
+      }
         <section className={classes.farmNameSection}>
           <h1 className={classes.farmName}>Hi! {farmData?.farmName}</h1>
           <p className={classes.farmAddress}>
