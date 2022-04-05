@@ -24,6 +24,7 @@ import CustomerHome from "./components/Customers/customerHome";
 import CustomerProduct from "./components/Customers/customerProduct";
 import CustomerPayment from "./components/Customers/customerPayment";
 import { isLogin } from "./auth";
+import RequestPayment from "./components/Farmers/requestPayment";
 
 function App() {
   return (
@@ -65,6 +66,7 @@ function App() {
         <Route path="customer/home" element={<CustomerHome />} />
         <Route path="customer/products/:id" element={<CustomerProduct />} />
         <Route path="customer/payment" element={<CustomerPayment />} />
+        <Route path="farmer/request" element={<RequestPayment />} />
       </Routes>
       <Footer />
     </div>

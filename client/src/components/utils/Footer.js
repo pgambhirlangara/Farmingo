@@ -6,7 +6,6 @@ const Footer = () => {
   const useStyles = makeStyles((theme) => ({
     footer: {
       background: "#182918",
-
       display: "grid",
       gridTemplateColumns: "70% 30%",
       justifyContent: "space-around",

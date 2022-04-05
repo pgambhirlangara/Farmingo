@@ -118,9 +118,11 @@ export default function Settings() {
             padding: "20px",
             display: "flex",
             alignItems: "center",
+            cursor: "pointer",
             gap: "20px",
             "&:hover": {
-                color: theme.palette.primary.main
+                color: theme.palette.primary.main,
+                backgroundColor: "#dcf5de"
             }
         }
 
@@ -156,7 +158,7 @@ export default function Settings() {
                     <Divider />
                     <Link to="../farmer/addUser" className={classes.settingAction}><AddIcon />Add User</Link>
                     <Divider />
-                    <Link to="farmer/payment" className={classes.settingAction}><PaymentIcon />Payment</Link>
+                    <Link to="../farmer/request" className={classes.settingAction}><PaymentIcon />Payment</Link>
                     <Divider />
                     <div onClick={logout} className={classes.settingAction}><LogoutIcon />Log Out</div>
                 </div>
