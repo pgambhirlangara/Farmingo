@@ -1,4 +1,4 @@
-import { Button, Skeleton } from "@mui/material";
+import { Button, LinearProgress, Skeleton } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import FarmerOrderItem from "./farmerOrderItem";
 import {
@@ -254,14 +254,13 @@ const FarmerOrderHistory = (props) => {
                       if (!showData) {
                         console.log("hello");
                         return (
-                          <Box sx={{ pt: 0.5 }} padding="30px">
+                          <Box sx={{ pt: 0.5 }} >
                             <Skeleton
                               variant="rectangular"
-                              width={140}
-                              height={118}
+                              width={215}
+                              height={84}
                             />
                             <Skeleton width={140} />
-                            <Skeleton width="40%" />
                           </Box>
                         );
                       } else {

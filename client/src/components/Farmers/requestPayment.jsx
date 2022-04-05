@@ -1,4 +1,4 @@
-import { Alert, Button, CircularProgress, FormControl, InputAdornment, InputLabel, OutlinedInput, Snackbar } from "@mui/material";
+import { Alert, Button, Card, CircularProgress, FormControl, InputAdornment, InputLabel, OutlinedInput, Snackbar } from "@mui/material";
 import { useState } from "react";
 import EmailIcon from '@mui/icons-material/Email';
 import axios from "axios";
@@ -55,12 +55,14 @@ const RequestPayment = () => {
 
 
     return (
-        <FormControl fullWidth sx={{ m: 1 }} style={{
+       <Card>
+            <FormControl fullWidth sx={{ m: 1 }} style={{
             height: "calc(100vh - 270px)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             gap: "20px",
+            backgroundColor: "#ECF4EC"
         }}>
             <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleAlertClose}>
                 <Alert onClose={handleAlertClose} severity={severity}>
@@ -98,6 +100,7 @@ const RequestPayment = () => {
 
                 Submit</Button>
         </FormControl>
+       </Card>
     )
 }
 
