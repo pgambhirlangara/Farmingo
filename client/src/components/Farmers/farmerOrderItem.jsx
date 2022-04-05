@@ -1,4 +1,3 @@
-import { Button, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
@@ -73,7 +72,7 @@ const FarmerOrderItem = ({ data }) => {
     >
       <Box className={classes.farmOrderItem}>
         <Box className={classes.farmLeft}>
-          <h1 className={classes.header}>Farmer</h1>
+          <h1 className={classes.header}>{data.name}</h1>
           <p className={classes.paragraph}>{data.orderDate}</p>
         </Box>
         <Box className={classes.farmRight}>

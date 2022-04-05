@@ -233,6 +233,7 @@ export const orderHistory = [
     orderDate: "21/03/2022",
     total: "$120",
     complete: true,
+    name: "#123",
     issue: false,
     new: true,
     items: [
@@ -284,6 +285,7 @@ export const orderHistory = [
     id: "2",
     orderDate: "18/03/2022",
     total: "$50",
+    name: "#124",
     complete: true,
     issue: false,
     new: false,
@@ -338,6 +340,7 @@ export const orderHistory = [
     total: "$200",
     complete: false,
     issue: true,
+    name: "#125",
     new: true,
     items: [
       {
@@ -391,6 +394,7 @@ export const orderHistory = [
     complete: true,
     issue: true,
     new: false,
+    name: "#126",
     items: [
       {
         id: "11",
@@ -443,6 +447,7 @@ export const orderHistory = [
     complete: false,
     issue: false,
     new: true,
+    name: "#127",
     items: [
       {
         id: "11",
@@ -495,6 +500,7 @@ export const orderHistory = [
     complete: true,
     issue: true,
     new: false,
+    name: "#128",
     items: [
       {
         id: "11",
@@ -547,6 +553,7 @@ export const orderHistory = [
     complete: false,
     issue: false,
     new: true,
+    name: "#129",
     items: [
       {
         id: "11",
