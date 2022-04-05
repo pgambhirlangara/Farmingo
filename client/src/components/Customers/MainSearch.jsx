@@ -22,13 +22,16 @@ export default function MainSearch() {
             backgroundPosition: "center",
             height: "calc(100vh - 64px)",
             position: "relative",
-            background: "grey",
+            background: "url('../assets/farmer_home_banner.jpg')",
         },
         search: {
             position: "absolute",
             top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)"
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+            background: "white",
+            opacity: "0.8",
+            borderRadius: "30px"
         }
     }));
 
@@ -37,7 +40,6 @@ export default function MainSearch() {
 
     const fetchFarmData = async (event) => {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/farm`);
-        console.log(response.data.data);
         setSearchList(response.data.data);
     }
 
@@ -63,6 +65,8 @@ export default function MainSearch() {
                 groupBy={(option) => option.firstLetter}
                 getOptionLabel={(option) => option.farmName}
                 sx={{ width: "60%" }}
+                selectOnFocus
+                clearOnBlur
                 renderInput={(params) => <TextField fullWidth placeholder='Search for Farms' {...params}  />}
             />
         </div>

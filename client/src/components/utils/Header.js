@@ -123,7 +123,7 @@ export default function Header() {
     return (
       <Toolbar className={toolbar}>
         {farmingoLogo}
-        <div>{isLogin() ? getMenuButtons() : null}</div>
+        <div style={{ display: "flex", gap: "10px"}}>{isLogin() ? getMenuButtons() : null}</div>
       </Toolbar>
     );
   };

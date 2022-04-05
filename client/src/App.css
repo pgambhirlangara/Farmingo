@@ -17,3 +17,20 @@ button {
 #subscribeInput {
   padding: 8px;
 }
+
+.googleLogin {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+}
+
+.googleLogin div {
+  background-color: transparent !important;
+}
+
+.MuiAccordion-root:before {
+  background-color: unset !important;
+}
+
+.MuiCollapse-root {
+  background: #f0ffee;
+    border-radius: 20px;
+}

@@ -87,6 +87,10 @@ export default function FarmerCreatePost() {
             marginBottom: "10px",
             textAlign: "center"
         },
+        image: {
+            width: "80px",
+            borderRadius: "24px"
+        },
         faq: {
             fontSize: "20px",
             fontWeight: "bold",
@@ -183,6 +187,7 @@ export default function FarmerCreatePost() {
             cursor: "pointer",
             minWidth: "64px",
             height: "51px",
+            width: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -252,7 +257,7 @@ export default function FarmerCreatePost() {
             setSeverity('success');
             setTimeout(() => {
                 setButtonDisabled(false);
-                navigate('../farmer/home');
+                navigate('/');
             }, 2000);
         } catch (error) {
             setSeverity('error');
@@ -339,8 +344,15 @@ export default function FarmerCreatePost() {
                         <InputLabel className={classes.label}>Product Description</InputLabel>
                         <TextField className={classes.formInput} type="text" onChange={(e) => setDescription(e.target.value)} multiline placeholder="Nutrition Facts...." />
                         <div className={classes.actionButtonContainer}>
+                            <div style={{ display: "flex", gap: "10px", alignItems: "center"}}>
+                            {
+                            image ?
+                                <img className={classes.image} src={image} alt="" />
+                                : ""
+                        }
                                 <label for="upload"  className={classes.uploadImage}>Upload Image of the Product</label>
                                 <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
+                            </div>
                             <Button disabled={buttonDisabled} type="submit" variant='contained' className={classes.actionButton}>
                             {buttonDisabled ? <CircularProgress size="1.5rem" style={{marginRight: "8px"}} color="primary"/> : null}
                                 Create a post 

@@ -14,3 +14,7 @@ export const isLogin = () => {
 
   return false;
 };
+
+export const getUser = () => {
+  return JSON.parse(localStorage.getItem('user'));
+}

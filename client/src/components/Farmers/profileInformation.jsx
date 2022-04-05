@@ -71,25 +71,20 @@ export default function EditFarmProfile() {
         },
         outerdiv: {
             width: "100%",
-            height: "100%",
+            height: "fit-content",
             display: "flex",
-            paddingTop: "400px",
-            gap: "20px",
+            gap: "10px",
             margin: "auto",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignItems: "center",
             flexDirection: "column",
             [theme.breakpoints.up("sm")]: {
-                padding: "100px 70px !important",
+                padding: "70px !important",
                 width: "830px",
-                height: "130%",
                 border: "1px green solid",
                 borderRadius: "10px",
                 backgroundColor: "white !important",
                 display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                alignItems: "center",
                 marginBottom: "50px"
             }
 
@@ -107,7 +102,7 @@ export default function EditFarmProfile() {
 
         },
         addressDiv: {
-            width: "80%",
+            width: "100%",
             display: "flex",
             marginBottom: "20px",
             justifyContent: "center",
@@ -147,7 +142,7 @@ export default function EditFarmProfile() {
             }
         },
         bigarea: {
-            width: "80%",
+            width: "100%",
             display: "flex",
             flexDirection: "column",
             height: "150px",
@@ -226,11 +221,14 @@ export default function EditFarmProfile() {
         },
         image: {
             width: "100%",
-            borderRadius: "24px"
-        },
+            borderRadius: "24px",
+            height: "80%"
+        },  
         imageSection: {
             display: "grid",
             gridTemplateColumns: "30% 70%",
+            width: "100%",
+            gap: "40px"
         }
     }));
 
@@ -405,8 +403,8 @@ export default function EditFarmProfile() {
                     <label className={classes.labels} htmlFor="email">Contact info</label>
                     <TextField fullWidth className={classes.textboxes} placeholder='phone' required value={contact} type="text" onChange={(e) => setContact(e.target.value)} />
                 </div>
-                <div className={classes.heads}>Days of Operation</div>
                 <div className={classes.formmove}>
+                <label className={classes.labels} htmlFor="daysofOperation">Days of Operation</label>
                     <Select
                         value={daysOfOperation}
                         className={classes.textboxes}
@@ -423,14 +421,14 @@ export default function EditFarmProfile() {
                     </Select>
                 </div>
 
-                <div className={classes.heads}>Hours of operation</div>
                 <div className={classes.formmove}>
+                <label className={classes.labels} htmlFor="hoursOfOperation">Hours of operation</label>
                     <TextField fullWidth className={classes.textboxes} placeholder='Set the opening hours' required value={hoursOfOperation} type="number" onChange={(e) => setHoursOfOperation(e.target.value)} />
                 </div>
 
                 <div className={classes.bigarea}>
+                <label className={classes.labels} htmlFor="description">Farm Description</label>
                     <TextField rows="4" multiline fullWidth className={classes.textboxesbig} placeholder='Farm description...' required value={description} type="number" onChange={(e) => setDescription(e.target.value)} />
-
                 </div>
 
 

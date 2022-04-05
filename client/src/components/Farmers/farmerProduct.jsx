@@ -214,13 +214,20 @@ const FarmerProductPage = () => {
                 Create new post
               </Button>
             </Link>
-            <h3 className={classes.productViewHeader}>
-              View and Edit your products
-            </h3>
-            <h4 className={classes.productDescription}>
-              Here is the list of your products on sale, click in to the product
-              to manage the list and update it.
-            </h4>
+            {
+              farmProducts.length > 0 ?
+                <>
+                  <h3 className={classes.productViewHeader}>
+                    View and Edit your products
+                  </h3>
+                  <h4 className={classes.productDescription}>
+                    Here is the list of your products on sale, click in to the product
+                    to manage the list and update it.
+                  </h4>
+                </>
+                : ""
+            }
+
           </section>
           <section>
             {farmProducts.length === 0 ? (
@@ -229,7 +236,7 @@ const FarmerProductPage = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  padding: "100px",
+                  padding: "50px",
                 }}
               >
                 You need to add products to view them
@@ -239,29 +246,29 @@ const FarmerProductPage = () => {
           <section className={classes.farmProducts}>
             {farmProducts.length !== 0
               ? farmProducts.map((item) => {
-                  return (
-                    <>
-                      {!showData ? (
-                        <Box sx={{ pt: 0.5 }} padding="30px">
-                          <Skeleton
-                            variant="rectangular"
-                            width={210}
-                            height={118}
-                          />
-                          <Skeleton />
-                          <Skeleton width="60%" />
-                        </Box>
-                      ) : (
-                        <FarmerProductItem
-                          name={item.title}
-                          price={item.price}
-                          id={item._id}
-                          image={item.image}
+                return (
+                  <>
+                    {!showData ? (
+                      <Box sx={{ pt: 0.5 }} padding="30px">
+                        <Skeleton
+                          variant="rectangular"
+                          width={210}
+                          height={230}
                         />
-                      )}
-                    </>
-                  );
-                })
+                        <Skeleton />
+                        <Skeleton width="60%" />
+                      </Box>
+                    ) : (
+                      <FarmerProductItem
+                        name={item.title}
+                        price={item.price}
+                        id={item._id}
+                        image={item.image}
+                      />
+                    )}
+                  </>
+                );
+              })
               : null}
           </section>
         </div>

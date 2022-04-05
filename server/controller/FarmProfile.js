@@ -2,10 +2,13 @@ const FarmProfile = require("../models/FarmProfile");
 const Farmer = require("../models/Farmer");
 const fs = require("fs");
 const upload = require("../utils/upload");
+const jwt = require('jsonwebtoken');
 
 const createFarmProfile = async (req, res) => {
   try {
-    let farmer = await Farmer.findOne({ email: req.body.email });
+    let token = req.headers.authorization.split(' ')[1];
+    let decodedEmail = jwt.decode(token, {complete: true}).payload.email;
+    let farmer = await Farmer.findOne({ email: decodedEmail });
     if (farmer) {
       const uploadImage = await upload(
         `${Date.now() + "" + req.body.farmName}`,

@@ -34,10 +34,14 @@ export default function Faqfarmer() {
     },
     accordianContainer: {
       maxWidth: "600px",
-      border: "1px solid #74C26C",
+      display: "flex",
+      flexDirection: "column",
+      gap: "20px"
     },
     accordian: {
-      padding: "20px"
+      padding: "20px",
+      border: "1px solid #74C26C",
+      borderRadius: "20px !important",
     },
     question: {
       fontWeight: "bold !important"

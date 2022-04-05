@@ -1,34 +1,29 @@
 export const Faqfarmer = [
   {
-    question: "Are contracts legally binding?",
+    question: "How to create a farmer profile ?",
     answer:
-      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
+      "Click on farmers from the home page. Then select don't have an account from the menu. Then fill in the details as directed. Click on Sign up.  You'll be redirected to the login screen. This indicates that your account has been set up. You can now log in to your profile after entering your credentials.",
   },
   {
-    question: "Are contracts legally binding?",
+    question: "How to create the post ?",
     answer:
-      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
+      "Click on create a new post after signing into your account. You'll be taken to the create post page after clicking that. You can enter basic information about your item on this page, such as its name, price, category, and image. In addition, you'd be able to make the post active or inactive based on the product's availability.",
   },
   {
-    question: "Are contracts legally binding?",
+    question: "How to view order history ? ",
     answer:
-      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
+      "On the header menu you can view all of your order details including pending,transit and canceled orders.",
   },
   {
-    question: "Are contracts legally binding?",
+    question: "How to contact the customer support ?",
     answer:
-      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
+      "You can contact Farmingo at , Email - info@farmingo.com",
   },
   {
-    question: "Are contracts legally binding?",
+    question: "How to edit your personal(farmer) information ?",
     answer:
-      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
-  },
-  {
-    question: "Are contracts legally binding?",
-    answer:
-      "YES! Once both parties agree upon the terms & conditions of their transactional deal, then these terms and conditions become legally binding. This makes sure that both buyer and/or seller take full responsibility if a transaction is not performed in accordance to the agreed upon terms & conditions.",
-  },
+      "To Edit your profile choose Settings --> Profile Information",
+  }
 ];
 
 export const testimonials = [
@@ -156,7 +151,7 @@ export const farmProducts = [
 export const headersData = [
   {
     label: "Products",
-    href: "/farmer/home",
+    href: "/",
     icon: "/assets/products.svg",
   },
   {
@@ -177,8 +172,8 @@ export const headersData = [
   {
     label: "Create Farm Profile",
     href: "/farmer/createProfile",
-    icon: null
-  }
+    icon: null,
+  },
 ];
 
 export const orderDetails = [
@@ -637,7 +632,6 @@ export const imageGallery = [
   },
 ];
 
-
 export const days = [
   "Monday",
   "Tuesday",
@@ -645,5 +639,5 @@ export const days = [
   "Thursday",
   "Friday",
   "Saturday",
-  "Sunday"
-]
+  "Sunday",
+];
