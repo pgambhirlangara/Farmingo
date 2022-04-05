@@ -14,7 +14,10 @@ function CustomerLogin() {
             alignItems: "center",
             justifyContent: "center",
             gap: "20px",
-            height: "100%"
+            height: "100%",
+            [theme.breakpoints.down("md")]: {
+                height: "unset"
+            }
         },
         customerLoginHeading: {
             color: "#182918",
@@ -26,7 +29,7 @@ function CustomerLogin() {
         },
         customerLoginContent: {
             backgroundColor: "white",
-            width: "50%",
+            width: "400px",
             padding: "50px",
             borderRadius: "20px",
             display: "flex",
@@ -89,6 +92,12 @@ function CustomerLogin() {
     const classes = useStyles();
     const navigate = useNavigate();
 
+    const anchorOrigin = {
+        vertical: "bottom",
+        horizontal: "center"
+    }
+
+
     const customerLogin = async (e) => {
         setButtonDisabled(true);
         const signupData = {
@@ -127,7 +136,7 @@ function CustomerLogin() {
     return (
         <form className={classes.customerLogin}>
 
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={3000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={severity}>
                     {message}
                 </Alert>

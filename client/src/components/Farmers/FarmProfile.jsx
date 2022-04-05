@@ -72,7 +72,7 @@ export default function FarmProfile() {
             width: "100%",
             height: "100%",
             display: "flex",
-            gap: "20px",
+            gap: "10px",
             padding: "50px",
             margin: "auto",
             justifyContent: "flex-start",
@@ -80,7 +80,7 @@ export default function FarmProfile() {
             flexDirection: "column",
             height: "fit-content",
             [theme.breakpoints.up("sm")]: {
-                padding: "100px 70px !important",
+                padding: "70px !important",
                 width: "830px",
                 border: "1px green solid",
                 borderRadius: "10px",
@@ -171,12 +171,17 @@ export default function FarmProfile() {
             }
 
         },
+        image: {
+            width: "80px",
+            borderRadius: "24px"
+        },
         btnform: {
             width: "343px",
             height: "51px",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            gap: "8px"
         },
         addButton1: {
             color: "white !important",
@@ -261,7 +266,12 @@ export default function FarmProfile() {
             category
         }
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farm/create`, farmProfile);
+            console.log(user);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/farm/create`, farmProfile, {
+                headers: {
+                    "Authorization": `Bearer ${user.token}`
+                }
+            });
             farmProfile = { ...farmProfile, id: response.data.data._id }
             localStorage.setItem('farm-profile', JSON.stringify(farmProfile));
 
@@ -269,7 +279,7 @@ export default function FarmProfile() {
             setOpen(true);
             setSeverity('success');
             setTimeout(() => {
-                navigate('../farmer/home');
+                navigate('../');
                 setButtonDisabled(false);
             }, 2000);
         } catch (error) {
@@ -366,11 +376,13 @@ export default function FarmProfile() {
                     <TextField fullWidth className={classes.textboxes} placeholder='phone' type="number" required value={contact} onChange={(e) => setContact(e.target.value)} />
                 </div>
                 <div className={classes.formmove}>
-                    <InputLabel className={classes.label}>Category</InputLabel>
+                    <label className={classes.labels} htmlFor="category">Category</label>
+                    {/* <InputLabel className={classes.label}>Category</InputLabel> */}
                     <Select
                         value={category}
                         required
                         className={classes.formInput}
+                        placeholder='Category'
                         onChange={(e) => setCategory(e.target.value)}
                     >
                         {
@@ -381,15 +393,14 @@ export default function FarmProfile() {
                     </Select>
 
                 </div>
-                <div className={classes.heads}>Days of Operation</div>
                 <div className={classes.formmove}>
+                    <label className={classes.labels} htmlFor="daysofOperation">Days of Operation</label>
                     <Select
                         value={daysOfOperation}
                         className={classes.textboxes}
                         required
                         fullWidth
                         multiple
-                        label="Days"
                         onChange={(e) => setDaysOfOperation(e.target.value)}
                     >
                         {
@@ -400,20 +411,25 @@ export default function FarmProfile() {
                     </Select>
                 </div>
 
-                <div className={classes.heads}>Hours of operation</div>
                 <div className={classes.formmove}>
+                    <label className={classes.labels} htmlFor="daysofOperation">Hours of operation</label>
                     <TextField fullWidth className={classes.textboxes} placeholder='Set the opening hours' required value={hoursOfOperation} type="number" onChange={(e) => setHoursOfOperation(e.target.value)} />
                 </div>
 
                 <div className={classes.bigarea}>
+                    <label className={classes.labels} htmlFor="description">Farm Description</label>
                     <TextField rows="4" multiline fullWidth className={classes.textboxesbig} placeholder='Farm description...' required value={description} type="number" onChange={(e) => setDescription(e.target.value)} />
-
                 </div>
 
 
                 <div className={classes.btndiv}>
 
                     <div className={classes.btnform}>
+                        {
+                            image ?
+                                <img className={classes.image} src={image} alt="" />
+                                : ""
+                        }
                         <label for="upload" className={classes.uploadImage}>Upload Image of the Product</label>
                         <input id="upload" className={classes.fileUpload} onChange={onSelectFile} type="file" hidden />
                     </div>

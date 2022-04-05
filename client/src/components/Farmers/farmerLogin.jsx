@@ -141,7 +141,8 @@ const FarmerLogin = () => {
             const user = {
                 id: response.data.id,
                 email: response.data.email,
-                name: response.data.name
+                name: response.data.name,
+                token: response.data.token
             }
 
             login(user);
@@ -183,23 +184,26 @@ const FarmerLogin = () => {
     };
 
     const responseGoogle = async ({ profileObj }) => {
+       if (profileObj) {
         const signupData = {
             name: profileObj.name,
             email: profileObj.email,
             contact: "",
             provice: "",
-            password: ""
+            password: `${Date.now()}`
         }
        try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/farmer/register`, signupData);
+        console.log(response, "response");
         setMessage(response.data.message);
         setOpen(true);
         if (response) {
             setTimeout(() => {
                 const user = {
-                    id: response.data.id,
-                    email: response.data.email,
-                    name: response.data.name
+                    id: response.data.data.id,
+                    email: response.data.data.email,
+                    name: response.data.data.name,
+                    token: response.data.data.token
                 }
                 login(user);
                 navigate('/');
@@ -210,6 +214,7 @@ const FarmerLogin = () => {
         setSeverity('error');
         setOpen(true);
         setMessage(error.response.data.message);
+       }
        }
     }
 

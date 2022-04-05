@@ -6,6 +6,10 @@ const jwt = require('jsonwebtoken');
 const registerFarmer = async (req, res) => {
     try {
         let newPassword = await bcrypt.hash(req.body.password, 10);
+        const token = jwt.sign({
+            name: req.body.name,
+            email: req.body.email
+        }, process.env.JWT_SECRET)
         const output = await Farmer.create({
             name: req.body.name,
             password: newPassword,
@@ -17,7 +21,11 @@ const registerFarmer = async (req, res) => {
 
         return res.status(200).json({
             message: "Farmer Registered Succesfully",
-            data: output
+            data: {
+                token,
+                email : req.body.email,
+                name: req.body.name
+            }
         })
 
     } catch(error) {

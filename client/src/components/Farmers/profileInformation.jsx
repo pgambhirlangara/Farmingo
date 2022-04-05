@@ -428,7 +428,6 @@ export default function EditFarmProfile() {
 
                 <div className={classes.bigarea}>
                     <TextField rows="4" multiline fullWidth className={classes.textboxesbig} placeholder='Farm description...' required value={description} type="number" onChange={(e) => setDescription(e.target.value)} />
-
                 </div>
 
 
